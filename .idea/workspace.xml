@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0b0d27ad-2d8e-4061-88ce-481b35598ab3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/newprofile/embroiderytext.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/newprofile/embroiderytext.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +134,7 @@
       <workItem from="1585570333903" duration="15766000" />
       <workItem from="1586274771349" duration="2263000" />
       <workItem from="1586708028027" duration="432000" />
-      <workItem from="1586886018053" duration="497000" />
+      <workItem from="1586886018053" duration="1103000" />
     </task>
     <task id="LOCAL-00001" summary="GitDemo Added">
       <created>1586708442056</created>

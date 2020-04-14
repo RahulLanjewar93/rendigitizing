@@ -94,7 +94,7 @@
           <div class="reach-out-buttons">
             <table class="table table-striped table-items">
               <th>
-                <a href="prders.php" class="btn order-btn-1 d-block py-2">Embroidery Images</a>
+                <a href="orders.php" class="btn order-btn-1 d-block py-2">Embroidery Images</a>
               </th>
               <th>
                 <a href="embroiderytext.php" class="btn order-btn-1 d-block py-2">Embroidery Text</a>
