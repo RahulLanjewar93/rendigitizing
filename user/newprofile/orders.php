@@ -1,3 +1,25 @@
+<?php
+  session_start();
+  require_once "../../db/connection/conn.php";
+
+  if(isset($_SESSION['USER']))
+  {
+      $fetchei = "SELECT * FROM tbl_order WHERE category = 'Emboridery Image'";
+      $fetcheiFire = mysqli_query($conn, $fetchei);
+
+      if(mysqli_num_rows($fetcheiFire)>1)
+      {
+          //
+      }
+      else{
+          $eiOrderEmptyMessage = "No orders availabe right now";
+      }
+  }
+  else{
+      header("location:http://localhost/RenDigitizingUpdated/user/authentication/login.php?nosession=true");
+  }
+?>
+
 <html>
 
 <head>
@@ -135,20 +157,19 @@
               <thead>
                 <tr>
                   <th>Image</th>
-                  <th>Name</th>
-                  <th>Quantity</th>
+                  <th>Design Name</th>
                   <th>Price</th>
                   <th>Status</th>
-                  <th>Estimated Delivery</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
+              <?php while($rows = mysqli_fetch_array($fetcheiFire)){ ?>
                 <tr>
-                  <td> <img class="table-image py-2" src="../../styleassets/images/items/item1.jpg" alt=""> </td>
-                  <td>Embroidery</td>
-                  <td> 1 </td>
-                  <td> 250 </td>
+                  <td> <img class="table-image py-2" src="Uploads/DesignImages/<?php echo $rows['emboridery_design_image']?>" alt=""> </td>
+                  <td><?php echo $rows['design_name'] ?></td>
+                  <td> <?php echo $rows['price'] ?> </td>
+                  <td> <?php echo $rows['order_flag'] ?> </td>
                   <td> In Transit </td>
                   <td> 26 Jan </td>
                   <td>
@@ -159,6 +180,7 @@
                     </div>
                   </td>
                 </tr>
+              <?php } ?>
                 <tr>
                   <td> <img class="table-image py-2" src="../../styleassets/images/items/item1.jpg" alt=""> </td>
                   <td> Embroidery </td>
