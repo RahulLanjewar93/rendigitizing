@@ -107,7 +107,7 @@
           <div class="ongoing-orders" id="ongoing-orders">
             <div class="row">
               <div class="col-md-6">
-                <h1 class="profile-text-area">Embroidery Images</h1>
+                <h1 class="profile-text-area">Vector Art</h1>
               </div>
               <div class="col-md-6">
                 <nav aria-label="Page navigation example" class="my-2">
