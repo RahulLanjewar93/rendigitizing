@@ -134,7 +134,8 @@
       <workItem from="1585570333903" duration="15766000" />
       <workItem from="1586274771349" duration="2263000" />
       <workItem from="1586708028027" duration="432000" />
-      <workItem from="1586886018053" duration="2834000" />
+      <workItem from="1586886018053" duration="3018000" />
+      <workItem from="1586930106241" duration="1077000" />
     </task>
     <task id="LOCAL-00001" summary="GitDemo Added">
       <created>1586708442056</created>
@@ -234,10 +235,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1584383339210" />
-    <state x="479" y="171" key="com.intellij.ide.util.TipDialog" timestamp="1586886057439">
+    <state x="503" y="166" key="com.intellij.ide.util.TipDialog" timestamp="1586930123720">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="479" y="171" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1586886057439" />
+    <state x="503" y="166" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1586930123720" />
     <state x="499" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1586708374020">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

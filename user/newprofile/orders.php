@@ -170,77 +170,16 @@
                   <td><?php echo $rows['design_name'] ?></td>
                   <td> <?php echo $rows['price'] ?> </td>
                   <td> <?php echo $rows['order_flag'] ?> </td>
-                  <td> In Transit </td>
-                  <td> 26 Jan </td>
                   <td>
                     <div class="row order-button-group d-block">
                       <div class="col-md-12">
-                        <button class="btn order-btn-1 d-block py-2">View</button>
-                        <button class="btn order-btn-2 d-block py-2">Edit</button></div>
+                          <?php $OrderId = mysqli_real_escape_string($conn, $rows['order_id']); ?>
+                        <a class="btn order-btn-1 d-block py-2" href="details.php?orderid=<?php echo $OrderId ?>">View</a>
+                        <a class="btn order-btn-2 d-block py-2" href="edit.php?orderid=<?php echo $OrderId ?>">Edit</a></div>
                     </div>
                   </td>
                 </tr>
               <?php } ?>
-                <tr>
-                  <td> <img class="table-image py-2" src="../../styleassets/images/items/item1.jpg" alt=""> </td>
-                  <td> Embroidery </td>
-                  <td> 1 </td>
-                  <td> 250 </td>
-                  <td> In Transit </td>
-                  <td> 26 Jan </td>
-                  <td>
-                    <div class="row order-button-group d-block">
-                      <div class="col-md-12">
-                        <button class="btn order-btn-1 d-block py-2">View</button>
-                        <button class="btn order-btn-2 d-block py-2">Edit</button></div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td> <img class="table-image py-2" src="../../styleassets/images/items/item1.jpg" alt=""> </td>
-                  <td> Embroidery </td>
-                  <td> 1 </td>
-                  <td> 250 </td>
-                  <td> In Transit </td>
-                  <td> 26 Jan </td>
-                  <td>
-                    <div class="row order-button-group d-block">
-                      <div class="col-md-12">
-                        <button class="btn order-btn-1 d-block py-2">View</button>
-                        <button class="btn order-btn-2 d-block py-2">Edit</button></div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td> <img class="table-image py-2" src="../../styleassets/images/items/item1.jpg" alt=""> </td>
-                  <td> Embroidery </td>
-                  <td> 1 </td>
-                  <td> 250 </td>
-                  <td> In Transit </td>
-                  <td> 26 Jan </td>
-                  <td>
-                    <div class="row order-button-group d-block">
-                      <div class="col-md-12">
-                        <button class="btn order-btn-1 d-block py-2">View</button>
-                        <button class="btn order-btn-2 d-block py-2">Edit</button></div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td> <img class="table-image py-2" src="../../styleassets/images/items/item1.jpg" alt=""> </td>
-                  <td> Embroidery </td>
-                  <td> 1 </td>
-                  <td> 250 </td>
-                  <td> In Transit </td>
-                  <td> 26 Jan </td>
-                  <td>
-                    <div class="row order-button-group d-block">
-                      <div class="col-md-12">
-                        <button class="btn order-btn-1 d-block py-2">View</button>
-                        <button class="btn order-btn-2 d-block py-2">Edit</button></div>
-                    </div>
-                  </td>
-                </tr>
               </tbody>
             </table>
             <nav aria-label="Page navigation example" class="my-2">
