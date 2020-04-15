@@ -208,7 +208,7 @@ else{
                   <td>
                     <div class="row order-button-group d-block">
                       <div class="col-md-12">
-                          <?php $OrderId = $rows['order_id'] ?>
+                          <?php $OrderId = mysqli_real_escape_string($conn, $rows['order_id']) ?>
                         <a href="details.php?orderid=<?php echo $OrderId?>" class="btn order-btn-1 d-block py-2">View</a>
                         <a href="edit.php?orderid=<?php echo $OrderId?>" class="btn order-btn-2 d-block py-2">Edit</a></div>
                     </div>
