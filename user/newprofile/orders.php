@@ -4,7 +4,19 @@
 
   if(isset($_SESSION['USER']))
   {
-      $fetchei = "SELECT * FROM tbl_order WHERE category = 'Emboridery Image'";
+      //Pagination
+      if(isset($_GET['page']))
+      {
+          $page = $_GET['page'];
+      }
+      else
+      {
+          $page = 1;
+      }
+
+      $num_per_page = 01;
+      $start_from = ($page-1)*01;
+      $fetchei = "SELECT * FROM tbl_order WHERE category = 'Emboridery Image' LIMIT $start_from, $num_per_page";
       $fetcheiFire = mysqli_query($conn, $fetchei);
 
       if(mysqli_num_rows($fetcheiFire)>1)
@@ -133,22 +145,42 @@
               </div>
               <div class="col-md-6">
                 <nav aria-label="Page navigation example" class="my-2">
+                    <?php
+                    $getEIRecords = "SELECT * FROM tbl_order WHERE category = 'Emboridery Image'";
+                    $getEIRecordsFire = mysqli_query($conn, $getEIRecords);
+                    $total_records = mysqli_num_rows($getEIRecordsFire);
+
+                    $total_pages = ceil($total_records/$num_per_page);
+
+
+                    ?>
                   <ul class="pagination justify-content-end" id="Pagination">
-                    <li class="page-item">
-                      <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                      <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span class="sr-only">Next</span>
-                      </a>
-                    </li>
+                      <?php
+                      if($page>1)
+                      { ?>
+                          <li class="page-item">
+                              <a class="page-link" href="orders.php?page=<?php echo ($page-1) ?>" aria-label="Previous">
+                                  <span aria-hidden="true">&laquo;</span>
+                                  <span class="sr-only">Previous</span>
+                              </a>
+                          </li>
+                      <?php } ?>
+                      <?php
+                      for($i=1; $i<$total_pages; $i++)
+                      {?>
+                          <li class="page-item"><a class="page-link" href="orders.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
+                      <?php } ?>
+                      <?php
+                      if($i>$page)
+                      {
+                          ?>
+                          <li class="page-item">
+                              <a class="page-link" href="orders.php?page=<?php echo ($page+1)?>" aria-label="Next">
+                                  <span aria-hidden="true">&raquo;</span>
+                                  <span class="sr-only">Next</span>
+                              </a>
+                          </li>
+                      <?php } ?>
                   </ul>
                 </nav>
               </div>
@@ -183,22 +215,34 @@
               </tbody>
             </table>
             <nav aria-label="Page navigation example" class="my-2">
+
                   <ul class="pagination justify-content-end" id="Pagination">
+                      <?php
+                      if($page>1)
+                      { ?>
                     <li class="page-item">
-                      <a class="page-link" href="#" aria-label="Previous">
+                      <a class="page-link" href="orders.php?page=<?php echo ($page-1) ?>" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                         <span class="sr-only">Previous</span>
                       </a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <?php } ?>
+                      <?php
+                      for($i=1; $i<$total_pages; $i++)
+                      {?>
+                    <li class="page-item"><a class="page-link" href="orders.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
+                      <?php } ?>
+                      <?php
+                            if($i>$page)
+                            {
+                      ?>
                     <li class="page-item">
-                      <a class="page-link" href="#" aria-label="Next">
+                      <a class="page-link" href="orders.php?page=<?php echo ($page+1)?>" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                         <span class="sr-only">Next</span>
                       </a>
                     </li>
+                      <?php } ?>
                   </ul>
                 </nav>
           </div>
