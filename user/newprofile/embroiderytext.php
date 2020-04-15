@@ -208,8 +208,9 @@ else{
                   <td>
                     <div class="row order-button-group d-block">
                       <div class="col-md-12">
-                        <a href="details.php?orderid=<?php echo $rows['order_id']?>" class="btn order-btn-1 d-block py-2">View</a>
-                        <a href="edit.php?orderid=<?php echo $rows['order_id']?>" class="btn order-btn-2 d-block py-2">Edit</a></div>
+                          <?php $OrderId = $rows['order_id'] ?>
+                        <a href="details.php?orderid=<?php echo $OrderId?>" class="btn order-btn-1 d-block py-2">View</a>
+                        <a href="edit.php?orderid=<?php echo $OrderId?>" class="btn order-btn-2 d-block py-2">Edit</a></div>
                     </div>
                   </td>
                 </tr>
