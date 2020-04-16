@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b0d27ad-2d8e-4061-88ce-481b35598ab3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/profile/embroiderytext.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/profile/embroiderytext.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/profile/orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/profile/orders.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/profile/placeorder.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/profile/placeorder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/profile/vectorart.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/profile/vectorart.php" afterDir="false" />
-    </list>
+    <list default="true" id="0b0d27ad-2d8e-4061-88ce-481b35598ab3" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -141,7 +135,7 @@
       <workItem from="1586930106241" duration="5326000" />
       <workItem from="1586953896956" duration="9330000" />
       <workItem from="1587016477817" duration="2253000" />
-      <workItem from="1587032625951" duration="4321000" />
+      <workItem from="1587032625951" duration="4793000" />
     </task>
     <task id="LOCAL-00001" summary="GitDemo Added">
       <created>1586708442056</created>
