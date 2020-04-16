@@ -959,21 +959,6 @@ body::-webkit-scrollbar-track {
     display: flex;
 }
 
-#Pagination ul{
-    color: red;
-    border: none;
-}
-
-
-#Pagination .page-link{
-    color: #195a61;
-}
-
-.justify-content-end {
-    justify-content: flex-end;
-}
-
-
 @media (min-width:900px) {
     #sidebar {
         display: flex!important;
@@ -1027,13 +1012,5 @@ body::-webkit-scrollbar-track {
 
     .reach-out-buttons table  tr {
         border: none;
-    }
-
-    .justify-content-end {
-        justify-content: center!important;
-    }
-
-    .profile-text-area {
-        text-align: center;
     }
 }

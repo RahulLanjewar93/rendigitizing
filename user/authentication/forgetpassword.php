@@ -4,6 +4,7 @@
  * Date : 13/03/2020
 */
 session_start();
+date_default_timezone_set('Asia/Kolkata');
 require_once "../../PHPMailer/PHPMailer.php";
 require_once "../../PHPMailer/SMTP.php";
 require_once "../../PHPMailer/Exception.php";
@@ -39,12 +40,12 @@ if (!isset($_SESSION['USER'])) {
                     $mail = new PHPMailer\PHPMailer\PHPMailer(true);
                     $mail->IsSMTP();
                     $mail->SMTPSecure = 'tls';
-                    $mail->Host = "smtp.gmail.com";
+                    $mail->Host = "mail.rendigitizing.com";
                     $mail->Post = 587;
                     $mail->SMTPAuth = true;
-                    $mail->Username = 'rendigitizing.info@gmail.com'; // Replace with company email
-                    $mail->Password = 'Qwerty@1234'; //Replace with email password
-                    $mail->setFrom("rendigitizing.info@gmail.com"); //Replace with company email
+                    $mail->Username = 'rendigitizing.help@rendigitizing.com'; // Replace with company email
+                    $mail->Password = 'Rishav@1234'; //Replace with email password
+                    $mail->setFrom("rendigitizing.help@rendigitizing.com"); //Replace with company email
 
                     $mail->addAddress($email);
                     $mail->Subject = "Password Reset Link";
@@ -52,7 +53,7 @@ if (!isset($_SESSION['USER'])) {
                     $mail->Body = "
                 <p>Hi, <br/>In order to reset your email, please click the link below: </p>
                 <br/>
-                <a href='http://localhost/RenDigitizingUpdated/user/authentication/resetpassword.php?email=$email&token=$token' class='btn btn-success' style='text-decoration: none'>http://localhost/RenDigitizingUpdated/user/authentication/resetpassword.php?email=$email&token=$token</a>
+                <onclick='window.location.href ='http://rendigitizing.com/user/authentication/resetpassword.php?email=$email&token=$token'' class='btn btn-success' style='text-decoration: none'>http://rendigitizing.com/user/authentication/resetpassword.php?email=$email&token=$token</a>
                 <br>
                 Kind Regard,<br/>
                 Company Name
@@ -61,7 +62,8 @@ if (!isset($_SESSION['USER'])) {
                     $_SESSION['TOKEN'] = $token;
                     if ($mail->send()) {
                         $emailsendMsg = "<b>Password Reset Link Sent !!</b> <br />
-                    Please check your mailbox";
+                    Please check your mailbox <br/>
+                    Note: Link will be expired after 5 minutes";
                     } else {
                         $emailsendMsgErr = "<b>Something went wrong</b>";
                     }
@@ -75,7 +77,7 @@ if (!isset($_SESSION['USER'])) {
         }
     }
 } else {
-    header("location:http://localhost/RendigitizingUpdated/index.php");
+    header("location:http://rendigitizing.com/index.php?nosession=false");
 }
 ?>
 <!DOCTYPE html>
@@ -127,10 +129,6 @@ if (!isset($_SESSION['USER'])) {
                 <h2 class="my-md-3 site-title">RenDigitizing</h2>
             </div>
             <div class="col-md-6 text-right">
-                <p class="my-md-4 header-links">
-                    <a href="../RenDigitizing/user/authentication/login.php" class="px-2">Sign IN</a>
-                    <a href="../RenDigitizing/user/authentication/register.php" class="px-1">Create an Account</a>
-                </p>
             </div>
         </div>
     </div>
@@ -140,7 +138,7 @@ if (!isset($_SESSION['USER'])) {
 
     <!-- Sing in  Form -->
     <section class="sign-in">
-        <div class="container">
+        <div class="container1">
             <div class="signin-content">
                 <div class="signin-image">
                     <figure><img src="../../styleassets/images/signin-image.jpg" alt="sing up image"></figure>

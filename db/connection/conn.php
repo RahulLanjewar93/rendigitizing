@@ -1,8 +1,8 @@
 <?php
 $host = "localhost";
-$user = "root";
-$pass = "";
-$db = "rendigitization_db";
+$user = "pranav12_root";
+$pass = "Rishav@1234";
+$db = "pranav12_rendigitizing_db";
 
 $conn = mysqli_connect($host, $user, $pass, $db);
 if($conn)

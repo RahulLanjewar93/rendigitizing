@@ -71,5 +71,5 @@ if (!isset($_SESSION['USER'])) {
 else{
     header("location:http://rendigitizing.com/index.php?nosession=false");
 }
-}
+
 ?>
