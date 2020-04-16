@@ -88,17 +88,8 @@ else{
         </div>
 
         <div class="col-md-6 text-right my-auto">
-          <?php if (isset($userEmail)) { ?>
           <p class="my-md-4 header-links">
-            <a href="account.php" class="px-2"><?php echo $userEmail ?></a>
             <a href="../authentication/logout.php" class="px-1">Logout</a>
-            <?php
-                } else {
-                    ?>
-            <a href="../authentication/login.php" class="px-2">Login</a>
-            <a href="../authentication/register.php" class="px-1">Create an account</a>
-          </p>
-          <?php } ?>
         </div>
       </div>
     </div>

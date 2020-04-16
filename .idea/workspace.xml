@@ -3,14 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0b0d27ad-2d8e-4061-88ce-481b35598ab3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/connection/conn.php" beforeDir="false" afterPath="$PROJECT_DIR$/db/connection/conn.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/syntaxchecker.php" beforeDir="false" afterPath="$PROJECT_DIR$/syntaxchecker.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/authentication/forgetpassword.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/authentication/forgetpassword.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/authentication/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/authentication/login.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/authentication/logout.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/authentication/logout.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/authentication/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/authentication/register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/authentication/resetpassword.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/authentication/resetpassword.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/profile/embroiderytext.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/profile/embroiderytext.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/profile/orders.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/profile/orders.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user/profile/placeorder.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/profile/placeorder.php" afterDir="false" />
@@ -149,7 +141,7 @@
       <workItem from="1586930106241" duration="5326000" />
       <workItem from="1586953896956" duration="9330000" />
       <workItem from="1587016477817" duration="2253000" />
-      <workItem from="1587032625951" duration="3738000" />
+      <workItem from="1587032625951" duration="4321000" />
     </task>
     <task id="LOCAL-00001" summary="GitDemo Added">
       <created>1586708442056</created>
