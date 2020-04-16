@@ -4,15 +4,19 @@
  * Date : 12/03/2020
 */
 session_start();
+//ini_set('display_errors',1);
 unset($_SESSION['TOKEN']);
 unset($_SESSION['TEMAIL']);
 // Report all errors except E_NOTICE
 error_reporting(E_ALL ^ E_NOTICE);
 require_once "../../db/connection/conn.php";
+require_once "../../functions/functions.php";
 if(!isset($_SESSION['USER'])) {
     if (isset($_POST['login'])) {
         $email = trim(mysqli_real_escape_string($conn, $_POST['email']));
         $pass = mysqli_real_escape_string($conn, $_POST['pass']);
+
+
         if (empty($email)) {
             $emailErr = "Please enter email";
         } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -42,7 +46,8 @@ if(!isset($_SESSION['USER'])) {
 
                     if (mysqli_num_rows($emailConfirmationCheckFire) > 0) {
                         $_SESSION['USER'] = $email;
-                        header("location:http://localhost/RendigitizingUpdated/index.php");
+                        $token = generateString(256);
+                        header("location:http://rendigitizing.com/index.php?userauth=$token");
                     } else {
                         //echo "Go verify email";
                         $confirmationMsgErr = "Please verify email address to get login access";
@@ -67,7 +72,8 @@ if(!isset($_SESSION['USER'])) {
     }
 }
 else{
-    header("location:http://localhost/RendigitizingUpdated/index.php?nosession=false");
+    header("location:http://rendigitizing.com/index.php?nosession=false");
+    //ini_set('display_errors',1);
 }
 ?>
 <!DOCTYPE html>
@@ -116,10 +122,45 @@ else{
                     <h2 class="my-md-3 site-title">RenDigitizing</h2>
                 </div>
                 <div class="col-md-6 text-right">
+                    <!--<p class="my-md-4 header-links">-->
+                    <!--    <a href="login.php" class="px-2">Sign IN</a>-->
+                    <!--    <a href="register.php" class="px-1">Create an Account</a>-->
+                    <!--</p>-->
                 </div>
             </div>
         </div>
     </header>
+    <!--<div class="container-fluid p-0">-->
+    <!--    <nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+    <!--        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"-->
+    <!--            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"-->
+    <!--            aria-label="Toggle navigation">-->
+    <!--            <span><i class="fas fa-bars fa-1x"></i></span>-->
+    <!--        </button>-->
+    <!--        <div class="navbar-collapse collapse" id="navbarSupportedContent">-->
+    <!--            <ul class="navbar-nav mr-auto">-->
+    <!--                <li class="nav-item active">-->
+    <!--                    <a class="nav-link" href="../../index.html">Home <span class="sr-only">(current)</span></a>-->
+    <!--                </li>-->
+    <!--                <li class="nav-item">-->
+    <!--                    <a class="nav-link" href="/user/authentication/login.php">Shop</a>-->
+    <!--                </li>-->
+    <!--                <li class="nav-item">-->
+    <!--                    <a class="nav-link" href="#">About Us</a>-->
+    <!--                </li>-->
+    <!--                <li class="nav-item">-->
+    <!--                    <a class="nav-link" href="contact.html">Contact Us</a>-->
+    <!--                </li>-->
+    <!--            </ul>-->
+    <!--        </div>-->
+
+    <!--        <div class="navbar-nav">-->
+    <!--            <li class="nav-item border rounded-circle mx-2 search-icon">-->
+    <!--                <i class="fas fa-search p-2"></i>-->
+    <!--            </li>-->
+    <!--        </div>-->
+    <!--    </nav>-->
+    <!--</div>-->
     <div class="main">
 
         <!-- Sing in  Form -->
@@ -152,7 +193,6 @@ else{
                         </span>
                         <span class="error"><b><?php echo $_SESSION['PASSWORD_CHANGED_FAILED']; unset($_SESSION['PASSWORD_CHANGED_FAILED']); ?></b>
                         </span>
-
 
 
                         <form method="POST" class="register-form" id="login-form">
@@ -250,6 +290,13 @@ else{
         <!-- JS -->
         <script src="../../styleassets/vendor/jquery/jquery.min.js"></script>
         <script src="../../styleassets/js/main.js"></script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+        <script src="../../styleassets/js/main.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+  </script>
+</body>
 
 </html>

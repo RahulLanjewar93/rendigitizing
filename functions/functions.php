@@ -1,5 +1,4 @@
 <?php
-
 function generateString($len = 10)
 {
     $token = "qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM1234567890";
@@ -10,12 +9,27 @@ function generateString($len = 10)
 }
 function redirectSuccess()
 {
-    header("location:http://localhost/RenDigitizingUpdated/user/authentication/login.php?resetpassword=success");
+    header("location:http://rendigitizing.com/user/authentication/login.php?resetpassword=success");
     exit();
 }
 function redirectFail()
 {
-    header("location:http://localhost/RenDigitizingUpdated/user/authentication/login.php?resetpassword=fail");
+    header("location:http://rendigitizing.com/user/authentication/login.php?resetpassword=fail");
+    exit();
+}
+function redirectFailPasswordChanged()
+{
+    header("location:http://rendigitizing.com/user/authentication/login.php?resetpassword=fail&errorFrom=PasswordChanged");
+    exit();
+}
+function redirectFailLinkExpired()
+{
+    header("location:http://rendigitizing.com/user/authentication/login.php?resetpassword=fail&errorFrom=LinkExpired");
+    exit();
+}
+function redirectFailLinkManipulated()
+{
+    header("location:http://rendigitizing.com/user/authentication/login.php?resetpassword=fail&errorFrom=LinkManipulated");
     exit();
 }
 function getUserIpAddr()
@@ -39,6 +53,6 @@ function getIndianDateTime()
 }
 function redirectResetPasswordConfirm()
 {
-    header("location:http://localhost/RenDigitizingUpdated/user/authentication/resetpasswordconfirm.php?fromresetlink=true");
+    header("location:http://rendigitizing.com/user/authentication/resetpasswordconfirm.php?fromresetlink=true");
     exit();
 }

@@ -3,7 +3,6 @@
  * Author : Rishav Mandal (TE-IT)
  * Date : 11/03/2020
 */
-error_reporting(E_ALL ^ E_NOTICE);
 session_start();
 if(!isset($_SESSION['USER'])) {
     require_once "../../PHPMailer/PHPMailer.php";
@@ -106,18 +105,18 @@ if(!isset($_SESSION['USER'])) {
 
             $encryptedPass = sha1($pass);
             $tnc = "YES";
-            $registerQuery = "INSERT INTO tbl_user (firstname, lastname, email, phone, password, isemailconfirm, token, is_tnc_agreed, user_ip_address, created_at) VALUES ('$firstName','$lastName', '$email', '$phone', '$encryptedPass', 'NO', '$token', '$tnc', '$userIP', '$datetime')";
+            $registerQuery = "INSERT INTO tbl_user (firstname, lastname, email, phone, password, isemailconfirm, token, is_tnc_agreed, user_ip_address, user_status, created_at) VALUES ('$firstName','$lastName', '$email', '$phone', '$encryptedPass', 'NO', '$token', '$tnc', '$userIP', 'PENDING', '$datetime')";
             $registerQueryFire = mysqli_query($conn, $registerQuery);
             if ($registerQueryFire) {
                 $mail = new PHPMailer\PHPMailer\PHPMailer(true);
                 $mail->IsSMTP();
                 $mail->SMTPSecure = 'tls';
-                $mail->Host = "smtp.gmail.com";
-                $mail->Post = 587;
+                $mail->Host = "mail.rendigitizing.com";
+                $mail->Post = 465;
                 $mail->SMTPAuth = true;
-                $mail->Username = 'rendigitizing.info@gmail.com'; //Replace your comapany email
-                $mail->Password = 'Qwerty@1234';// Replace your email password
-                $mail->setFrom("rendigitizing.info@gmail.com"); // Replace with company email
+                $mail->Username = 'rendigitizing.help@rendigitizing.com'; //Replace your comapany email
+                $mail->Password = 'Rishav@1234';// Replace your email password
+                $mail->setFrom("rendigitizing.help@rendigitizing.com"); // Replace with company email
 
                 $mail->addAddress($email, $firstName . " " . $lastName);
                 $mail->Subject = "Please verify your email address";
@@ -125,7 +124,7 @@ if(!isset($_SESSION['USER'])) {
                 $mail->Body = "
                 <p>Please click the button to verify your email address</p>
                 <br/>
-                <a href='http://localhost/RenDigitizing/EmailConfirmation/confirm.php?email=$email&token=$token' class='btn btn-success' style='text-decoration: none'>Verify Email</a>
+                <a href='http://rendigitizing.com/EmailConfirmation/confirm.php?email=$email&token=$token' class='btn btn-success' style='text-decoration: none'>Verify Email</a>
                 ";
                 if ($mail->send()) {
                     $emailsendMsg = "<b>Registration Successfull !!</b> <br />
@@ -141,7 +140,7 @@ if(!isset($_SESSION['USER'])) {
     }
 }
 else{
-    header("location:http://localhost/RendigitizingUpdated/user/authentication/login.php?nosession=true");
+    header("location:http://rendigitizing.com/user/authentication/login.php?nosession=true");
 }
 ?>
 <!DOCTYPE html>
@@ -230,18 +229,52 @@ else{
                     <h2 class="my-md-3 site-title">RenDigitizing</h2>
                 </div>
                 <div class="col-md-6 text-right">
-
+                    <!--<p class="my-md-4 header-links">-->
+                    <!--    <a href="login.php" class="px-2">Sign IN</a>-->
+                    <!--    <a href="register.php" class="px-1">Create an Account</a>-->
+                    <!--</p>-->
                 </div>
             </div>
         </div>
     </header>
+    <!--<div class="container-fluid p-0">-->
+    <!--    <nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+    <!--        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"-->
+    <!--            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"-->
+    <!--            aria-label="Toggle navigation">-->
+    <!--            <span><i class="fas fa-bars fa-1x"></i></span>-->
+    <!--        </button>-->
+    <!--        <div class="navbar-collapse collapse" id="navbarSupportedContent">-->
+    <!--            <ul class="navbar-nav mr-auto">-->
+    <!--                <li class="nav-item active">-->
+    <!--                    <a class="nav-link" href="../../index.html">Home <span class="sr-only">(current)</span></a>-->
+    <!--                </li>-->
+    <!--                <li class="nav-item">-->
+    <!--                    <a class="nav-link" href="/user/authentication/login.php">Shop</a>-->
+    <!--                </li>-->
+    <!--                <li class="nav-item">-->
+    <!--                    <a class="nav-link" href="#">About Us</a>-->
+    <!--                </li>-->
+    <!--                <li class="nav-item">-->
+    <!--                    <a class="nav-link" href="contact.html">Contact Us</a>-->
+    <!--                </li>-->
+    <!--            </ul>-->
+    <!--        </div>-->
+
+    <!--        <div class="navbar-nav">-->
+    <!--            <li class="nav-item border rounded-circle mx-2 search-icon">-->
+    <!--                <i class="fas fa-search p-2"></i>-->
+    <!--            </li>-->
+    <!--        </div>-->
+    <!--    </nav>-->
+    <!--</div>-->
 
 
     <div class="main">
 
         <!-- Sign up form -->
         <section class="signup">
-            <div class="container">
+            <div class="container1">
                 <div class="signup-content">
                     <div class="signup-form">
                         <h2 class="form-title">Registration</h2>
@@ -366,6 +399,13 @@ event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
         <!-- JS -->
         <script src="../../styleassets/vendor/jquery/jquery.min.js"></script>
         <script src="../../styleassets/js/main.js"></script>
+        <script src="../../styleassets/js/main.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+  </script>
 </body>
 
 </html>

@@ -1,12 +1,12 @@
 <?php
 session_start();
-ini_set('display_errors',1);
 error_reporting(E_ALL ^ E_NOTICE);
 require_once "../../functions/functions.php";
 require_once "../../db/connection/conn.php";
+date_default_timezone_set('Asia/Kolkata');
 if (!isset($_SESSION['USER'])) {
-if (isset($_SESSION['TEMAIL']) && isset($_SESSION['TOKEN'])) {
-    if (isset($_GET['email']) && isset($_GET['token']) && $_GET['email'] == $_SESSION['TEMAIL'] && $_GET['token'] == $_SESSION['TOKEN']) {
+//if (isset($_SESSION['TEMAIL']) && isset($_SESSION['TOKEN'])) {
+    //if (isset($_GET['email']) && isset($_GET['token']) && $_GET['email'] == $_SESSION['TEMAIL'] && $_GET['token'] == $_SESSION['TOKEN']) {
         if (isset($_POST['submit'])) {
             $email = mysqli_real_escape_string($conn, $_GET['email']);
             $token = mysqli_real_escape_string($conn, $_GET['token']);
@@ -24,22 +24,30 @@ if (isset($_SESSION['TEMAIL']) && isset($_SESSION['TOKEN'])) {
                 $lowercase = preg_match('@[a-z]@', $newPass);
                 $number = preg_match('@[0-9]@', $newPass);
                 $specialChars = preg_match('@[^\w]@', $newPass);
-
+                
+                $ErrorCount = 0;
+                $newPassErr = "";
+                $renewPassErr = "";
 
                 if (empty($newPass)) {
+                    $ErrorCount += 1;
                     $newPassErr = "Please enter a password";
-                } else if (strlen($newPass) > 50) {
+                } if (strlen($newPass) > 50) {
+                    $ErrorCount += 1;
                     $newPassErr = "Password is too long, make it within 50 characters";
-                } else if (strlen($newPass) < 8) {
+                } if (strlen($newPass) < 8) {
+                    $ErrorCount += 1;
                     $newPassErr = "Password must be at least of 8 characters";
-                } else if (!$uppercase || !$lowercase || !$number || !$specialChars) {
+                } if (!$uppercase || !$lowercase || !$number || !$specialChars) {
+                    $ErrorCount += 1;
                     $newPassErr = "Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character";
-                } else if ($newPass != $renewPass) {
+                } if ($newPass != $renewPass) {
+                    $ErrorCount += 1;
                     $renewPassErr = "Password does not matched";
-                } else {
+                } if($ErrorCount == 0) {
                     $encryptNewPass = sha1($newPass);
 
-                    $updatePassword = "UPDATE tbl_user SET token = '', password = '$encryptNewPass' WHERE email = '$email'";
+                    $updatePassword = "UPDATE tbl_user SET token = '', token_expire = null, password = '$encryptNewPass' WHERE email = '$email'";
                     $updatePasswordFire = mysqli_query($conn, $updatePassword);
 
                     if ($updatePasswordFire) {
@@ -47,26 +55,32 @@ if (isset($_SESSION['TEMAIL']) && isset($_SESSION['TOKEN'])) {
                         redirectSuccess();
                     } else {
                         $_SESSION['PASSWORD_CHANGED_FAILED'] = "Password did not changed, Something went wrong";
-                        redirectFail();
+                        redirectFailPasswordChanged();
                     }
 
                 }
+                else
+                {
+                    echo $ErrorCount;
+                }
             } else {
-                redirectFail();
                 $_SESSION['NEW_PASSWORD_STATUS'] = "Link has been expired";
+                redirectFailLinkExpired();
+                
             }
-        }
-    } else {
-        redirectFail();
-        $_SESSION['UNAUTHORIZED_ACCESS'] = "Link is manipulated, unauthorised error !!";
+        //}
+    //} else {
+        //$_SESSION['UNAUTHORIZED_ACCESS'] = "Link is manipulated, unauthorised error !!";
+        //redirectFailLinkManipulated();
+        
     }
-}
-else{
-    redirectFail();
-    $_SESSION['NEW_PASSWORD_STATUS'] = "Link has been expired";
-}
+//}
+//else{
+    //redirectFail();
+    //$_SESSION['NEW_PASSWORD_STATUS'] = "Link has been expired";
+//}
 } else {
-    header("location:http://localhost/Rendigitization/index.php");
+    header("location:http://rendigitizing.com/index.php");
 }
 ?>
 
@@ -90,6 +104,11 @@ else{
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+            <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
 </head>
 <header>
     <div class="container">
@@ -138,8 +157,8 @@ else{
                             <span class="error"><?php echo $renewPassErr ?></span>
                         </div>
                         <div class="form-group form-button">
-                            <input type="submit" name="submit" id="submit" class="form-submit" value="Register"/>
-                            <input type="reset" name="Reset" id="reset" class="resetnewpass" value="Reset"/>
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Change"/>
+                            <input type="reset" name="Reset" id="reset" class="resetnewpass" value="Clear"/>
                         </div>
                     </form>
                 </div>

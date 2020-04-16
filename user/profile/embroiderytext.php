@@ -16,10 +16,10 @@ if(isset($_SESSION['USER']))
 
     $num_per_page = 01;
     $start_from = ($page-1)*01;
-    $fetchva = "SELECT * FROM tbl_order WHERE category = 'Emboridery Vector' LIMIT $start_from, $num_per_page";
-    $fetchvaFire = mysqli_query($conn, $fetchva);
+    $fetchet = "SELECT * FROM tbl_order WHERE category = 'Emboridery Text' LIMIT $start_from, $num_per_page";
+    $fetchetFire = mysqli_query($conn, $fetchet);
 
-    if(mysqli_num_rows($fetchvaFire)>1)
+    if(mysqli_num_rows($fetchetFire)>1)
     {
         //
     }
@@ -106,7 +106,7 @@ else{
 
   <div class="col-md-3 profile-area-sidebar indexnewnavbar p-5 my-2" id="indexBar">
     <a href="account.php">Account Details</a>
-    <a href="orders.php">My Orders</a>
+    <a class="current" href="orders.php">My Orders</a>
     <a href="placeorder.php">Place an Order</a>
     <a href="../../index.php">Home</a>
   </div>
@@ -140,14 +140,14 @@ else{
           <div class="ongoing-orders" id="ongoing-orders">
             <div class="row">
               <div class="col-md-6">
-                <h1 class="profile-text-area">Vector Art</h1>
+                <h1 class="profile-text-area">Embroidery Text</h1>
               </div>
               <div class="col-md-6">
                   <nav aria-label="Page navigation example" class="my-2">
                       <?php
-                      $getVARecords = "SELECT * FROM tbl_order WHERE category = 'Emboridery Vector'";
-                      $getVARecordsFire = mysqli_query($conn, $getVARecords);
-                      $total_records = mysqli_num_rows($getVARecordsFire);
+                      $getETRecords = "SELECT * FROM tbl_order WHERE category = 'Emboridery Text'";
+                      $getETRecordsFire = mysqli_query($conn, $getETRecords);
+                      $total_records = mysqli_num_rows($getETRecordsFire);
 
                       $total_pages = ceil($total_records/$num_per_page);
 
@@ -159,7 +159,7 @@ else{
                           if($page>1)
                           { ?>
                               <li class="page-item">
-                                  <a class="page-link" href="vectorart.php.php?page=<?php echo ($page-1) ?>" aria-label="Previous">
+                                  <a class="page-link" href="embroiderytext.php?page=<?php echo ($page-1) ?>" aria-label="Previous">
                                       <span aria-hidden="true">&laquo;</span>
                                       <span class="sr-only">Previous</span>
                                   </a>
@@ -168,14 +168,14 @@ else{
                           <?php
                           for($i=1; $i<$total_pages; $i++)
                           {?>
-                              <li class="page-item"><a class="page-link" href="vectorart.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
+                              <li class="page-item"><a class="page-link" href="embroiderytext.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
                           <?php } ?>
                           <?php
                           if($i>$page)
                           {
                               ?>
                               <li class="page-item">
-                                  <a class="page-link" href="vectorart.php?page=<?php echo ($page+1)?>" aria-label="Next">
+                                  <a class="page-link" href="embroiderytext.php?page=<?php echo ($page+1)?>" aria-label="Next">
                                       <span aria-hidden="true">&raquo;</span>
                                       <span class="sr-only">Next</span>
                                   </a>
@@ -188,7 +188,7 @@ else{
             <table class="table table-striped table-items">
               <thead>
                 <tr>
-                  <th>Image</th>
+                  <th>Text</th>
                   <th>Design Name</th>
                   <th>Price</th>
                   <th>Status</th>
@@ -197,17 +197,18 @@ else{
               </thead>
               <tbody>
               <?php
-                    while ($rows = mysqli_fetch_array($fetchvaFire)){
+                    while ($rows = mysqli_fetch_array($fetchetFire)){
               ?>
                 <tr>
-                  <td> <img class="table-image py-2" src="Uploads/Vector/DesignImages/<?php echo $rows['emboridery_vector_design_image']?>" alt=""> </td>
-                  <td><?php echo $rows['design_name']?></td>
-                  <td> <?php echo $rows['price']?> </td>
-                  <td> <?php echo $rows['order_flag']?> </td>
+
+                  <td><?php echo $rows['emboridery_text'] ?></td>
+                  <td> <?php echo $rows['design_name'] ?> </td>
+                  <td> <?php echo $rows['price'] ?> </td>
+                  <td> <?php echo $rows['order_flag'] ?> </td>
                   <td>
                     <div class="row order-button-group d-block">
                       <div class="col-md-12">
-                          <?php $OrderId = mysqli_real_escape_string($conn, $rows['order_id']); ?>
+                          <?php $OrderId = mysqli_real_escape_string($conn, $rows['order_id']) ?>
                         <a href="details.php?orderid=<?php echo $OrderId?>" class="btn order-btn-1 d-block py-2">View</a>
                         <a href="edit.php?orderid=<?php echo $OrderId?>" class="btn order-btn-2 d-block py-2">Edit</a></div>
                     </div>
@@ -216,36 +217,37 @@ else{
               <?php } ?>
               </tbody>
             </table>
-            <nav aria-label="Page navigation example" class="my-2">
-                <ul class="pagination justify-content-end" id="Pagination">
-                    <?php
-                    if($page>1)
-                    { ?>
-                        <li class="page-item">
-                            <a class="page-link" href="vectorart.php.php?page=<?php echo ($page-1) ?>" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </li>
-                    <?php } ?>
-                    <?php
-                    for($i=1; $i<$total_pages; $i++)
-                    {?>
-                        <li class="page-item"><a class="page-link" href="vectorart.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
-                    <?php } ?>
-                    <?php
-                    if($i>$page)
-                    {
-                        ?>
-                        <li class="page-item">
-                            <a class="page-link" href="vectorart.php?page=<?php echo ($page+1)?>" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
-                    <?php } ?>
-                </ul>
-                </nav>
+              <nav aria-label="Page navigation example" class="my-2">
+
+                  <ul class="pagination justify-content-end" id="Pagination">
+                      <?php
+                      if($page>1)
+                      { ?>
+                          <li class="page-item">
+                              <a class="page-link" href="embroiderytext.php?page=<?php echo ($page-1) ?>" aria-label="Previous">
+                                  <span aria-hidden="true">&laquo;</span>
+                                  <span class="sr-only">Previous</span>
+                              </a>
+                          </li>
+                      <?php } ?>
+                      <?php
+                      for($i=1; $i<$total_pages; $i++)
+                      {?>
+                          <li class="page-item"><a class="page-link" href="embroiderytext.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
+                      <?php } ?>
+                      <?php
+                      if($i>$page)
+                      {
+                          ?>
+                          <li class="page-item">
+                              <a class="page-link" href="embroiderytext.php?page=<?php echo ($page+1)?>" aria-label="Next">
+                                  <span aria-hidden="true">&raquo;</span>
+                                  <span class="sr-only">Next</span>
+                              </a>
+                          </li>
+                      <?php } ?>
+                  </ul>
+              </nav>
           </div>
         </div>
       </div>

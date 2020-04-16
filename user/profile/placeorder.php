@@ -749,10 +749,9 @@ if (isset($_SESSION['USER']))
     <div class="container2 mx-5">
         <div class="row row1">
             <div class="col-md-3 profile-area-sidebar p-5">
-                <a href="dashboard.php">Dashboard</a>
-                <a class="current" href="placeorder.php">Place an Order</a>
-                <a href="orders.php">My Orders</a>
                 <a href="account.php">Account Details</a>
+                <a href="orders.php">My Orders</a>
+                <a class="current" href="placeorder.php">Place an Order</a>
                 <a href="../../index.php">Home</a>
             </div>
 
