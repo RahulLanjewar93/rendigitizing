@@ -14,8 +14,8 @@ if(isset($_SESSION['USER']))
         $page = 1;
     }
 
-    $num_per_page = 01;
-    $start_from = ($page-1)*01;
+    $num_per_page = 05;
+    $start_from = ($page-1)*05;
     $fetchva = "SELECT * FROM tbl_order WHERE category = 'Emboridery Vector' LIMIT $start_from, $num_per_page";
     $fetchvaFire = mysqli_query($conn, $fetchva);
 

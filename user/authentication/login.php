@@ -47,7 +47,7 @@ if(!isset($_SESSION['USER'])) {
                     if (mysqli_num_rows($emailConfirmationCheckFire) > 0) {
                         $_SESSION['USER'] = $email;
                         $token = generateString(256);
-                        header("location:http://rendigitizing.com/index.php?userauth=$token");
+                        header("location:http://localhost/rendigitizingupdated/index.php?userauth=$token");
                     } else {
                         //echo "Go verify email";
                         $confirmationMsgErr = "Please verify email address to get login access";
@@ -72,7 +72,7 @@ if(!isset($_SESSION['USER'])) {
     }
 }
 else{
-    header("location:http://rendigitizing.com/index.php?nosession=false");
+    header("location:http://localhost/rendigitizingupdated/index.php?nosession=false");
     //ini_set('display_errors',1);
 }
 ?>

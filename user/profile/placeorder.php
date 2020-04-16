@@ -3,8 +3,8 @@
 session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-//error_reporting(E_ALL ^ E_NOTICE);
+//error_reporting(E_ALL);
+error_reporting(E_ALL ^ E_NOTICE);
 require_once "../../functions/functions.php";
 require_once "../../db/connection/conn.php";
 $datetime = getIndianDateTime();
@@ -73,6 +73,14 @@ if (isset($_SESSION['USER']))
     $PrintingProcessVectorErr = "";
     $ColorVectorErr = "";
     $ErrorVectorCounter = 0;
+
+    //Intialization
+    $Error = "";
+    $orderSuccessMsg = "";
+    $EmborideryTextSuccessMsg = "";
+    $EmborideryTextFailedMsg = "";
+
+
 
     //Placing order Image
     if (isset($_POST['placeorderemimages']))
@@ -773,7 +781,6 @@ if (isset($_SESSION['USER']))
                     <span class="success"><?php echo $EmborideryTextSuccessMsg ?></span>
                     <span class="error"><?php echo $EmborideryTextFailedMsg ?></span>
                 </div>
-
 
                 <!--Forms-->
                 <div id="emimages">

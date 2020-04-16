@@ -80,7 +80,7 @@ if (!isset($_SESSION['USER'])) {
     //$_SESSION['NEW_PASSWORD_STATUS'] = "Link has been expired";
 //}
 } else {
-    header("location:http://rendigitizing.com/index.php");
+    header("location:http://localhost/rendigitizingupdated/index.php");
 }
 ?>
 

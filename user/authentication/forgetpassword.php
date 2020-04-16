@@ -53,7 +53,7 @@ if (!isset($_SESSION['USER'])) {
                     $mail->Body = "
                 <p>Hi, <br/>In order to reset your email, please click the link below: </p>
                 <br/>
-                <onclick='window.location.href ='http://rendigitizing.com/user/authentication/resetpassword.php?email=$email&token=$token'' class='btn btn-success' style='text-decoration: none'>http://rendigitizing.com/user/authentication/resetpassword.php?email=$email&token=$token</a>
+                <onclick='window.location.href ='http://localhost/rendigitizingupdated/user/authentication/resetpassword.php?email=$email&token=$token'' class='btn btn-success' style='text-decoration: none'>http://localhost/rendigitizingupdated/user/authentication/resetpassword.php?email=$email&token=$token</a>
                 <br>
                 Kind Regard,<br/>
                 Company Name
@@ -77,7 +77,7 @@ if (!isset($_SESSION['USER'])) {
         }
     }
 } else {
-    header("location:http://rendigitizing.com/index.php?nosession=false");
+    header("location:http://localhost/rendigitizingupdated/index.php?nosession=false");
 }
 ?>
 <!DOCTYPE html>

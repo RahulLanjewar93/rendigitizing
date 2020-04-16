@@ -124,7 +124,7 @@ if(!isset($_SESSION['USER'])) {
                 $mail->Body = "
                 <p>Please click the button to verify your email address</p>
                 <br/>
-                <a href='http://rendigitizing.com/EmailConfirmation/confirm.php?email=$email&token=$token' class='btn btn-success' style='text-decoration: none'>Verify Email</a>
+                <a href='http://localhost/rendigitizingupdated/EmailConfirmation/confirm.php?email=$email&token=$token' class='btn btn-success' style='text-decoration: none'>Verify Email</a>
                 ";
                 if ($mail->send()) {
                     $emailsendMsg = "<b>Registration Successfull !!</b> <br />
@@ -140,7 +140,7 @@ if(!isset($_SESSION['USER'])) {
     }
 }
 else{
-    header("location:http://rendigitizing.com/user/authentication/login.php?nosession=true");
+    header("location:http://localhost/rendigitizingupdated/user/authentication/login.php?nosession=true");
 }
 ?>
 <!DOCTYPE html>

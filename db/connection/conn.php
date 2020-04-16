@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
-$user = "pranav12_root";
-$pass = "Rishav@1234";
+$user = "root";
+$pass = "";
 $db = "pranav12_rendigitizing_db";
 
 $conn = mysqli_connect($host, $user, $pass, $db);
