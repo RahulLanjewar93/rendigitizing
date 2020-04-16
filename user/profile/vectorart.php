@@ -4,7 +4,6 @@ require_once "../../db/connection/conn.php";
 
 if(isset($_SESSION['USER']))
 {
-    $userEmail = $_SESSION['USER'];
     //Pagination
     if(isset($_GET['page']))
     {
@@ -15,9 +14,9 @@ if(isset($_SESSION['USER']))
         $page = 1;
     }
 
-    $num_per_page = 05;
-    $start_from = ($page-1)*05;
-    $fetchva = "SELECT * FROM tbl_order WHERE category = 'Emboridery Vector' AND user = '$userEmail' LIMIT $start_from, $num_per_page";
+    $num_per_page = 01;
+    $start_from = ($page-1)*01;
+    $fetchva = "SELECT * FROM tbl_order WHERE category = 'Emboridery Vector' LIMIT $start_from, $num_per_page";
     $fetchvaFire = mysqli_query($conn, $fetchva);
 
     if(mysqli_num_rows($fetchvaFire)>1)
@@ -29,7 +28,7 @@ if(isset($_SESSION['USER']))
     }
 }
 else{
-    header("location:https://rendigitizing.com/user/authentication/login.php?nosession=true");
+    header("location:http://localhost/RenDigitizingUpdated/user/authentication/login.php?nosession=true");
 }
 ?>
 <html>
@@ -56,6 +55,7 @@ else{
       $("#closeMenu").fadeIn(400);
       document.getElementById('closeMenu').style.display = 'inherit';
       $("#mainOrderArea").fadeOut(400);
+      document.getElementsByTagName("BODY")[0].onresize = function () {closeSlideMenu()};
     }
 
     function closeSlideMenu() {
@@ -89,8 +89,17 @@ else{
         </div>
 
         <div class="col-md-6 text-right my-auto">
+          <?php if (isset($userEmail)) { ?>
           <p class="my-md-4 header-links">
+            <a href="account.php" class="px-2"><?php echo $userEmail ?></a>
             <a href="../authentication/logout.php" class="px-1">Logout</a>
+            <?php
+                } else {
+                    ?>
+            <a href="../authentication/login.php" class="px-2">Login</a>
+            <a href="../authentication/register.php" class="px-1">Create an account</a>
+          </p>
+          <?php } ?>
         </div>
       </div>
     </div>
@@ -113,7 +122,7 @@ else{
           <a href="account.php">Account Details</a>
           <a class="current" href="orders.php">My Orders</a>
           <a href="placeorder.php">Place an Order</a>
-          <a href="../authentication/logout.php?logout=success&from=orders">Home</a>
+          <a href="../../index.php">Home</a>
         </div>
         <div class="col-md-9 profile-area-content p-5">
           <div class="reach-out-buttons">
@@ -137,7 +146,7 @@ else{
               <div class="col-md-6">
                   <nav aria-label="Page navigation example" class="my-2">
                       <?php
-                      $getVARecords = "SELECT * FROM tbl_order WHERE category = 'Emboridery Vector' AND user = '$userEmail'";
+                      $getVARecords = "SELECT * FROM tbl_order WHERE category = 'Emboridery Vector'";
                       $getVARecordsFire = mysqli_query($conn, $getVARecords);
                       $total_records = mysqli_num_rows($getVARecordsFire);
 

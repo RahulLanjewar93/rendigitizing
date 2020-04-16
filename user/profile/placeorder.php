@@ -4,7 +4,7 @@ session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-error_reporting(E_ALL ^ E_NOTICE);
+//error_reporting(E_ALL ^ E_NOTICE);
 require_once "../../functions/functions.php";
 require_once "../../db/connection/conn.php";
 $datetime = getIndianDateTime();
@@ -174,7 +174,7 @@ if (isset($_SESSION['USER']))
 
             //Main Image
 
-            $targetDesignImage = "Uploads/DesignImages/" . basename($_FILES['designimage']['name']);
+            $targetDesignImage = "Uploads/designimages/" . basename($_FILES['designimage']['name']);
             $mainImage = $_FILES['designimage']['name'];
             $mainImageTemp = $_FILES['designimage']['tmp_name'];
             $mainImageType = $_FILES['designimage']['type'];
@@ -182,7 +182,7 @@ if (isset($_SESSION['USER']))
             if (move_uploaded_file($_FILES['designimage']['name'], $targetDesignImage) && strtolower($mainImageType) == "image/jpg" || strtolower($mainImageType) == "image/jpeg" || strtolower($mainImageType) == "image/png") {
                 //$Mainmsg = "Main Image Uploaded Successfully";
                 //Supporting Image
-                $targetSupportingImage = "Uploads/SupportingImages/" . basename($_FILES['supportingimage']['name']);
+                $targetSupportingImage = "Uploads/supportingimages/" . basename($_FILES['supportingimage']['name']);
                 $supportingImage = $_FILES['supportingimage']['name'];
                 $supportingImageTemp = $_FILES['supportingimage']['tmp_name'];
                 $supportingImagetyType = $_FILES['supportingimage']['type'];
@@ -224,53 +224,53 @@ if (isset($_SESSION['USER']))
 
 
                 $InsertImageEmboridery = "INSERT INTO tbl_order
-             (
-             emboridery_design_image,
-             emboridery_supporting_image,
-             design_name,
-             category,
-             ponumber,
-             turnarround,
-             dimension,
-             dimension_width,
-             dimension_height,
-             have_bg_color,
-             stitch,
-             application,
-             fabric,
-             thread,
-             applique,
-             comments,
-             price,
-             order_flag,
-             order_at,
-             user,
-             user_ip
-             )
-             VALUES
-             (
-             '$mainImage',
-             '$supportingImage',
-             '$DesignName',
-             'Emboridery Image',
-             '$PoNumber',
-             '$TurnAround',
-             '$Dimension',
-             '$DimensionWidth',
-             '$DimensionHeight',
-             '$IsBGColorInclude',
-             '$Stitch',
-             '$Application',
-             '$Fabric',
-             '$Thread',
-             '$Applique',
-             '$Comments',
-             $FinalPrice,
-             'NEW',
-             '$datetime',
-             '$userEmail',
-             '$userIP'
-             )";
+            (
+            emboridery_design_image,
+            emboridery_supporting_image,
+            design_name,
+            category,
+            ponumber,
+            turnarround,
+            dimension,
+            dimension_width,
+            dimension_height,
+            have_bg_color,
+            stitch,
+            application,
+            fabric,
+            thread,
+            applique,
+            comments,
+            price,
+            order_flag,
+            order_at,
+            user,
+            user_ip
+            )
+            VALUES
+            (
+            '$mainImage',
+            '$supportingImage',
+            '$DesignName',
+            'Emboridery Image',
+            '$PoNumber',
+            '$TurnAround',
+            '$Dimension',
+            '$DimensionWidth',
+            '$DimensionHeight',
+            '$IsBGColorInclude',
+            '$Stitch',
+            '$Application',
+            '$Fabric',
+            '$Thread',
+            '$Applique',
+            '$Comments',
+            $FinalPrice,
+            'NEW',
+            '$datetime',
+            '$userEmail',
+            '$userIP'
+            )";
 
                 $InsertImageEmborideryFire = mysqli_query($conn, $InsertImageEmboridery);
 
@@ -285,16 +285,12 @@ if (isset($_SESSION['USER']))
                 }
             } else {
 
-                $Mainmsg = "Invalid Image";
-                //echo $Mainmsg;
+                $ErrorNo = $ErrorCounter;
+
+                $Error = "Please Fix errors";
             }
         } else {
-            
-
-            $ErrorNo = $ErrorCounter;
-
-            $Error = "Please Fix errors";
-            //echo $ErrorNo;
+            $Mainmsg = "Invalid Image";
         }
 
 
@@ -421,51 +417,51 @@ if (isset($_SESSION['USER']))
 
 
             $InsertTextEmboridery = "INSERT INTO tbl_order
-             (
-             emboridery_text,
-             design_name,
-             category,
-             ponumber,
-             turnarround,
-             dimension,
-             dimension_width,
-             dimension_height,
-             have_bg_color,
-             stitch,
-             application,
-             fabric,
-             thread,
-             applique,
-             comments,
-             price,
-             order_flag,
-             order_at,
-             user,
-             user_ip
-             )
-             VALUES
-             (
-             '$Text',
-             '$DesignNameText',
-             'Emboridery Text',
-             '$PoNumberText',
-             '$TurnAroundText',
-             '$DimensionText',
-             '$DimensionWidthText',
-             '$DimensionHeightText',
-             '$IsBGColorIncludeText',
-             '$StitchText',
-             '$ApplicationText',
-             '$FabricText',
-             '$ThreadText',
-             '$AppliqueText',
-             '$CommentsText',
-             $FinalPriceText,
-             'NEW',
-             '$datetime',
-             '$userEmail',
-             '$userIP'
-             )";
+            (
+            emboridery_text,
+            design_name,
+            category,
+            ponumber,
+            turnarround,
+            dimension,
+            dimension_width,
+            dimension_height,
+            have_bg_color,
+            stitch,
+            application,
+            fabric,
+            thread,
+            applique,
+            comments,
+            price,
+            order_flag,
+            order_at,
+            user,
+            user_ip
+            )
+            VALUES
+            (
+            '$Text',
+            '$DesignNameText',
+            'Emboridery Text',
+            '$PoNumberText',
+            '$TurnAroundText',
+            '$DimensionText',
+            '$DimensionWidthText',
+            '$DimensionHeightText',
+            '$IsBGColorIncludeText',
+            '$StitchText',
+            '$ApplicationText',
+            '$FabricText',
+            '$ThreadText',
+            '$AppliqueText',
+            '$CommentsText',
+            $FinalPriceText,
+            'NEW',
+            '$datetime',
+            '$userEmail',
+            '$userIP'
+            )";
 
             $InsertTextEmborideryFire = mysqli_query($conn, $InsertTextEmboridery);
 
@@ -627,51 +623,51 @@ if (isset($_SESSION['USER']))
 
 
                 $VectorEmboridery = "INSERT INTO tbl_order
-             (
-             emboridery_vector_design_image,
-             emboridery_vector_supporting_image,
-             design_name,
-             ponumber,
-             turnarround,
-             category,
-             dimension_width,
-             dimension_height,
-             dimension,
-             have_bg_color,
-             vector_format,
-             application,
-             printing_process,
-             color,
-             comments,
-             price,
-             order_flag,
-             order_at,
-             user,
-             user_ip
-             )
-             VALUES
-             (
-             '$mainImage',
-             '$supportingImage',
-             '$DesignNameVector',
-             '$PoNumberVector',
-             '$TurnAroundVector',
-             'Emboridery Vector',
-             '$DimensionWidthVector',
-             '$DimensionHeightVector',
-             '$DimensionVector',
-             '$IsBGColorIncludeVector',
-             '$FormatVector',
-             '$ApplicationVector',
-             '$PrintingProcessVector',
-             '$ColorVector',
-             '$CommentsVector',
-             $FinalPriceVector,
-             'NEW',
-             '$datetime',
-             '$userEmail',
-             '$userIP'
-             )";
+            (
+            emboridery_vector_design_image,
+            emboridery_vector_supporting_image,
+            design_name,
+            ponumber,
+            turnarround,
+            category,
+            dimension_width,
+            dimension_height,
+            dimension,
+            have_bg_color,
+            vector_format,
+            application,
+            printing_process,
+            color,
+            comments,
+            price,
+            order_flag,
+            order_at,
+            user,
+            user_ip
+            )
+            VALUES
+            (
+            '$mainImage',
+            '$supportingImage',
+            '$DesignNameVector',
+            '$PoNumberVector',
+            '$TurnAroundVector',
+            'Emboridery Vector',
+            '$DimensionWidthVector',
+            '$DimensionHeightVector',
+            '$DimensionVector',
+            '$IsBGColorIncludeVector',
+            '$FormatVector',
+            '$ApplicationVector',
+            '$PrintingProcessVector',
+            '$ColorVector',
+            '$CommentsVector',
+            $FinalPriceVector,
+            'NEW',
+            '$datetime',
+            '$userEmail',
+            '$userIP'
+            )";
 
                 $VectorEmborideryFire = mysqli_query($conn, $VectorEmboridery);
 
@@ -680,27 +676,22 @@ if (isset($_SESSION['USER']))
                     move_uploaded_file($mainImageTemp, $targetDesignImage);
                     move_uploaded_file($supportingImageTemp, $targetSupportingImage);
                     $orderSuccessMsg = "Order has been placed successfully";
-                    //echo $orderSuccessMsg;
+                    echo $orderSuccessMsg;
                 } else {
                     echo mysqli_error($conn);
                 }
 
 
             }
-            else
-            {
-                $VectorImageError =  "Invalid Image";
-            }
         }
         else {
             //echo $ErrorVectorCounter;
-            $VectorError = "Please fix errors";
         }
     }
 }
-else
-{
-    header("location:https://localhost/RenDigitizing/user/authentication/login.php");
+    else {
+        header("location:http://localhost/RenDigitizingUpdated/user/authentication/login.php");
+
 }
 ?>
 
@@ -727,49 +718,27 @@ else
             color: green;
         }
     </style>
-    <script>
-        function openSlideMenu() {
-
-            $("#sideBar").fadeIn(400);
-            document.getElementById('sideBar').style.display = 'inherit';
-            $("#openMenu").fadeOut(400);
-            document.getElementById('openMenu').style.display = 'none';
-            $("#closeMenu").fadeIn(400);
-            document.getElementById('closeMenu').style.display = 'inherit';
-            $("#profileAreaContent").fadeOut(400);
-        }
-
-        function closeSlideMenu() {
-            $("#sideBar").fadeOut(400);
-            // document.getElementById('sideBar').style.display = 'none';
-            $("#openMenu").fadeIn(400);
-            document.getElementById('openMenu').style.display = 'inherit';
-            $("#closeMenu").fadeOut(400);
-            document.getElementById('closeMenu').style.display = 'none';
-            $("#profileAreaContent").fadeIn(400);
-        }
-    </script>
 </head>
 
 <body>
 <header>
     <div class="container">
         <div class="row">
-            <div class="col-md-6 text-left  my-auto">
-                    <span class="slide text-left">
-                        <a href="#" class="openmenu" id="openMenu" onclick="openSlideMenu()">
-                            <i class="fas fa-bars hamburger"></i>
-                        </a>
-                        <a href="#" class="closemenu" id="closeMenu" onclick="closeSlideMenu()">
-                            <i class="fas fa-times"></i>
-                        </a>
-                    </span>
+            <div class="col-md-6 text-left">
                 <h2 class="my-md-3 site-title">RenDigitizing</h2>
             </div>
-            <div class="col-md-6 text-right my-auto">
-                <p class="my-md-4 header-links">
+            <div class="col-md-6 text-right">
+                <?php if (isset($userEmail)) { ?>
+                    <p class="my-md-4 header-links">
+                    <a href="account.php" class="px-2"><?php echo $userEmail ?></a>
                     <a href="../authentication/logout.php" class="px-1">Logout</a>
-
+                    <?php
+                } else {
+                    ?>
+                    <a href="../authentication/login.php" class="px-2">Login</a>
+                    <a href="../authentication/register.php" class="px-1">Create an account</a>
+                    </p>
+                <?php } ?>
             </div>
         </div>
     </div>
@@ -779,37 +748,30 @@ else
 <div class="profile-area">
     <div class="container2 mx-5">
         <div class="row row1">
-            <div class="col-md-3 profile-area-sidebar p-5" id="sideBar">
+            <div class="col-md-3 profile-area-sidebar p-5">
                 <a href="account.php">Account Details</a>
                 <a href="orders.php">My Orders</a>
                 <a class="current" href="placeorder.php">Place an Order</a>
-                <a href="../../index.php?from=placeorder">Home</a>
+                <a href="../../index.php">Home</a>
             </div>
 
-            <div class="col-md-9 profile-area-content p-5" id="profileAreaContent">
+            <div class="col-md-9 profile-area-content p-5">
                 <div class="reach-out-buttons">
                     <table class="table table-striped table-items">
                         <th>
-                            <input class="btn order-btn-1 btn-mobile" type="button" value="Emboridery Images"
-                                   name="btnchoice">
+                            <input class="btn order-btn-1" type="button" value="Emboridery Images" name="btnchoice">
                         </th>
                         <th>
-                            <input class="btn order-btn-2 btn-mobile" type="button" value="Embroidery Text"
-                                   name="btnchoice">
+                            <input class="btn order-btn-2" type="button" value="Embroidery Text" name="btnchoice">
                         </th>
                         <th>
-                            <input class="btn order-btn-3 btn-mobile" type="button" value="Vector Art"
-                                   name="btnchoice">
+                            <input class="btn order-btn-3" type="button" value="Vector Art" name="btnchoice">
                         </th>
                     </table>
                     <span class="error"><?php echo $Error ?></span>
-                    <span class="error"><?php echo $Mainmsg ?></span>
                     <span class="success"><?php echo $orderSuccessMsg ?></span>
                     <span class="success"><?php echo $EmborideryTextSuccessMsg ?></span>
                     <span class="error"><?php echo $EmborideryTextFailedMsg ?></span>
-                    <span class="error"><?php echo $VectorImageError ?></span>
-                    <span class="error"><?php echo $VectorError ?></span>
-                    
                 </div>
 
 
@@ -818,8 +780,8 @@ else
                     <form method="post" name="emimages" id="form1" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-md-6">
-                                <input class="btn order-btn-1 py-2 my-3 btn-mobile" type="button"
-                                       value="Image Details" name="btnImage">
+                                <input class="btn order-btn-1 py-2 my-3 " type="button" value="Image Details"
+                                       name="btnImage">
                                 <div class="container myaccount-details-area need2hide">
                                     <h1 class="profile-text-area">Image Details</h1>
                                     <table class="myaccount-details-table">
@@ -881,8 +843,8 @@ else
                                         </tr>
                                     </table>
                                 </div>
-                                <input class="btn order-btn-2 py-2 my-3 btn-mobile" type="button"
-                                       value="Image Description" name="btnImage">
+                                <input class="btn order-btn-2 py-2 my-3" type="button" value="Image Description"
+                                       name="btnImage">
                                 <div class="container myaccount-change-password need2hide">
                                     <h1 class="profile-text-area">Image Description</h1>
                                     <table>
@@ -1016,10 +978,10 @@ else
                             </div>
                             <div class="col-md-6 ">
 
-                                <input class="btn order-btn-1 d-block py-2 my-3 btn-mobile" id="btnQuote"
-                                       type="submit" name="getquoteemimjages" value="Get Quote">
-                                <input class="btn order-btn-2 d-block py-2 my-3 btn-mobile" id="btnPlaceOrder"
-                                       type="submit" name="placeorderemimages" formmethod="post" value="Place Order">
+                                <input class="btn order-btn-1 d-block py-2 my-3" id="btnQuote" type="submit"
+                                       name="getquoteemimjages" value="Get Quote">
+                                <input class="btn order-btn-2 d-block py-2 my-3" id="btnPlaceOrder" type="submit"
+                                       name="placeorderemimages" formmethod="post" value="Place Order">
                             </div>
                         </div>
                     </form>
@@ -1028,9 +990,9 @@ else
                     <form name="emtext" id="form2" method="post">
                         <div class="row">
                             <div class="col-md-6">
-                                <input class="btn order-btn-1 py-2 my-3" type="button" value="Text Detail"
+                                <input class="btn order-btn-1py-2 my-3" type="button" value="Text Detail"
                                        name="btnText">
-                                <div class="container myaccount-details-area need2hide" id="emText">
+                                <div class="container myaccount-details-area" id="emText">
                                     <h1 class="profile-text-area">Text Details</h1>
                                     <table class="myaccount-details-table">
                                         <tr>
@@ -1073,8 +1035,7 @@ else
 
                                                         <option value="Select Plan">Select Plan</option>
                                                         <option value="Budget - 24 Hours">Budget - 24 Hours</option>
-                                                        <option value="Standard - 12 Hours">Standard - 12 Hours
-                                                        </option>
+                                                        <option value="Standard - 12 Hours">Standard - 12 Hours</option>
                                                         <option value="Express - 5 hours">Express - 5 hours</option>
                                                     </select>
                                                     <span class="error"><?php echo $TurnAroundTextErr ?></span>
@@ -1085,7 +1046,7 @@ else
                                 </div>
                                 <input class="btn order-btn-2 py-2 my-3" type="button" value="Text Description"
                                        name="btnText">
-                                <div class="container myaccount-change-password need2hide" id="emDescription">
+                                <div class="container myaccount-change-password" id="emDescription">
                                     <h1 class="profile-text-area">Text Description</h1>
                                     <table>
 
@@ -1098,18 +1059,15 @@ else
                                                     <div class="col-md-4">
                                                         <input type="text" placeholder="Width" name="widthtext"
                                                                id="widthtext">
-                                                        <span
-                                                            class="error"><?php echo $DimensionWidthTextErr ?></span>
+                                                        <span class="error"><?php echo $DimensionWidthTextErr ?></span>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <input type="text" placeholder="Height" name="heighttext"
                                                                id="heighttext">
-                                                        <span
-                                                            class="error"><?php echo $DimensionHeightTextErr ?></span>
+                                                        <span class="error"><?php echo $DimensionHeightTextErr ?></span>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <select name="dimensiontext" id="dimensiontext"
-                                                                class="btn dropdown-select">
+                                                        <select name="dimensiontext" id="dimensiontext" class="btn dropdown-select">
                                                             <option value="Inches">Inches</option>
                                                             <option value="cm">cm</option>
                                                             <option value="mm">mm</option>
@@ -1135,8 +1093,7 @@ else
                                                 <h5>Stitch</h5>
                                             </td>
                                             <td>
-                                                <select name="stitchtext" id="stitchtext"
-                                                        class="btn dropdown-select">
+                                                <select name="stitchtext" id="stitchtext" class="btn dropdown-select">
                                                     <option value="Select One">Select One</option>
                                                     <option value="Melco OFM">Melco OFM</option>
                                                     <option value="Toyota 100">Toyota 100</option>
@@ -1184,8 +1141,7 @@ else
                                                 <h5>Fabric</h5>
                                             </td>
                                             <td>
-                                                <select name="fabrictext" id="fabrictext"
-                                                        class="btn dropdown-select">
+                                                <select name="fabrictext" id="fabrictext" class="btn dropdown-select">
                                                     <option value="Select One">Select One</option>
                                                     <option value="Cotton / Twill">Cotton / Twill</option>
                                                     <option value="Wool">Wool</option>
@@ -1195,8 +1151,7 @@ else
                                                     <option value="Traditional(jersey,pique.etc)">
                                                         Traditional(jersey,pique.etc)
                                                     </option>
-                                                    <option value="Lycra / Spandex trees">Lycra / Spandex trees
-                                                    </option>
+                                                    <option value="Lycra / Spandex trees">Lycra / Spandex trees</option>
                                                     <option value="Leather">Leather</option>
                                                     <option value="Other">Other</option>
                                                 </select>
@@ -1208,19 +1163,15 @@ else
                                                 <h5>Thread</h5>
                                             </td>
                                             <td>
-                                                <select name="threadtext" id="threadtext"
-                                                        class="btn dropdown-select">
+                                                <select name="threadtext" id="threadtext" class="btn dropdown-select">
                                                     <option value="Select One">Select One</option>
                                                     <option value="Ackeman Isacord 40">Ackeman Isacord 40</option>
                                                     <option value="Ackeman Isacord 30">Ackeman Isacord 30</option>
-                                                    <option value="Medira Classic Rayon #40">Medira Classic Rayon
-                                                        #40
+                                                    <option value="Medira Classic Rayon #40">Medira Classic Rayon #40
                                                     </option>
-                                                    <option value="Medira Classic Rayon #60">Medira Classic Rayon
-                                                        #60
+                                                    <option value="Medira Classic Rayon #60">Medira Classic Rayon #60
                                                     </option>
-                                                    <option value="Medira Classic Rayon #30">Medira Classic Rayon
-                                                        #30
+                                                    <option value="Medira Classic Rayon #30">Medira Classic Rayon #30
                                                     </option>
                                                     <option value="Polyneon #40">Polyneon #40</option>
                                                     <option value="Polyneon #60">Polyneon #60</option>
@@ -1233,8 +1184,7 @@ else
                                                 <h5>Applique</h5>
                                             </td>
                                             <td>
-                                                <select name="appliquetext" id="appliquetext"
-                                                        class="btn dropdown-select">
+                                                <select name="appliquetext" id="appliquetext" class="btn dropdown-select">
 
                                                     <option value="Yes">Yes</option>
                                                     <option value="No">No</option>
@@ -1246,8 +1196,7 @@ else
                                                 <h5>Comments</h5>
                                             </td>
                                             <td>
-                                                    <textarea form="form2" name="commenttext" id="commenttext" cols="40"
-                                                              rows="5"></textarea>
+                                                <textarea form="form2" name="commenttext" id="commenttext" cols="40" rows="5"></textarea>
                                                 <span class="error"><?php echo $CommentsTextErr ?></span>
                                             </td>
                                         </tr>
@@ -1259,8 +1208,9 @@ else
 
                                 <input class="btn order-btn-1 d-block py-2 my-3" id="btnQuote" type="submit"
                                        name="getquoteemtext" value="Get Quote">
-                                <input class="btn order-btn-2 d-block py-2 my-3" id="btnPlaceOrderText"
-                                       type="submit" formmethod="post" name="placeorderemtext" value="Place Order">
+                                <input class="btn order-btn-2 d-block py-2 my-3" id="btnPlaceOrderText" type="submit"
+                                       formmethod="post"
+                                       name="placeorderemtext" value="Place Order">
                             </div>
                         </div>
                     </form>
@@ -1271,7 +1221,7 @@ else
                             <div class="col-md-6">
                                 <input class="btn order-btn-1 py-2 my-3" type="button" value="Vector Detail"
                                        name="btnVector">
-                                <div class="container myaccount-details-area need2hide" id="vectorDetails">
+                                <div class="container myaccount-details-area" id="vectorDetails">
                                     <h1 class="profile-text-area">Vector Details</h1>
                                     <table class="myaccount-details-table">
                                         <tr>
@@ -1316,12 +1266,10 @@ else
                                             </td>
                                             <td>
                                                 <div class="dropdown myaccount-details-phpcontent">
-                                                    <select name="turnaroundvector" id="turnaroundvector"
-                                                            class="btn dropdown-select">
+                                                    <select name="turnaroundvector" id="turnaroundvector" class="btn dropdown-select">
                                                         <option value="Select Plan">Select Plan</option>
                                                         <option value="Budget - 24 Hours">Budget - 24 Hours</option>
-                                                        <option value="Standard - 12 Hours">Standard - 12 Hours
-                                                        </option>
+                                                        <option value="Standard - 12 Hours">Standard - 12 Hours</option>
                                                         <option value="Express - 5 hours">Express - 5 hours</option>
                                                     </select>
                                                     <span class="error"><?php echo $TurnAroundVectorErr?></span>
@@ -1332,7 +1280,7 @@ else
                                 </div>
                                 <input class="btn order-btn-2 py-2 my-3" type="button" value="Vector Description"
                                        name="btnVector">
-                                <div class="container myaccount-change-password need2hide" id="vectorDescription">
+                                <div class="container myaccount-change-password" id="vectorDescription">
                                     <h1 class="profile-text-area">Vector Description</h1>
                                     <table>
 
@@ -1343,20 +1291,15 @@ else
                                             <td>
                                                 <div class="row">
                                                     <div class="col-md-4">
-                                                        <input type="text" placeholder="Width" name="widthvector"
-                                                               id="widthvector">
-                                                        <span
-                                                            class="error"><?php echo $DimensionWidthVectorErr?></span>
+                                                        <input type="text" placeholder="Width" name="widthvector" id="widthvector">
+                                                        <span class="error"><?php echo $DimensionWidthVectorErr?></span>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <input type="text" placeholder="Height" name="heightvector"
-                                                               id="heightvector">
-                                                        <span
-                                                            class="error"><?php echo $DimensionHeightVectorErr?></span>
+                                                        <input type="text" placeholder="Height" name="heightvector" id="heightvector">
+                                                        <span class="error"><?php echo $DimensionHeightVectorErr?></span>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <select name="dimensionvector" id="dimensionvector"
-                                                                class="btn dropdown-select">
+                                                        <select name="dimensionvector" id="dimensionvector" class="btn dropdown-select">
                                                             <option value="Inches">Inches</option>
                                                             <option value="cm">cm</option>
                                                             <option value="mm">mm</option>
@@ -1370,8 +1313,7 @@ else
                                                 <h5>Include the background color?</h5>
                                             </td>
                                             <td>
-                                                <select name="backgroundcolorinclusionvector"
-                                                        id="backgroundcolorinclusionvector" class="btn dropdown-select">
+                                                <select name="backgroundcolorinclusionvector" id="backgroundcolorinclusionvector" class="btn dropdown-select">
 
                                                     <option value="Yes">Yes</option>
                                                     <option value="No">No</option>
@@ -1383,8 +1325,7 @@ else
                                                 <h5>Format</h5>
                                             </td>
                                             <td>
-                                                <select name="formatvector" id="formatvector"
-                                                        class="btn dropdown-select">
+                                                <select name="formatvector" id="formatvector" class="btn dropdown-select">
                                                     <option value="Select One">Select One</option>
                                                     <option value="svg">svg</option>
                                                     <option value=".ai">.ai</option>
@@ -1400,15 +1341,13 @@ else
                                                 <h5>Application</h5>
                                             </td>
                                             <td>
-                                                <select name="applicationvector" id="applicationvector"
-                                                        class="btn dropdown-select">
+                                                <select name="applicationvector" id="applicationvector" class="btn dropdown-select">
                                                     <option value="Select One">Select One</option>
                                                     <option value="Vector Art">Vector Art</option>
                                                     <option value="Silkscreen">Silkscreen</option>
                                                     <option value="DTG">DTG</option>
                                                     <option value="Vinyl (Cad cut)">Vinyl (Cad cut)</option>
-                                                    <option value="Vinyl (Hairline border)">Vinyl (Hairline border)
-                                                    </option>
+                                                    <option value="Vinyl (Hairline border)">Vinyl (Hairline border)</option>
                                                     <option value="Sandblasting">Sandblasting</option>
                                                     <option value="Laser engraving">Laser engraving</option>
                                                     <option value="Laser engraving">Lapel pins/emblems</option>
@@ -1421,12 +1360,10 @@ else
                                                 <h5>Printing Process</h5>
                                             </td>
                                             <td>
-                                                <select name="printingprocessvector" id="printingprocessvector"
-                                                        class="btn dropdown-select">
+                                                <select name="printingprocessvector" id="printingprocessvector" class="btn dropdown-select">
                                                     <option value="Select One">Select One</option>
                                                     <option value="Spot Colours">Spot Colours</option>
-                                                    <option value="CMYK (process color)">CMYK (process color)
-                                                    </option>
+                                                    <option value="CMYK (process color)">CMYK (process color)</option>
                                                 </select>
                                                 <span class="error"><?php echo $PrintingProcessVectorErr?></span>
                                             </td>
@@ -1436,8 +1373,7 @@ else
                                                 <h5>Color</h5>
                                             </td>
                                             <td>
-                                                <select name="colorvector" id="colorvector"
-                                                        class="btn dropdown-select">
+                                                <select name="colorvector" id="colorvector" class="btn dropdown-select">
                                                     <option value="Select One">Select One</option>
                                                     <option value="As per part">As per part</option>
                                                     <option value="1-color logo">1-color logo</option>
@@ -1451,8 +1387,7 @@ else
                                                 <h5>Comments</h5>
                                             </td>
                                             <td>
-                                                    <textarea form="form3" name="commentvector" id="commentvector"
-                                                              cols="40" rows="5"></textarea>
+                                                <textarea form="form3" name="commentvector" id="commentvector" cols="40" rows="5"></textarea>
                                                 <span class="error"><?php echo $CommentsVectorErr?></span>
                                             </td>
                                         </tr>
@@ -1464,8 +1399,8 @@ else
 
                                 <input class="btn order-btn-1 d-block py-2 my-3" id="btnQuote" type="submit"
                                        name="getquotevectorart" value="Get Quote">
-                                <input class="btn order-btn-2 d-block py-2 my-3" id="btnPlaceOrdervector"
-                                       type="submit" formmethod="post" name="placeordervectorart" value="Place Order">
+                                <input class="btn order-btn-2 d-block py-2 my-3" id="btnPlaceOrdervector" type="submit" formmethod="post"
+                                       name="placeordervectorart" value="Place Order">
                             </div>
                         </div>
                     </form>

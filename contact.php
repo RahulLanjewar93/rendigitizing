@@ -156,6 +156,7 @@ ini_set('display_errors', 0);
             $("#closeMenu").fadeIn(400);
             document.getElementById('closeMenu').style.display = 'inherit';
             $("#mainContactArea").fadeOut(400);
+            document.getElementsByTagName("BODY")[0].onresize = function () {closeSlideMenu()};
         }
 
         function closeSlideMenu() {
@@ -268,11 +269,11 @@ ini_set('display_errors', 0);
 
     <div class="col-md-3 profile-area-sidebar indexnewnavbar p-5 my-2" id="indexBar">
         <a href="index.php">Home</a>
-        <a href="placeorder.php">My Acccount</a>
-        <a href="placeorder.php">My Orders</a>
+        <a href="user/profile/account.php">My Acccount</a>
+        <a href="user/profile/placeorder.php">My Orders</a>
         <a href="about.php">About us</a>
         <a href="contact.php">Contact Us</a>
-        <a href="../../index.php">Home</a>
+        <a href="index.php">Home</a>
     </div>
 
     <div class="main-contact-area" id="mainContactArea">

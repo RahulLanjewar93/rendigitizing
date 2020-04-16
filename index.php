@@ -73,26 +73,28 @@ else{
         // });
     </script>
     <script>
-        function openSlideMenu() {
+            function openSlideMenu() {
 
-            $("#indexBar").fadeIn(400);
-            document.getElementById('indexBar').style.display = 'flex';
-            $("#openMenu").fadeOut(400);
-            document.getElementById('openMenu').style.display = 'none';
-            $("#closeMenu").fadeIn(400);
-            document.getElementById('closeMenu').style.display = 'inherit';
-            $("#indexBodyArea").fadeOut(400);
-        }
+                $("#indexBar").fadeIn(400);
+                document.getElementById('indexBar').style.display = 'flex';
+                $("#openMenu").fadeOut(400);
+                document.getElementById('openMenu').style.display = 'none';
+                $("#closeMenu").fadeIn(400);
+                document.getElementById('closeMenu').style.display = 'inherit';
+                $("#indexBodyArea").fadeOut(400);
 
-        function closeSlideMenu() {
-            $("#indexBar").fadeOut(400);
-            // document.getElementById('sideBar').style.display = 'none';
-            $("#openMenu").fadeIn(400);
-            document.getElementById('openMenu').style.display = 'inherit';
-            $("#closeMenu").fadeOut(400);
-            document.getElementById('closeMenu').style.display = 'none';
-            $("#indexBodyArea").fadeIn(400);
-        }
+                document.getElementsByTagName("BODY")[0].onresize = function () {closeSlideMenu()};
+            }
+
+            function closeSlideMenu() {
+                $("#indexBar").fadeOut(400);
+                // document.getElementById('sideBar').style.display = 'none';
+                $("#openMenu").fadeIn(400);
+                document.getElementById('openMenu').style.display = 'inherit';
+                $("#closeMenu").fadeOut(400);
+                document.getElementById('closeMenu').style.display = 'none';
+                $("#indexBodyArea").fadeIn(400);
+            }
     </script>
 </head>
 
@@ -189,11 +191,11 @@ else{
 
     <div class="col-md-3 profile-area-sidebar indexnewnavbar p-5 my-2" id="indexBar">
         <a href="index.php">Home</a>
-        <a href="placeorder.php">My Acccount</a>
-        <a href="placeorder.php">My Orders</a>
+        <a href="user/newprofile/account.php">My Acccount</a>
+        <a href="user/newprofile/placeorder.php">My Orders</a>
         <a href="about.php">About us</a>
         <a href="contact.php">Contact Us</a>
-        <a href="../../index.php">Home</a>
+        <a href="index.php">Home</a>
     </div>
 
     <div class="index-body-area" id="indexBodyArea">

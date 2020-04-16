@@ -4,7 +4,6 @@
 
   if(isset($_SESSION['USER']))
   {
-      $userEmail = $_SESSION['USER'];
       //Pagination
       if(isset($_GET['page']))
       {
@@ -15,9 +14,9 @@
           $page = 1;
       }
 
-      $num_per_page = 05;
-      $start_from = ($page-1)*05;
-      $fetchei = "SELECT * FROM tbl_order WHERE category = 'Emboridery Image' AND user = '$userEmail' LIMIT $start_from, $num_per_page";
+      $num_per_page = 01;
+      $start_from = ($page-1)*01;
+      $fetchei = "SELECT * FROM tbl_order WHERE category = 'Emboridery Image' LIMIT $start_from, $num_per_page";
       $fetcheiFire = mysqli_query($conn, $fetchei);
 
       if(mysqli_num_rows($fetcheiFire)>1)
@@ -29,7 +28,7 @@
       }
   }
   else{
-      header("location:https://rendigitizing.com/user/authentication/login.php?nosession=true");
+      header("location:http://localhost/RenDigitizingUpdated/user/authentication/login.php?nosession=true");
   }
 ?>
 
@@ -90,8 +89,17 @@
         </div>
 
         <div class="col-md-6 text-right my-auto">
+          <?php if (isset($userEmail)) { ?>
           <p class="my-md-4 header-links">
+            <a href="account.php" class="px-2"><?php echo $userEmail ?></a>
             <a href="../authentication/logout.php" class="px-1">Logout</a>
+            <?php
+                } else {
+                    ?>
+            <a href="../authentication/login.php" class="px-2">Login</a>
+            <a href="../authentication/register.php" class="px-1">Create an account</a>
+          </p>
+          <?php } ?>
         </div>
       </div>
     </div>
@@ -99,7 +107,7 @@
 
   <div class="col-md-3 profile-area-sidebar indexnewnavbar p-5 my-2" id="indexBar">
     <a href="account.php">Account Details</a>
-    <a href="orders.php">My Orders</a>
+    <a class="current" href="orders.php">My Orders</a>
     <a href="placeorder.php">Place an Order</a>
     <a href="../../index.php">Home</a>
   </div>
@@ -114,7 +122,7 @@
           <a href="account.php">Account Details</a>
           <a class="current" href="orders.php">My Orders</a>
           <a href="placeorder.php">Place an Order</a>
-          <a href="https://rendigitizing.com/?from=myorder">Home</a>
+          <a href="../authentication/logout.php?logout=success&from=orders">Home</a>
         </div>
         <div class="col-md-9 profile-area-content p-5">
           <div class="reach-out-buttons">
@@ -138,7 +146,7 @@
               <div class="col-md-6">
                 <nav aria-label="Page navigation example" class="my-2">
                     <?php
-                    $getEIRecords = "SELECT * FROM tbl_order WHERE category = 'Emboridery Image' AND user = '$userEmail'";
+                    $getEIRecords = "SELECT * FROM tbl_order WHERE category = 'Emboridery Image'";
                     $getEIRecordsFire = mysqli_query($conn, $getEIRecords);
                     $total_records = mysqli_num_rows($getEIRecordsFire);
 
