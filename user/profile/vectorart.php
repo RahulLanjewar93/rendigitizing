@@ -71,6 +71,8 @@ else{
 </head>
 
 <body>
+
+
   <header>
     <div class="container">
       <div class="row">
@@ -151,7 +153,7 @@ else{
                           if($page>1)
                           { ?>
                               <li class="page-item">
-                                  <a class="page-link" href="vectorart.php.php?page=<?php echo ($page-1) ?>" aria-label="Previous">
+                                  <a class="page-link" href="vectorart.php?page=<?php echo ($page-1) ?>" aria-label="Previous">
                                       <span aria-hidden="true">&laquo;</span>
                                       <span class="sr-only">Previous</span>
                                   </a>
@@ -214,7 +216,7 @@ else{
                     if($page>1)
                     { ?>
                         <li class="page-item">
-                            <a class="page-link" href="vectorart.php.php?page=<?php echo ($page-1) ?>" aria-label="Previous">
+                            <a class="page-link" href="vectorart.php?page=<?php echo ($page-1) ?>" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                                 <span class="sr-only">Previous</span>
                             </a>
