@@ -197,8 +197,8 @@
                     <div class="row order-button-group d-block">
                       <div class="col-md-12">
                           <?php $OrderId = mysqli_real_escape_string($conn, $rows['order_id']); ?>
-                        <a class="btn order-btn-1 d-block py-2" href="details.php?orderid=<?php echo $OrderId ?>">View</a>
-                        <a class="btn order-btn-2 d-block py-2" href="edit.php?orderid=<?php echo $OrderId ?>">Edit</a></div>
+                        <a class="btn order-btn-1 d-block py-2" href="view.php?orderid=<?php echo $OrderId ?>">View</a>
+                        <a class="btn order-btn-2 d-block py-2" href="cancel.php?orderid=<?php echo $OrderId ?>">Cancel</a></div>
                     </div>
                   </td>
                 </tr>
