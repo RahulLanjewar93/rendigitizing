@@ -34,7 +34,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-left">
-                    <h2 class="my-md-3 site-title">RenDigitizing</h2>
+                    <h2 class="my-md-3 site-title">
+                    <a href="../../index.php">RenDigitizing</a>
+                    </h2>
                 </div>
                 <div class="col-md-6 text-right my-auto">
                     <p class="my-md-4 header-links">

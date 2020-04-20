@@ -192,8 +192,8 @@ else{
 
     <div class="col-md-3 profile-area-sidebar indexnewnavbar p-5 my-2" id="indexBar">
         <a href="index.php">Home</a>
-        <a href="user/newprofile/account.php">My Acccount</a>
-        <a href="user/newprofile/placeorder.php">My Orders</a>
+        <a href="user/profile/account.php">My Acccount</a>
+        <a href="user/profile/placeorder.php">My Orders</a>
         <a href="about.php">About us</a>
         <a href="contact.php">Contact Us</a>
         <a href="index.php">Home</a>
