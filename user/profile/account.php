@@ -27,6 +27,33 @@
 
         );
     </script>
+    <script>
+        function openSlideMenu() {
+            document.getElementById("profileAreaForNav").style.display = "none";
+            $("#indexBar").fadeIn(400);
+            document.getElementById('indexBar').style.display = 'flex';
+            $("#openMenu").fadeOut(400);
+            document.getElementById('openMenu').style.display = 'none';
+            $("#closeMenu").fadeIn(400);
+            document.getElementById('closeMenu').style.display = 'inherit';
+            $("#mainContactArea").fadeOut(400);
+            document.getElementsByTagName("BODY")[0].onresize = function () {
+                closeSlideMenu()
+            };
+
+        }
+
+        function closeSlideMenu() {
+            document.getElementById("profileAreaForNav").style.display = "block";
+            $("#indexBar").fadeOut(400);
+            // document.getElementById('sideBar').style.display = 'none';
+            $("#openMenu").fadeIn(400);
+            document.getElementById('openMenu').style.display = 'inherit';
+            $("#closeMenu").fadeOut(400);
+            document.getElementById('closeMenu').style.display = 'none';
+            $("#mainContactArea").fadeIn(400);
+        }
+    </script>
 </head>
 
 <body>
@@ -34,8 +61,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-left">
+                    <span class="slide text-left">
+                        <a href="#" class="openmenu" id="openMenu" onclick="openSlideMenu()">
+                            <i class="fas fa-bars hamburger"></i>
+                        </a>
+                        <a href="#" class="closemenu" id="closeMenu" onclick="closeSlideMenu()">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </span>
                     <h2 class="my-md-3 site-title">
-                    <a href="../../index.php">RenDigitizing</a>
+                        <a href="../../index.php">RenDigitizing</a>
                     </h2>
                 </div>
                 <div class="col-md-6 text-right my-auto">
@@ -45,7 +80,14 @@
             </div>
         </div>
     </header>
-    <div class="profile-area">
+    <div class="col-md-3 profile-area-sidebar indexnewnavbar p-5 my-2" id="indexBar">
+        <a class="current" href="account.php">My Acccount</a>
+        <a href="orders.php">My Orders</a>
+        <a href="placeorder.php">Place on order</a>
+        <a href="../../aboutus.php">About us</a>
+        <a href="../../contact.php">Contact Us</a>
+    </div>
+    <div class="profile-area" id="profileAreaForNav">
         <div class="container2 mx-5">
             <div class="row row1">
                 <div class="col-md-3 profile-area-sidebar p-5">
@@ -54,7 +96,10 @@
                     <a href="placeorder.php">Place an Order</a>
                     <a href="../../index.php">Home</a>
                 </div>
-                <div class="col-md-9 profile-area-content p-5">
+
+
+
+                <div class="col-md-9 profile-area-content p-5" id="mainContactArea">
                     <h1 class="profile-text-area">My Account</h1>
                     <div class="row">
                         <div class="col-md-6">

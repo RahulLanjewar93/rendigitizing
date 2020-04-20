@@ -55,7 +55,7 @@
       document.getElementById('openMenu').style.display = 'none';
       $("#closeMenu").fadeIn(400);
       document.getElementById('closeMenu').style.display = 'inherit';
-      $("#mainOrderArea").fadeOut(400);
+      $("#mainContactArea").fadeOut(400);
     }
 
     function closeSlideMenu() {
@@ -65,7 +65,7 @@
       document.getElementById('openMenu').style.display = 'inherit';
       $("#closeMenu").fadeOut(400);
       document.getElementById('closeMenu').style.display = 'none';
-      $("#mainOrderArea").fadeIn(400);
+      $("#mainContactArea").fadeIn(400);
     }
   </script>
 </head>
@@ -95,18 +95,15 @@
       </div>
     </div>
   </header>
-
   <div class="col-md-3 profile-area-sidebar indexnewnavbar p-5 my-2" id="indexBar">
-    <a href="account.php">Account Details</a>
+    <a href="account.php">My Acccount</a>
     <a class="current" href="orders.php">My Orders</a>
-    <a href="placeorder.php">Place an Order</a>
-    <a href="../../index.php">Home</a>
+    <a href="placeorder.php">Place an order</a>
+    <a href="../../aboutus.php">About us</a>
+    <a href="../../contact.php">Contact Us</a>
   </div>
 
-
-
-
-  <div class="profile-area">
+  <div class="profile-area" id="mainContactArea">
     <div class="container2 mx-5">
       <div class="row row1">
         <div class="col-md-3 profile-area-sidebar p-5">
@@ -115,6 +112,7 @@
           <a href="placeorder.php">Place an Order</a>
           <a href="../authentication/logout.php?logout=success&from=orders">Home</a>
         </div>
+
         <div class="col-md-9 profile-area-content p-5">
           <div class="reach-out-buttons">
             <table class="table table-striped table-items">
@@ -136,7 +134,7 @@
               </div>
               <div class="col-md-6">
                 <nav aria-label="Page navigation example" class="my-2">
-                    <?php
+                  <?php
                     $getEIRecords = "SELECT * FROM tbl_order WHERE category = 'Emboridery Image'";
                     $getEIRecordsFire = mysqli_query($conn, $getEIRecords);
                     $total_records = mysqli_num_rows($getEIRecordsFire);
@@ -146,32 +144,33 @@
 
                     ?>
                   <ul class="pagination justify-content-end" id="Pagination">
-                      <?php
+                    <?php
                       if($page>1)
                       { ?>
-                          <li class="page-item">
-                              <a class="page-link" href="orders.php?page=<?php echo ($page-1) ?>" aria-label="Previous">
-                                  <span aria-hidden="true">&laquo;</span>
-                                  <span class="sr-only">Previous</span>
-                              </a>
-                          </li>
-                      <?php } ?>
-                      <?php
+                    <li class="page-item">
+                      <a class="page-link" href="orders.php?page=<?php echo ($page-1) ?>" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                    </li>
+                    <?php } ?>
+                    <?php
                       for($i=1; $i<$total_pages; $i++)
                       {?>
-                          <li class="page-item"><a class="page-link" href="orders.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
-                      <?php } ?>
-                      <?php
+                    <li class="page-item"><a class="page-link"
+                        href="orders.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
+                    <?php } ?>
+                    <?php
                       if($i>$page)
                       {
                           ?>
-                          <li class="page-item">
-                              <a class="page-link" href="orders.php?page=<?php echo ($page+1)?>" aria-label="Next">
-                                  <span aria-hidden="true">&raquo;</span>
-                                  <span class="sr-only">Next</span>
-                              </a>
-                          </li>
-                      <?php } ?>
+                    <li class="page-item">
+                      <a class="page-link" href="orders.php?page=<?php echo ($page+1)?>" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </li>
+                    <?php } ?>
                   </ul>
                 </nav>
               </div>
@@ -187,55 +186,58 @@
                 </tr>
               </thead>
               <tbody>
-              <?php while($rows = mysqli_fetch_array($fetcheiFire)){ ?>
+                <?php while($rows = mysqli_fetch_array($fetcheiFire)){ ?>
                 <tr>
-                  <td> <img class="table-image py-2" src="Uploads/DesignImages/<?php echo $rows['emboridery_design_image']?>" alt=""> </td>
+                  <td> <img class="table-image py-2"
+                      src="Uploads/DesignImages/<?php echo $rows['emboridery_design_image']?>" alt=""> </td>
                   <td><?php echo $rows['design_name'] ?></td>
                   <td> <?php echo $rows['price'] ?> </td>
                   <td> <?php echo $rows['order_flag'] ?> </td>
                   <td>
                     <div class="row order-button-group d-block">
                       <div class="col-md-12">
-                          <?php $OrderId = mysqli_real_escape_string($conn, $rows['order_id']); ?>
+                        <?php $OrderId = mysqli_real_escape_string($conn, $rows['order_id']); ?>
                         <a class="btn order-btn-1 d-block py-2" href="view.php?orderid=<?php echo $OrderId ?>">View</a>
-                        <a class="btn order-btn-2 d-block py-2" href="cancel.php?orderid=<?php echo $OrderId ?>">Cancel</a></div>
+                        <a class="btn order-btn-2 d-block py-2"
+                          href="cancel.php?orderid=<?php echo $OrderId ?>">Cancel</a></div>
                     </div>
                   </td>
                 </tr>
-              <?php } ?>
+                <?php } ?>
               </tbody>
             </table>
             <nav aria-label="Page navigation example" class="my-2">
 
-                  <ul class="pagination justify-content-end" id="Pagination">
-                      <?php
+              <ul class="pagination justify-content-end" id="Pagination">
+                <?php
                       if($page>1)
                       { ?>
-                    <li class="page-item">
-                      <a class="page-link" href="orders.php?page=<?php echo ($page-1) ?>" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                    </li>
-                      <?php } ?>
-                      <?php
+                <li class="page-item">
+                  <a class="page-link" href="orders.php?page=<?php echo ($page-1) ?>" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                </li>
+                <?php } ?>
+                <?php
                       for($i=1; $i<$total_pages; $i++)
                       {?>
-                    <li class="page-item"><a class="page-link" href="orders.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
-                      <?php } ?>
-                      <?php
+                <li class="page-item"><a class="page-link" href="orders.php?page=<?php echo $i ?>"><?php echo $i ?></a>
+                </li>
+                <?php } ?>
+                <?php
                             if($i>$page)
                             {
                       ?>
-                    <li class="page-item">
-                      <a class="page-link" href="orders.php?page=<?php echo ($page+1)?>" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span class="sr-only">Next</span>
-                      </a>
-                    </li>
-                      <?php } ?>
-                  </ul>
-                </nav>
+                <li class="page-item">
+                  <a class="page-link" href="orders.php?page=<?php echo ($page+1)?>" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </li>
+                <?php } ?>
+              </ul>
+            </nav>
           </div>
         </div>
       </div>

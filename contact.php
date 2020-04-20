@@ -156,7 +156,9 @@ ini_set('display_errors', 0);
             $("#closeMenu").fadeIn(400);
             document.getElementById('closeMenu').style.display = 'inherit';
             $("#mainContactArea").fadeOut(400);
-            document.getElementsByTagName("BODY")[0].onresize = function () {closeSlideMenu()};
+            document.getElementsByTagName("BODY")[0].onresize = function () {
+                closeSlideMenu()
+            };
         }
 
         function closeSlideMenu() {
@@ -185,7 +187,10 @@ ini_set('display_errors', 0);
                             <i class="fas fa-times"></i>
                         </a>
                     </span>
-                    <h2 class="my-md-3 site-title">RenDigitizing</h2>
+                    <h2 class="my-md-3 site-title">
+                    <a href="index.php">RenDigitizing </a>
+                    </h2>
+                   
                 </div>
                 <div class="col-md-6 text-right my-auto">
                     <p class="my-md-4 header-links">
@@ -246,7 +251,7 @@ ini_set('display_errors', 0);
                             href="/user/authentication/login.php?nosession=true&userauth=<?php echo $token ?>">Shop</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link" href="aboutus.php">About Us</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
@@ -271,9 +276,8 @@ ini_set('display_errors', 0);
         <a href="index.php">Home</a>
         <a href="user/profile/account.php">My Acccount</a>
         <a href="user/profile/placeorder.php">My Orders</a>
-        <a href="about.php">About us</a>
-        <a href="contact.php">Contact Us</a>
-        <a href="index.php">Home</a>
+        <a href="aboutus.php">About us</a>
+        <a class="current" href="contact.php">Contact Us</a>
     </div>
 
     <div class="main-contact-area" id="mainContactArea">
@@ -292,7 +296,8 @@ ini_set('display_errors', 0);
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="">Your Name</label> <br>
-                                    <input type="text" name="name" id="name" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
+                                    <input type="text" name="name" id="name"
+                                        onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"
                                         value='<?php echo isset($_POST['name']) ? $_POST['name'] : ''; ?>'> <br>
                                     <span class="error"><?php echo $nameErr ?></span>
                                     <br />

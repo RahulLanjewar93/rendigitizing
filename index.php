@@ -73,28 +73,30 @@ else{
         // });
     </script>
     <script>
-            function openSlideMenu() {
+        function openSlideMenu() {
 
-                $("#indexBar").fadeIn(400);
-                document.getElementById('indexBar').style.display = 'flex';
-                $("#openMenu").fadeOut(400);
-                document.getElementById('openMenu').style.display = 'none';
-                $("#closeMenu").fadeIn(400);
-                document.getElementById('closeMenu').style.display = 'inherit';
-                $("#indexBodyArea").fadeOut(400);
+            $("#indexBar").fadeIn(400);
+            document.getElementById('indexBar').style.display = 'flex';
+            $("#openMenu").fadeOut(400);
+            document.getElementById('openMenu').style.display = 'none';
+            $("#closeMenu").fadeIn(400);
+            document.getElementById('closeMenu').style.display = 'inherit';
+            $("#indexBodyArea").fadeOut(400);
 
-                document.getElementsByTagName("BODY")[0].onresize = function () {closeSlideMenu()};
-            }
+            document.getElementsByTagName("BODY")[0].onresize = function () {
+                closeSlideMenu()
+            };
+        }
 
-            function closeSlideMenu() {
-                $("#indexBar").fadeOut(400);
-                // document.getElementById('sideBar').style.display = 'none';
-                $("#openMenu").fadeIn(400);
-                document.getElementById('openMenu').style.display = 'inherit';
-                $("#closeMenu").fadeOut(400);
-                document.getElementById('closeMenu').style.display = 'none';
-                $("#indexBodyArea").fadeIn(400);
-            }
+        function closeSlideMenu() {
+            $("#indexBar").fadeOut(400);
+            // document.getElementById('sideBar').style.display = 'none';
+            $("#openMenu").fadeIn(400);
+            document.getElementById('openMenu').style.display = 'inherit';
+            $("#closeMenu").fadeOut(400);
+            document.getElementById('closeMenu').style.display = 'none';
+            $("#indexBodyArea").fadeIn(400);
+        }
     </script>
 </head>
 
@@ -112,13 +114,15 @@ else{
                             <i class="fas fa-times"></i>
                         </a>
                     </span>
-                    <h2 class="my-md-3 site-title">RenDigitizing</h2>
+
+                    <h2 class="my-md-3 site-title">
+                        <a href="index.php">RenDigitizing</a>
+                    </h2>
                 </div>
                 <div class="col-md-6 text-right my-auto">
                     <p class="my-md-4 header-links">
                         <?php if(isset($_SESSION['USER'])){ ?>
-                            <a
-                            href="user/profile/account.php?nosession=false&ref=index"
+                        <a href="user/profile/account.php?nosession=false&ref=index"
                             class="px-2"><?php echo $_SESSION['USER'] ?></a><?php }else{ ?><a
                             href="user/authentication/register.php?nosession=true&ref=index" class="px-2">Create an
                             account</a><?php } ?>
@@ -166,12 +170,18 @@ else{
 
                     <?php } ?>
 
-
+                    <?php if(isset($userEmail)){ ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="user/authentication/login.php">Shop</a>
+                        <a class="nav-link" href="user/profile/placeorder.php?nosession=false&ref=index">Place an
+                            order</a>
                     </li>
+                    <?php } else { ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link" href="user/authentication/login.php">Place an order</a>
+                    </li>
+                    <?php }?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="aboutus.php">About Us</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contact.php?nosession=<?php echo $nosession ?>">Contact Us</a>
@@ -191,12 +201,11 @@ else{
     </div>
 
     <div class="col-md-3 profile-area-sidebar indexnewnavbar p-5 my-2" id="indexBar">
-        <a href="index.php">Home</a>
         <a href="user/profile/account.php">My Acccount</a>
-        <a href="user/profile/placeorder.php">My Orders</a>
-        <a href="about.php">About us</a>
+        <a href="user/profile/orders.php">My Orders</a>
+        <a href="user/profile/placeorder.php">Place an Order</a>
+        <a href="aboutus.php">About us</a>
         <a href="contact.php">Contact Us</a>
-        <a href="index.php">Home</a>
     </div>
 
     <div class="index-body-area" id="indexBodyArea">
