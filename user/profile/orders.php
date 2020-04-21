@@ -90,7 +90,7 @@
 
         <div class="col-md-6 text-right my-auto">
           <p class="my-md-4 header-links">
-          <?php if(isset($_SESSION['USER'])){ ?>
+            <?php if(isset($_SESSION['USER'])){ ?>
             <a href="account.php?nosession=false&ref=index" class="px-2">
               <?php echo $_SESSION['USER'] ?>
             </a>
