@@ -134,16 +134,17 @@ else{
           <div class="reach-out-buttons">
             <table class="table table-striped table-items">
               <th>
-                <a href="orders.php" class="btn order-btn-1 d-block py-2">Embroidery Images</a>
+                <a href="orders.php" class="btn order-btn-1 d-block py-2 primary">Embroidery Images</a>
               </th>
               <th>
-                <a href="embroiderytext.php" class="btn order-btn-1 d-block py-2">Embroidery Text</a>
+                <a href="embroiderytext.php" class="btn order-btn-1 d-block py-2 secondary">Embroidery Text</a>
               </th>
               <th>
-                <a href="vectorart.php" class="btn order-btn-1 d-block py-2">Vector Art</a>
+                <a href="vectorart.php" class="btn order-btn-1 d-block py-2 tertiary">Vector Art</a>
               </th>
             </table>
           </div>
+          <form action="" method="POST" id="searchForm"></form>
           <div class="ongoing-orders" id="ongoing-orders">
             <div class="row">
               <div class="col-md-6">
@@ -151,8 +152,8 @@ else{
               </div>
               <div class="col-md-6">
                 <div class="myOrderSearchArea">
-                  <input class="search-text d-inline-block" type="text" placeholder="Enter product name">
-                  <button class="btn d-inline-block">
+                  <input class="search-text d-inline-block" type="text" form="searchForm" placeholder="Enter product name">
+                  <button class="btn d-inline-block" form="searchForm">
                     <li class="nav-item border rounded-circle mx-2 search-icon ">
                       <i class="fas fa-search p-2"></i>
                     </li>

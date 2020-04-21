@@ -788,6 +788,7 @@ if (isset($_SESSION['USER']))
                         <?php }else{ ?>
                         <a href="../authentication/login.php?nosession=true&ref=index" class="px-2">Login</a>
                         <?php } ?>
+                    </p>
                 </div>
             </div>
         </div>
@@ -817,13 +818,16 @@ if (isset($_SESSION['USER']))
                     <div class="reach-out-buttons">
                         <table class="table table-striped table-items">
                             <th>
-                                <input class="btn order-btn-1 primary" type="button" value="Emboridery Images" name="btnchoice">
+                                <input class="btn order-btn-1 primary" type="button" value="Emboridery Images"
+                                    name="btnchoice">
                             </th>
                             <th>
-                                <input class="btn order-btn-2 secondary" type="button" value="Embroidery Text" name="btnchoice">
+                                <input class="btn order-btn-2 secondary" type="button" value="Embroidery Text"
+                                    name="btnchoice">
                             </th>
                             <th>
-                                <input class="btn order-btn-3 tertiary" type="button" value="Vector Art" name="btnchoice">
+                                <input class="btn order-btn-3 tertiary" type="button" value="Vector Art"
+                                    name="btnchoice">
                             </th>
                         </table>
                         <span class="error"><?php echo $Error ?></span>
@@ -839,7 +843,7 @@ if (isset($_SESSION['USER']))
                                 <div class="col-md-6">
                                     <input class="btn order-btn-1 py-2 my-3 " type="button" value="Image Details"
                                         name="btnImage">
-                                    <div class="container myaccount-details-area need2hide">
+                                    <div class="container myaccount-details-area need2hide" id="emImage">
                                         <h1 class="profile-text-area">Image Details</h1>
                                         <table class="myaccount-details-table">
                                             <tr>
@@ -902,7 +906,7 @@ if (isset($_SESSION['USER']))
                                     </div>
                                     <input class="btn order-btn-2 py-2 my-3" type="button" value="Image Description"
                                         name="btnImage">
-                                    <div class="container myaccount-change-password need2hide">
+                                    <div class="container myaccount-change-password need2hide" id="emImageDesc">
                                         <h1 class="profile-text-area">Image Description</h1>
                                         <table>
 
@@ -1035,8 +1039,8 @@ if (isset($_SESSION['USER']))
                                 </div>
                                 <div class="col-md-6 ">
 
-                                    <input class="btn order-btn-1 d-block py-2 my-3 getQuoteButton" id="btnQuote" type="submit"
-                                        name="getquoteemimjages" value="Get Quote">
+                                    <input class="btn order-btn-1 d-block py-2 my-3 getQuoteButton" id="btnQuote"
+                                        type="submit" name="getquoteemimjages" value="Get Quote">
                                     <input class="btn order-btn-2 d-block py-2 my-3 placeOrderButton" id="btnPlaceOrder"
                                         type="submit" name="placeorderemimages" formmethod="post" value="Place Order">
                                 </div>
@@ -1276,10 +1280,11 @@ if (isset($_SESSION['USER']))
                                 </div>
                                 <div class="col-md-6">
 
-                                    <input class="btn order-btn-1 d-block py-2 my-3 getQuoteButton" id="btnQuote" type="submit"
-                                        name="getquoteemtext" value="Get Quote">
-                                    <input class="btn order-btn-2 d-block py-2 my-3 placeOrderButton" id="btnPlaceOrderText"
-                                        type="submit" formmethod="post" name="placeorderemtext" value="Place Order">
+                                    <input class="btn order-btn-1 d-block py-2 my-3 getQuoteButton" id="btnQuote"
+                                        type="submit" name="getquoteemtext" value="Get Quote">
+                                    <input class="btn order-btn-2 d-block py-2 my-3 placeOrderButton"
+                                        id="btnPlaceOrderText" type="submit" formmethod="post" name="placeorderemtext"
+                                        value="Place Order">
                                 </div>
                             </div>
                         </form>
@@ -1481,10 +1486,11 @@ if (isset($_SESSION['USER']))
                                 </div>
                                 <div class="col-md-6">
 
-                                    <input class="btn order-btn-1 d-block py-2 my-3 getQuoteButton" id="btnQuote" type="submit"
-                                        name="getquotevectorart" value="Get Quote">
-                                    <input class="btn order-btn-2 d-block py-2 my-3 placeOrderButton" id="btnPlaceOrdervector"
-                                        type="submit" formmethod="post" name="placeordervectorart" value="Place Order">
+                                    <input class="btn order-btn-1 d-block py-2 my-3 getQuoteButton" id="btnQuote"
+                                        type="submit" name="getquotevectorart" value="Get Quote">
+                                    <input class="btn order-btn-2 d-block py-2 my-3 placeOrderButton"
+                                        id="btnPlaceOrdervector" type="submit" formmethod="post"
+                                        name="placeordervectorart" value="Place Order">
                                 </div>
                             </div>
                         </form>
@@ -1576,14 +1582,14 @@ if (isset($_SESSION['USER']))
 
             $("input[name=btnImage]").click(function () {
                 if ($(this).val() == "Image Details") {
-                    $(".myaccount-details-area").show();
-                    $(".myaccount-change-password").hide();
+                    $("#emImage").show();
+                    $("#emImageDesc").hide();
                 } else if ($(this).val() == "Image Description") {
-                    $(".myaccount-details-area").hide();
-                    $(".myaccount-change-password").show();
+                    $("#emImage").hide();
+                    $("#emImageDesc").show();
                 } else {
-                    $(".myaccount-details-area").hide();
-                    $(".myaccount-change-password").hide();
+                    $("#emImage").hide();
+                    $("#emImageDesc").hide();
                 }
             });
 
