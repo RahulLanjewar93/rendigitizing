@@ -636,7 +636,6 @@ input.search-text::placeholder {
 
     .order-button-group button {
         width: 100%;
-
     }
 
     .navbar-nav1 {
@@ -760,8 +759,8 @@ ul {
 
 
 .order-button-group button {
-    margin: 20px 0px;
-    padding: 40px 40px;
+    padding: 0 40px;
+    width: 100%;
 }
 
 .order-btn-1 {
@@ -999,6 +998,7 @@ body::-webkit-scrollbar-track {
 
 .primary {
     background-color: #f06789;
+    box-shadow: #f06789;
 }
 
 .secondary {
@@ -1021,7 +1021,53 @@ body::-webkit-scrollbar-track {
     background-color: #b433ff;
 }
 
-@media (min-width:900px) {
+.activeTab {
+    outline-offset: 5px;
+    outline: outset;
+    outline-color: #f06789;
+    outline-width: 2px;
+    
+}
+
+.activeTab2 {
+    outline-offset: 5px;
+    outline: outset;
+    outline-color: #faaa2a;
+    outline-width: 2px;
+    
+}
+
+.activeTab3 {
+    outline-offset: 5px;
+    outline: outset;
+    outline-color: #a742e2;
+    outline-width: 2px;
+    
+}
+
+.myaccount-details-area button {
+    margin-left: 30px;
+}
+
+
+#demo {
+    font-size:16px;
+    padding: 0px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.modal-header .close {
+    padding: 1rem 1rem;
+    margin: -1rem -1rem -1rem auto;
+    float: right;
+    text-align: end;
+    font-size: 40px;
+    color: #195a61;
+}
+
+
+@media (min-width:800px) {
     #sidebar {
         display: flex!important;
     }
@@ -1029,6 +1075,48 @@ body::-webkit-scrollbar-track {
 
 @media (max-width:800px) {
 
+    .myaccount-details-area button {
+        margin-left: 0px;
+    }
+
+    .modal-body table tr td h5 {
+        margin: 10px 0px;
+    }
+
+    .container {
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .container2 {
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .modal-header .close {
+        padding: 1rem 1rem;
+        margin: -1rem -1rem -1rem auto;
+        float: right;
+        text-align: end;
+        font-size: 80px;
+        color: #195a61;
+    }
+
+    .profile-area table td {
+        display: inline-block;
+        overflow: hidden;
+        margin-right: 5px;
+        width: 100%;
+    }
+
+    .myaccount-details-area button {
+        width: 100%;
+    }
+
+    .row1 .p-5 {
+        padding: 2px 0;
+    }
+    
     #sideBar {
         display: none;
     }

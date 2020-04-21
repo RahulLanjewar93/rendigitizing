@@ -337,7 +337,7 @@
                                             </td>
                                             <td>
                                                 <h5 class="myaccount-details-phpcontent">:
-                                                    <?php echo $getDetailsRows['firstname'] ?></h5>
+                                                    <?php echo ucfirst($getDetailsRows['firstname']); ?></h5>
                                             </td>
                                         </tr>
                                         <tr>
@@ -346,7 +346,7 @@
                                             </td>
                                             <td>
                                                 <h5 class="myaccount-details-phpcontent">:
-                                                    <?php echo $getDetailsRows['lastname'] ?></h5>
+                                                    <?php echo ucfirst($getDetailsRows['lastname']); ?></h5>
                                             </td>
                                         </tr>
                                         <tr>
@@ -528,6 +528,8 @@
                                                                 class="btn order-btn-1 d-block p-2 m-3" id="btnSubmit"
                                                                 type="submit">
                                                         </td>
+                                                    </tr>
+                                                    <tr>
                                                         <td>
                                                             <span id="demo"></span>
                                                         </td>
@@ -652,6 +654,13 @@
                     strengthBar.value = 100;
                     break;
             }
+        }
+    </script>
+    <script>
+        var x = window.matchMedia("(max-width: 800px)");
+        if (x.matches) {
+            $(".profile-area-content").removeClass("p-5").addClass("py-2 px-2");
+            $(".profile-text-area").addClass("my-3");
         }
     </script>
 </body>
