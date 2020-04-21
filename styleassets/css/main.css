@@ -963,6 +963,64 @@ body::-webkit-scrollbar-track {
     background-color: #7f6a93;
 }
 
+.myOrderSearchArea {
+    float: right;
+}
+
+.myOrderSearchArea input {
+    border-radius: 0;
+}
+
+
+.myOrderSearchArea input:hover {
+    border-radius: 0;
+}
+
+.pagination {
+    float: right;
+    margin-right: 20px;
+}
+
+.placeOrderButton {
+    background-color: #34b93d;
+}
+
+.placeOrderButton:hover {
+    background-color: #24d130;
+}
+
+.getQuoteButton {
+    background-color: rgb(0, 182, 243);
+}
+
+.getQuoteButton:hover {
+    background-color: rgb(65, 208, 255);
+}
+
+.primary {
+    background-color: #f06789;
+}
+
+.secondary {
+    background-color: #faaa2a;
+}
+
+.tertiary {
+    background-color: #a742e2;
+}
+
+.primary:hover {
+    background-color: #ff7b9c;
+}
+
+.secondary:hover {
+    background-color: #f8ba57;
+}
+
+.tertiary:hover {
+    background-color: #b433ff;
+}
+
 @media (min-width:900px) {
     #sidebar {
         display: flex!important;

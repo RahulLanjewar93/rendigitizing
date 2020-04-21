@@ -817,13 +817,13 @@ if (isset($_SESSION['USER']))
                     <div class="reach-out-buttons">
                         <table class="table table-striped table-items">
                             <th>
-                                <input class="btn order-btn-1" type="button" value="Emboridery Images" name="btnchoice">
+                                <input class="btn order-btn-1 primary" type="button" value="Emboridery Images" name="btnchoice">
                             </th>
                             <th>
-                                <input class="btn order-btn-2" type="button" value="Embroidery Text" name="btnchoice">
+                                <input class="btn order-btn-2 secondary" type="button" value="Embroidery Text" name="btnchoice">
                             </th>
                             <th>
-                                <input class="btn order-btn-3" type="button" value="Vector Art" name="btnchoice">
+                                <input class="btn order-btn-3 tertiary" type="button" value="Vector Art" name="btnchoice">
                             </th>
                         </table>
                         <span class="error"><?php echo $Error ?></span>
@@ -1035,9 +1035,9 @@ if (isset($_SESSION['USER']))
                                 </div>
                                 <div class="col-md-6 ">
 
-                                    <input class="btn order-btn-1 d-block py-2 my-3" id="btnQuote" type="submit"
+                                    <input class="btn order-btn-1 d-block py-2 my-3 getQuoteButton" id="btnQuote" type="submit"
                                         name="getquoteemimjages" value="Get Quote">
-                                    <input class="btn order-btn-2 d-block py-2 my-3 specialButton" id="btnPlaceOrder"
+                                    <input class="btn order-btn-2 d-block py-2 my-3 placeOrderButton" id="btnPlaceOrder"
                                         type="submit" name="placeorderemimages" formmethod="post" value="Place Order">
                                 </div>
                             </div>
@@ -1047,9 +1047,9 @@ if (isset($_SESSION['USER']))
                         <form name="emtext" id="form2" method="post">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <input class="btn order-btn-1py-2 my-3" type="button" value="Text Detail"
+                                    <input class="btn order-btn-1 py-2 my-3" type="button" value="Text Detail"
                                         name="btnText">
-                                    <div class="container myaccount-details-area" id="emText">
+                                    <div class="container myaccount-details-area need2hide" id="emText">
                                         <h1 class="profile-text-area">Text Details</h1>
                                         <table class="myaccount-details-table">
                                             <tr>
@@ -1104,7 +1104,7 @@ if (isset($_SESSION['USER']))
                                     </div>
                                     <input class="btn order-btn-2 py-2 my-3" type="button" value="Text Description"
                                         name="btnText">
-                                    <div class="container myaccount-change-password" id="emDescription">
+                                    <div class="container myaccount-change-password need2hide" id="emDescription">
                                         <h1 class="profile-text-area">Text Description</h1>
                                         <table>
 
@@ -1276,9 +1276,9 @@ if (isset($_SESSION['USER']))
                                 </div>
                                 <div class="col-md-6">
 
-                                    <input class="btn order-btn-1 d-block py-2 my-3" id="btnQuote" type="submit"
+                                    <input class="btn order-btn-1 d-block py-2 my-3 getQuoteButton" id="btnQuote" type="submit"
                                         name="getquoteemtext" value="Get Quote">
-                                    <input class="btn order-btn-2 d-block py-2 my-3" id="btnPlaceOrderText"
+                                    <input class="btn order-btn-2 d-block py-2 my-3 placeOrderButton" id="btnPlaceOrderText"
                                         type="submit" formmethod="post" name="placeorderemtext" value="Place Order">
                                 </div>
                             </div>
@@ -1290,7 +1290,7 @@ if (isset($_SESSION['USER']))
                                 <div class="col-md-6">
                                     <input class="btn order-btn-1 py-2 my-3" type="button" value="Vector Detail"
                                         name="btnVector">
-                                    <div class="container myaccount-details-area" id="vectorDetails">
+                                    <div class="container myaccount-details-area need2hide" id="vectorDetails">
                                         <h1 class="profile-text-area">Vector Details</h1>
                                         <table class="myaccount-details-table">
                                             <tr>
@@ -1351,7 +1351,7 @@ if (isset($_SESSION['USER']))
                                     </div>
                                     <input class="btn order-btn-2 py-2 my-3" type="button" value="Vector Description"
                                         name="btnVector">
-                                    <div class="container myaccount-change-password" id="vectorDescription">
+                                    <div class="container myaccount-change-password need2hide" id="vectorDescription">
                                         <h1 class="profile-text-area">Vector Description</h1>
                                         <table>
 
@@ -1481,9 +1481,9 @@ if (isset($_SESSION['USER']))
                                 </div>
                                 <div class="col-md-6">
 
-                                    <input class="btn order-btn-1 d-block py-2 my-3" id="btnQuote" type="submit"
+                                    <input class="btn order-btn-1 d-block py-2 my-3 getQuoteButton" id="btnQuote" type="submit"
                                         name="getquotevectorart" value="Get Quote">
-                                    <input class="btn order-btn-2 d-block py-2 my-3" id="btnPlaceOrdervector"
+                                    <input class="btn order-btn-2 d-block py-2 my-3 placeOrderButton" id="btnPlaceOrdervector"
                                         type="submit" formmethod="post" name="placeordervectorart" value="Place Order">
                                 </div>
                             </div>

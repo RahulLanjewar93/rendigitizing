@@ -145,6 +145,14 @@ else{
                 <h1 class="profile-text-area">Embroidery Text</h1>
               </div>
               <div class="col-md-6">
+              <div class="myOrderSearchArea">
+                  <input class="search-text d-inline-block" type="text" placeholder="Enter product name">
+                  <button class="btn d-inline-block">
+                    <li class="nav-item border rounded-circle mx-2 search-icon ">
+                      <i class="fas fa-search p-2"></i>
+                    </li>
+                  </button>
+                </div>
                 <nav aria-label="Page navigation example" class="my-2">
                   <?php
                       $getETRecords = "SELECT * FROM tbl_order WHERE category = 'Emboridery Text'";
