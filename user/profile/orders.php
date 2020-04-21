@@ -90,7 +90,20 @@
 
         <div class="col-md-6 text-right my-auto">
           <p class="my-md-4 header-links">
-            <a href="../authentication/logout.php" class="px-1">Logout</a>
+          <?php if(isset($_SESSION['USER'])){ ?>
+            <a href="account.php?nosession=false&ref=index" class="px-2">
+              <?php echo $_SESSION['USER'] ?>
+            </a>
+            <?php }else{ ?>
+            <a href="../authentication/register.php?nosession=true&ref=index" class="px-2">Create an
+              account</a>
+            <?php } ?>
+            <?php if(isset($_SESSION['USER'])){ ?>
+            <a href="../authentication/logout.php?securelogout=success" class="px-2">Logout
+            </a>
+            <?php }else{ ?>
+            <a href="../authentication/login.php?nosession=true&ref=index" class="px-2">Login</a>
+            <?php } ?>
         </div>
       </div>
     </div>

@@ -959,6 +959,10 @@ body::-webkit-scrollbar-track {
     display: flex;
 }
 
+.specialButton {
+    background-color: #7f6a93;
+}
+
 @media (min-width:900px) {
     #sidebar {
         display: flex!important;

@@ -95,12 +95,12 @@ if (!isset($_SESSION['USER'])) {
     <!-- Main css -->
     <!-- <link rel="stylesheet" href="../../styleassets/css/style.css"> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="../../styleassets/css/style.css">
     <link rel="stylesheet" href="../../styleassets/css/main.css">
     <script src="https://kit.fontawesome.com/4851c149c0.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"
-            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <style>
         .error {
             color: #FF0000;
@@ -118,112 +118,114 @@ if (!isset($_SESSION['USER'])) {
 
 </head>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <body>
 
-<header>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 text-left">
-                <h2 class="my-md-3 site-title">RenDigitizing</h2>
-            </div>
-            <div class="col-md-6 text-right">
-            </div>
-        </div>
-    </div>
-</header>
-
-<div class="main">
-
-    <!-- Sing in  Form -->
-    <section class="sign-in">
-        <div class="container1">
-            <div class="signin-content">
-                <div class="signin-image">
-                    <figure><img src="../../styleassets/images/signin-image.jpg" alt="sing up image"></figure>
-                    <a href="register.php?ref=fromLogin" class="signup-image-link">Create an account</a>
-                </div>
-
-                <div class="signin-form">
-                    <h2 class="form-title">Password Reset</h2>
-                    <span class="error"><?php echo "<b>" . $emailNotExistenceErr . "</b>" ?></span>
-                    <span class="success"><?php echo "<b>" . $emailsendMsg . "</b>" ?></span>
-                    <span class="error"><?php echo "<b>" . $emailsendMsgErr . "</b>" ?></span>
-                    <form method="POST" class="register-form" id="login-form">
-                        <div class="form-group">
-                            <label for="email"><i class="zmdi zmdi-email material-icons-name"></i></label>
-                            <input type="email" name="email" id="email" placeholder="Email" required
-                                   value='<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>'/>
-                            <span class="error"><?php echo $emailErr ?></span>
-                        </div>
-                        <div class="form-group form-button">
-                            <input type="submit" name="send" id="send" class="form-submit"
-                                   value="Send Reset Link"/>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
-<footer>
-    <div class="footer-dark">
-        <div class="container p-2">
+    <header>
+        <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <ul>
-                        <li class="list-header">Social</li>
-                        <table align="center">
-                            <tr>
-                                <td><i class="fab fa-instagram"></i></td>
-                                <td>
-                                    <li class="list-item"><a href="">Instagram</a></li>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><i class="fab fa-facebook"></i></td>
-                                <td>
-                                    <li class="list-item"><a href="">Facebook</a></li>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><i class="fab fa-skype"></i></td>
-                                <td>
-                                    <li class="list-item"><a href="">Skype</a></a></li>
-                                </td>
-                            </tr>
-                        </table>
-                    </ul>
+                <div class="col-md-6 text-left">
+                    <h2 class="my-md-3 site-title">
+                        <a href="../../index.php">RenDigitizing</a>
+                    </h2>
                 </div>
-                <div class="col-md-4">
-                    <ul>
-                        <li class="list-header">Address</li>
-                        <li>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis incidunt illo
-                                tenetur consequuntur. Magni, ad earum. Obcaecati adipisci incidunt ipsa, provident
-                                voluptate id nobis, cumque sed corrupti, itaque ullam praesentium?
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <ul>
-                        <li class="list-header">Usefull links</li>
-                        <li class="list-item"><a href="">num1</a></li>
-                        <li class="list-item"><a href="">num2</a></li>
-                        <li class="list-item"><a href="">num3</a></li>
-                        <li class="list-item"><a href="">num4</a></li>
-                    </ul>
+                <div class="col-md-6 text-right">
                 </div>
             </div>
         </div>
-    </div>
+    </header>
 
-    <!-- JS -->
-    <script src="../../styleassets/vendor/jquery/jquery.min.js"></script>
-    <script src="../../styleassets/js/main.js"></script>
+    <div class="main">
+
+        <!-- Sing in  Form -->
+        <section class="sign-in">
+            <div class="container1">
+                <div class="signin-content">
+                    <div class="signin-image">
+                        <figure><img src="../../styleassets/images/signin-image.jpg" alt="sing up image"></figure>
+                        <a href="register.php?ref=fromLogin" class="signup-image-link">Create an account</a>
+                    </div>
+
+                    <div class="signin-form">
+                        <h2 class="form-title">Password Reset</h2>
+                        <span class="error"><?php echo "<b>" . $emailNotExistenceErr . "</b>" ?></span>
+                        <span class="success"><?php echo "<b>" . $emailsendMsg . "</b>" ?></span>
+                        <span class="error"><?php echo "<b>" . $emailsendMsgErr . "</b>" ?></span>
+                        <form method="POST" class="register-form" id="login-form">
+                            <div class="form-group">
+                                <label for="email"><i class="zmdi zmdi-email material-icons-name"></i></label>
+                                <input type="email" name="email" id="email" placeholder="Email" required
+                                    value='<?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>' />
+                                <span class="error"><?php echo $emailErr ?></span>
+                            </div>
+                            <div class="form-group form-button">
+                                <input type="submit" name="send" id="send" class="form-submit"
+                                    value="Send Reset Link" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <div class="footer-dark">
+            <div class="container p-2">
+                <div class="row">
+                    <div class="col-md-4">
+                        <ul>
+                            <li class="list-header">Social</li>
+                            <table align="center">
+                                <tr>
+                                    <td><i class="fab fa-instagram"></i></td>
+                                    <td>
+                                        <li class="list-item"><a href="">Instagram</a></li>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fab fa-facebook"></i></td>
+                                    <td>
+                                        <li class="list-item"><a href="">Facebook</a></li>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fab fa-skype"></i></td>
+                                    <td>
+                                        <li class="list-item"><a href="">Skype</a></a></li>
+                                    </td>
+                                </tr>
+                            </table>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <ul>
+                            <li class="list-header">Address</li>
+                            <li>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis incidunt illo
+                                    tenetur consequuntur. Magni, ad earum. Obcaecati adipisci incidunt ipsa, provident
+                                    voluptate id nobis, cumque sed corrupti, itaque ullam praesentium?
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <ul>
+                            <li class="list-header">Usefull links</li>
+                            <li class="list-item"><a href="">num1</a></li>
+                            <li class="list-item"><a href="">num2</a></li>
+                            <li class="list-item"><a href="">num3</a></li>
+                            <li class="list-item"><a href="">num4</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- JS -->
+        <script src="../../styleassets/vendor/jquery/jquery.min.js"></script>
+        <script src="../../styleassets/js/main.js"></script>
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 
 </html>

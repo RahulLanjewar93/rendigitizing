@@ -774,7 +774,20 @@ if (isset($_SESSION['USER']))
                 </div>
                 <div class="col-md-6 text-right">
                     <p class="my-md-4 header-links">
-                        <a href="../authentication/logout.php" class="px-1">Logout</a>
+                        <?php if(isset($_SESSION['USER'])){ ?>
+                        <a href="account.php?nosession=false&ref=index" class="px-2">
+                            <?php echo $_SESSION['USER'] ?>
+                        </a>
+                        <?php }else{ ?>
+                        <a href="../authentication/register.php?nosession=true&ref=index" class="px-2">Create an
+                            account</a>
+                        <?php } ?>
+                        <?php if(isset($_SESSION['USER'])){ ?>
+                        <a href="../authentication/logout.php?securelogout=success" class="px-2">Logout
+                        </a>
+                        <?php }else{ ?>
+                        <a href="../authentication/login.php?nosession=true&ref=index" class="px-2">Login</a>
+                        <?php } ?>
                 </div>
             </div>
         </div>
@@ -1024,8 +1037,8 @@ if (isset($_SESSION['USER']))
 
                                     <input class="btn order-btn-1 d-block py-2 my-3" id="btnQuote" type="submit"
                                         name="getquoteemimjages" value="Get Quote">
-                                    <input class="btn order-btn-2 d-block py-2 my-3 specialButton" id="btnPlaceOrder" type="submit"
-                                        name="placeorderemimages" formmethod="post" value="Place Order">
+                                    <input class="btn order-btn-2 d-block py-2 my-3 specialButton" id="btnPlaceOrder"
+                                        type="submit" name="placeorderemimages" formmethod="post" value="Place Order">
                                 </div>
                             </div>
                         </form>

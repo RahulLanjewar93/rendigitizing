@@ -94,18 +94,31 @@ else{
 
         <div class="col-md-6 text-right my-auto">
           <p class="my-md-4 header-links">
-            <a href="../authentication/logout.php" class="px-1">Logout</a>
+            <?php if(isset($_SESSION['USER'])){ ?>
+            <a href="account.php?nosession=false&ref=index" class="px-2">
+              <?php echo $_SESSION['USER'] ?>
+            </a>
+            <?php }else{ ?>
+            <a href="../authentication/register.php?nosession=true&ref=index" class="px-2">Create an
+              account</a>
+            <?php } ?>
+            <?php if(isset($_SESSION['USER'])){ ?>
+            <a href="../authentication/logout.php?securelogout=success" class="px-2">Logout
+            </a>
+            <?php }else{ ?>
+            <a href="../authentication/login.php?nosession=true&ref=index" class="px-2">Login</a>
+            <?php } ?>
         </div>
       </div>
     </div>
   </header>
   <div class="col-md-3 profile-area-sidebar indexnewnavbar p-5 my-2" id="indexBar">
-          <a href="account.php">My Acccount</a>
-          <a class="current" href="orders.php">My Orders</a>
-          <a href="placeorder.php">Place an order</a>
-          <a href="../../aboutus.php">About us</a>
-          <a href="../../contact.php">Contact Us</a>
-        </div>
+    <a href="account.php">My Acccount</a>
+    <a class="current" href="orders.php">My Orders</a>
+    <a href="placeorder.php">Place an order</a>
+    <a href="../../aboutus.php">About us</a>
+    <a href="../../contact.php">Contact Us</a>
+  </div>
 
   <div class="profile-area" id="mainContactArea">
     <div class="container2 mx-5">
@@ -116,7 +129,7 @@ else{
           <a href="placeorder.php">Place an Order</a>
           <a href="../../index.php">Home</a>
         </div>
-        
+
         <div class="col-md-9 profile-area-content p-5">
           <div class="reach-out-buttons">
             <table class="table table-striped table-items">
