@@ -258,9 +258,9 @@ else{
                         <div class="row order-button-group d-block">
                             <div class="col-md-12">
                               <?php $OrderId = mysqli_real_escape_string($conn, $searchRows['order_id']) ?>
-                              <a href="view.php?orderid=<?php echo $OrderId?>" class="btn order-btn-1 d-block py-2">View</a>
+                              <a href="view.php?orderid=<?php echo $OrderId?>" class="btn order-btn-1 d-block py-2 btnview">View</a>
                               <a href="cancel.php?orderid=<?php echo $OrderId?>"
-        class="btn order-btn-2 d-block py-2">Cancel</a></div>
+        class="btn order-btn-2 d-block py-2 btncancel">Cancel</a></div>
                             </div>
                       </td>
 </tr>
@@ -290,10 +290,15 @@ else{
                   <div class="order-button-group">
                       <div class="row">
                         <div class="col-md-6">
-                          <button type="button" class="btn btn-secondary order-btn-3 py-2 my-2">Yes</button>
+
+
+                          <!--<button type="button" class="btn btn-secondary order-btn-3 py-2 my-2">Yes</button>
                         </div>
                         <div class="col-md-6">
-                          <button type="button" class="btn btn-primary order-btn-1 py-2 my-2">No</button>
+                          <button type="button" class="btn btn-primary order-btn-1 py-2 my-2">No</button>-->
+
+                          <input type="text" name="" id="">
+
                         </div>
                       </div>
                     </div>  
@@ -450,6 +455,15 @@ else{
             $(".profile-text-area").addClass("my-3");
         }
     </script>
+
+    <script>
+        /*$(document).ready(function(){
+           $('.btnview').on('click', function(){
+              $('#viewModal').modal('show');
+           });
+        });*/
+    </script>
+
 </body>
 
 </html>
