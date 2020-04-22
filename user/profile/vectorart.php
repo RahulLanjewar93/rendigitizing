@@ -235,9 +235,6 @@ else{
                 <?php
                 if(!isset($_POST['btnsearch'])){ while ($rows = mysqli_fetch_array($fetchvaFire)){
               ?>
-
-                    while ($rows = mysqli_fetch_array($fetchvaFire)){
-                ?>
                 <tr>
                   <td>
                     <img class="table-image py-2"
@@ -357,9 +354,6 @@ else{
                 </div>
               </div>
             </div>
-
-
->>>>>>> 745bc2ce7139cc383cd0f70a4faf35bdb1b9950b
             <nav aria-label="Page navigation example" class="my-2">
               <ul class="pagination justify-content-end" id="Pagination">
                 <?php
