@@ -1,9 +1,26 @@
 <?php
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 session_start();
 require_once "../../db/connection/conn.php";
 
 if(isset($_SESSION['USER']))
 {
+  //Search
+  $userEmail = $_SESSION['USER'];
+    $searchInput = $_POST['searchinput'];
+    $searchKeyword = mysqli_real_escape_string($conn, $searchInput);
+    
+    if(isset($_POST['btnsearch']))
+    {
+        $searchResult = "SELECT * FROM tbl_order WHERE user = '$userEmail' AND category = 'Emboridery Vector' AND ( 
+        emboridery_vector_design_image LIKE '%".$searchKeyword."%' OR design_name LIKE '%".$searchKeyword."%' OR ponumber LIKE '%".$searchKeyword."%' 
+        OR turnarround LIKE '%".$searchKeyword."%' 
+        OR vector_format LIKE '%".$searchKeyword."%' OR application LIKE '%".$searchKeyword."%' OR printing_process LIKE '%".$searchKeyword."%' 
+        OR color LIKE '%".$searchKeyword."%' OR dimension LIKE '%".$searchKeyword."%' OR dimension_width LIKE '%".$searchKeyword."%' 
+        OR dimension_height LIKE '%".$searchKeyword."%' OR order_flag LIKE '%".$searchKeyword."%')";
+
+        $searchResultFire = mysqli_query($conn, $searchResult);
+    }
     //Pagination
     if(isset($_GET['page']))
     {
@@ -16,16 +33,16 @@ if(isset($_SESSION['USER']))
 
     $num_per_page = 05;
     $start_from = ($page-1)*05;
-    $fetchva = "SELECT * FROM tbl_order WHERE category = 'Emboridery Vector' LIMIT $start_from, $num_per_page";
+    $fetchva = "SELECT * FROM tbl_order WHERE user = '$userEmail' AND category = 'Emboridery Vector' LIMIT $start_from, $num_per_page";
     $fetchvaFire = mysqli_query($conn, $fetchva);
 
-    if(mysqli_num_rows($fetchvaFire)>1)
+    /*if(mysqli_num_rows($fetchvaFire)>1)
     {
         //
     }
     else{
         $eiOrderEmptyMessage = "No orders availabe right now";
-    }
+    }*/
 }
 else{
     header("location:http://localhost/RenDigitizingUpdated/user/authentication/login.php?nosession=true");
@@ -152,8 +169,8 @@ else{
               </div>
               <div class="col-md-6">
                 <div class="myOrderSearchArea">
-                  <input class="search-text d-inline-block" type="text" form="searchForm" placeholder="Enter product name">
-                  <button class="btn d-inline-block" form="searchForm">
+                  <input class="search-text d-inline-block" type="text" name="searchinput" form="searchForm" placeholder="Enter product name">
+                  <button class="btn d-inline-block" form="searchForm" type="submit" name="btnsearch">
                     <li class="nav-item border rounded-circle mx-2 search-icon ">
                       <i class="fas fa-search p-2"></i>
                     </li>
@@ -203,6 +220,7 @@ else{
                 </nav>
               </div>
             </div>
+            <?php if(mysqli_num_rows($fetchvaFire) > 0) { ?>
             <table class="table table-striped table-items">
               <thead>
                 <tr>
@@ -215,7 +233,7 @@ else{
               </thead>
               <tbody>
                 <?php
-                    while ($rows = mysqli_fetch_array($fetchvaFire)){
+                if(!isset($_POST['btnsearch'])){ while ($rows = mysqli_fetch_array($fetchvaFire)){
               ?>
                 <tr>
                   <td> <img class="table-image py-2"
@@ -234,9 +252,34 @@ else{
                     </div>
                   </td>
                 </tr>
-                <?php } ?>
+                <?php } } else if(mysqli_num_rows($searchResultFire) > 0) { while($resultRows = mysqli_fetch_array($searchResultFire)) { ?>
+
+                  <tr>
+                  <td> <img class="table-image py-2"
+                      src="Uploads/Vector/DesignImages/<?php echo $resultRows['emboridery_vector_design_image']?>" alt="">
+                  </td>
+                  <td><?php echo $resultRows['design_name']?></td>
+                  <td> <?php echo $resultRows['price']?> </td>
+                  <td> <?php echo $resultRows['order_flag']?> </td>
+                  <td>
+                    <div class="row order-button-group d-block">
+                      <div class="col-md-12">
+                        <?php $OrderId = mysqli_real_escape_string($conn, $resultRows['order_id']); ?>
+                        <a href="view.php?orderid=<?php echo $OrderId?>" class="btn order-btn-1 d-block py-2">View</a>
+                        <a href="cancel.php?orderid=<?php echo $OrderId?>"
+                          class="btn order-btn-2 d-block py-2">Cancel</a></div>
+                    </div>
+                  </td>
+                </tr>
+
+                <?php } } else {
+                  echo "No order found";
+                  }?>
               </tbody>
             </table>
+                    <?php } else{
+                      echo "No Order found";
+                    } ?>
             <nav aria-label="Page navigation example" class="my-2">
               <ul class="pagination justify-content-end" id="Pagination">
                 <?php

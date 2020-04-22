@@ -1,9 +1,25 @@
 <?php
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 session_start();
 require_once "../../db/connection/conn.php";
 
 if(isset($_SESSION['USER']))
 {
+  //Search
+  $userEmail = $_SESSION['USER'];
+    $searchInput = $_POST['searchinput'];
+    $searchKeyword = mysqli_real_escape_string($conn, $searchInput);
+    
+    if(isset($_POST['btnsearch']))
+    {
+        $searchResult = "SELECT * FROM tbl_order WHERE user = '$userEmail' AND category = 'Emboridery Text' AND ( 
+        emboridery_text LIKE '%".$searchKeyword."%' OR design_name LIKE '%".$searchKeyword."%' OR ponumber LIKE '%".$searchKeyword."%' OR turnarround LIKE '%".$searchKeyword."%' 
+        OR stitch LIKE '%".$searchKeyword."%' OR application LIKE '%".$searchKeyword."%' OR fabric LIKE '%".$searchKeyword."%' 
+        OR thread LIKE '%".$searchKeyword."%' OR dimension LIKE '%".$searchKeyword."%' OR dimension_width LIKE '%".$searchKeyword."%' 
+        OR dimension_height LIKE '%".$searchKeyword."%' OR order_flag LIKE '%".$searchKeyword."%')";
+
+        $searchResultFire = mysqli_query($conn, $searchResult);
+    }
     //Pagination
     if(isset($_GET['page']))
     {
@@ -16,16 +32,16 @@ if(isset($_SESSION['USER']))
 
     $num_per_page = 05;
     $start_from = ($page-1)*05;
-    $fetchet = "SELECT * FROM tbl_order WHERE category = 'Emboridery Text' LIMIT $start_from, $num_per_page";
+    $fetchet = "SELECT * FROM tbl_order WHERE user = '$userEmail' AND category = 'Emboridery Text' LIMIT $start_from, $num_per_page";
     $fetchetFire = mysqli_query($conn, $fetchet);
 
-    if(mysqli_num_rows($fetchetFire)>1)
+    /*if(mysqli_num_rows($fetchetFire)>1)
     {
         //
     }
     else{
         $eiOrderEmptyMessage = "No orders availabe right now";
-    }
+    }*/
 }
 else{
     header("location:http://localhost/RenDigitizingUpdated/user/authentication/login.php?nosession=true");
@@ -147,8 +163,8 @@ else{
               </div>
               <div class="col-md-6">
               <div class="myOrderSearchArea">
-                  <input class="search-text d-inline-block" type="text" form="searchForm" placeholder="Enter product name">
-                  <button class="btn d-inline-block" form="searchForm">
+                  <input class="search-text d-inline-block" name="searchinput" type="text" form="searchForm" placeholder="Enter product name">
+                  <button class="btn d-inline-block" form="searchForm" type="submit" name="btnsearch">
                     <li class="nav-item border rounded-circle mx-2 search-icon ">
                       <i class="fas fa-search p-2"></i>
                     </li>
@@ -197,6 +213,7 @@ else{
                 </nav>
               </div>
             </div>
+            <?php if(mysqli_num_rows($fetchetFire) > 0){ ?>
             <table class="table table-striped table-items">
               <thead>
                 <tr>
@@ -209,7 +226,8 @@ else{
               </thead>
               <tbody>
                 <?php
-                    while ($rows = mysqli_fetch_array($fetchetFire)){
+                if(!isset($_POST['btnsearch'])) { while ($rows = mysqli_fetch_array($fetchetFire))
+                  {
               ?>
                 <tr>
 
@@ -227,9 +245,30 @@ else{
                     </div>
                   </td>
                 </tr>
-                <?php } ?>
+                <?php } } else if(mysqli_num_rows($searchResultFire)>0){ while($searchRows = mysqli_fetch_array($searchResultFire)){ ?>
+                  <tr>
+
+                    <td><?php echo $searchRows['emboridery_text'] ?></td>
+                    <td> <?php echo $searchRows['design_name'] ?> </td>
+                    <td> <?php echo $searchRows['price'] ?> </td>
+                    <td> <?php echo $searchRows['order_flag'] ?> </td>
+                    <td>
+                        <div class="row order-button-group d-block">
+                            <div class="col-md-12">
+                              <?php $OrderId = mysqli_real_escape_string($conn, $searchRows['order_id']) ?>
+                              <a href="view.php?orderid=<?php echo $OrderId?>" class="btn order-btn-1 d-block py-2">View</a>
+                              <a href="cancel.php?orderid=<?php echo $OrderId?>"
+        class="btn order-btn-2 d-block py-2">Cancel</a></div>
+                            </div>
+                      </td>
+</tr>
+                <?php } }
+                else{
+                  echo "No orders found";
+                } ?>
               </tbody>
             </table>
+              <?php }else{ echo "No Records found"; } ?>
             <nav aria-label="Page navigation example" class="my-2">
 
               <ul class="pagination justify-content-end" id="Pagination">
