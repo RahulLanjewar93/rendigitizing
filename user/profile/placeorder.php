@@ -819,15 +819,15 @@ if (isset($_SESSION['USER']))
                         <table class="table table-striped table-items">
                             <th>
                                 <input class="btn order-btn-1 primary" type="button" value="Emboridery Images"
-                                    name="btnchoice">
+                                    name="btnchoice" id="emImagesButton">
                             </th>
                             <th>
                                 <input class="btn order-btn-2 secondary" type="button" value="Embroidery Text"
-                                    name="btnchoice">
+                                    name="btnchoice" id="emTextButton">
                             </th>
                             <th>
                                 <input class="btn order-btn-3 tertiary" type="button" value="Vector Art"
-                                    name="btnchoice">
+                                    name="btnchoice" id="vectorArtButton">
                             </th>
                         </table>
                         <span class="error"><?php echo $Error ?></span>
@@ -1563,20 +1563,34 @@ if (isset($_SESSION['USER']))
         </div>
     </footer>
     <script type="text/javascript">
+    
         $(function () {
             $("input[name=btnchoice]").click(function () {
                 if ($(this).val() == "Emboridery Images") {
                     $("#emimages").fadeIn(800);
                     $("#emtext").fadeOut(400);
                     $("#vectorart").fadeOut(400);
+
+                    $("#emImagesButton").addClass("activeTab");
+                    $("#emTextButton").removeClass("activeTab2");
+                    $("#vectorArtButton").removeClass("activeTab3");
                 } else if ($(this).val() == "Embroidery Text") {
                     $("#emimages").fadeOut(400);
                     $("#emtext").fadeIn(800);
                     $("#vectorart").fadeOut(400);
+
+                    
+                    $("#emImagesButton").removeClass("activeTab");
+                    $("#emTextButton").addClass("activeTab2");
+                    $("#vectorArtButton").removeClass("activeTab3");
                 } else {
                     $("#emimages").fadeOut(400);
                     $("#emtext").fadeOut(400);
                     $("#vectorart").fadeIn(800);
+                    
+                    $("#emImagesButton").removeClass("activeTab");
+                    $("#emTextButton").removeClass("activeTab2");
+                    $("#vectorArtButton").addClass("activeTab3");
                 }
             });
 
@@ -1625,6 +1639,13 @@ if (isset($_SESSION['USER']))
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+     <script>
+        var x = window.matchMedia("(max-width: 800px)");
+        if (x.matches) {
+            $(".profile-area-content").removeClass("p-5").addClass("py-2 px-2");
+            $(".profile-text-area").addClass("my-3");
+        }
     </script>
 </body>
 

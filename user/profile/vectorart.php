@@ -235,20 +235,32 @@ else{
                 <?php
                 if(!isset($_POST['btnsearch'])){ while ($rows = mysqli_fetch_array($fetchvaFire)){
               ?>
+
+                    while ($rows = mysqli_fetch_array($fetchvaFire)){
+                ?>
                 <tr>
-                  <td> <img class="table-image py-2"
+                  <td>
+                    <img class="table-image py-2"
                       src="Uploads/Vector/DesignImages/<?php echo $rows['emboridery_vector_design_image']?>" alt="">
                   </td>
-                  <td><?php echo $rows['design_name']?></td>
-                  <td> <?php echo $rows['price']?> </td>
-                  <td> <?php echo $rows['order_flag']?> </td>
+                  <td>
+                    <?php echo $rows['design_name']?>
+                  </td>
+                  <td>
+                    <?php echo $rows['price']?>
+                  </td>
+                  <td>
+                    <?php echo $rows['order_flag']?>
+                  </td>
                   <td>
                     <div class="row order-button-group d-block">
                       <div class="col-md-12">
                         <?php $OrderId = mysqli_real_escape_string($conn, $rows['order_id']); ?>
-                        <a href="view.php?orderid=<?php echo $OrderId?>" class="btn order-btn-1 d-block py-2">View</a>
-                        <a href="cancel.php?orderid=<?php echo $OrderId?>"
-                          class="btn order-btn-2 d-block py-2">Cancel</a></div>
+                        <button class="btn order-btn-1 d-block py-2 my-2" data-toggle="modal" data-target="#viewModal"
+                          data-whatever="<?php echo $OrderId?>">View</button>
+                        <button class="btn order-btn-3 d-block py-2 my-2" data-toggle="modal" data-target="#cancelModal"
+                          data-whatever="<?php echo $OrderId?>">Cancel</button>
+                      </div>
                     </div>
                   </td>
                 </tr>
@@ -280,6 +292,74 @@ else{
                     <?php } else{
                       echo "No Order found";
                     } ?>
+
+
+            <!-- Modal Area -->
+
+            <!-- viewModal -->
+            <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title profile-text-area" id="exampleModalLabel">Are you sure you want to cancel
+                      your order?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                  <div class="order-button-group">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <button type="button" class="btn btn-secondary order-btn-3 py-2 my-2">Yes</button>
+                        </div>
+                        <div class="col-md-6">
+                          <button type="button" class="btn btn-primary order-btn-1 py-2 my-2">No</button>
+                        </div>
+                      </div>
+                    </div>  
+                  </div>
+                  <div class="modal-footer">
+                  <h5 class="profile-text-area noticeArea">Notice : Something Something</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- cancelModal -->
+            <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title profile-text-area" id="exampleModalLabel">Are you sure you want to cancel
+                      your order?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                  <div class="order-button-group">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <button type="button" class="btn btn-secondary order-btn-3 py-2 my-2">Yes</button>
+                        </div>
+                        <div class="col-md-6">
+                          <button type="button" class="btn btn-primary order-btn-1 py-2 my-2">No</button>
+                        </div>
+                      </div>
+                    </div>  
+                  </div>
+                  <div class="modal-footer">
+                  <h5 class="profile-text-area noticeArea">Notice : Something Something</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+>>>>>>> 745bc2ce7139cc383cd0f70a4faf35bdb1b9950b
             <nav aria-label="Page navigation example" class="my-2">
               <ul class="pagination justify-content-end" id="Pagination">
                 <?php
@@ -316,6 +396,7 @@ else{
       </div>
     </div>
   </div>
+
 
 
   <footer>
@@ -385,6 +466,13 @@ else{
   </script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+  </script>
+  <script>
+    var x = window.matchMedia("(max-width: 800px)");
+    if (x.matches) {
+      $(".profile-area-content").removeClass("p-5").addClass("py-2 px-2");
+      $(".profile-text-area").addClass("my-3");
+    }
   </script>
 </body>
 

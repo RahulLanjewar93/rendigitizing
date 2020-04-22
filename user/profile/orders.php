@@ -229,9 +229,11 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                     <div class="row order-button-group d-block">
                       <div class="col-md-12">
                         <?php $OrderId = mysqli_real_escape_string($conn, $rows['order_id']); ?>
-                        <a class="btn order-btn-1 d-block py-2" href="view.php?orderid=<?php echo $OrderId ?>">View</a>
-                        <a class="btn order-btn-2 d-block py-2"
-                          href="cancel.php?orderid=<?php echo $OrderId ?>">Cancel</a></div>
+                        <button class="btn order-btn-1 d-block py-2 my-2" data-toggle="modal" data-target="#viewModal"
+                          data-whatever="<?php echo $OrderId?>">View</button>
+                        <button class="btn order-btn-3 d-block py-2 my-2" data-toggle="modal" data-target="#cancelModal"
+                          data-whatever="<?php echo $OrderId?>">Cancel</button>
+                      </div>
                     </div>
                   </td>
                 </tr>
@@ -372,6 +374,13 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
   </script>
+  <script>
+        var x = window.matchMedia("(max-width: 800px)");
+        if (x.matches) {
+            $(".profile-area-content").removeClass("p-5").addClass("py-2 px-2");
+            $(".profile-text-area").addClass("my-3");
+        }
+    </script>
 </body>
 
 </html>
