@@ -6,12 +6,11 @@
  ini_set('display_startup_errors', 1);
  //ini_set("display_errors",1);
  if (isset($_SESSION['USER'])) {
-
-    $OldPasswordErr = "";
-    $NewPasswordErr = "";
-    $ConfirmPasswordErr = "";
-    $changeFailedMsg = "";
-    $changeSuccessMsg ="";
+     $OldPasswordErr = "";
+     $NewPasswordErr = "";
+     $ConfirmPasswordErr = "";
+     $changeFailedMsg = "";
+     $changeSuccessMsg ="";
      //Display user details
      $user = $_SESSION['USER'];
      $getDetails = "SELECT * FROM tbl_user WHERE email = '$user'";
@@ -57,8 +56,7 @@
          $ConfirmPasswordErr = "";
          $PasswordErrCount = 0;
 
-         if($OP['password'] != $oldPasswordEncr)
-         {
+         if ($OP['password'] != $oldPasswordEncr) {
              $OldPasswordErr = "Invalid Old Password !";
              $PasswordErrCount =+ 1;
          }
@@ -66,59 +64,60 @@
              $OldPasswordErr = "Enter current password";
              $PasswordErrCount =+ 1;
              echo "1<br/>";
-         } if (strlen($oldPassword) > 50) {
+         }
+         if (strlen($oldPassword) > 50) {
              $OldPasswordErr = "Password is too long";
              $PasswordErrCount =+ 1;
              echo "2<br/>";
-         } if (strlen($oldPassword) < 8) {
+         }
+         if (strlen($oldPassword) < 8) {
              $OldPasswordErr = "Password is too short";
              $PasswordErrCount =+ 1;
              echo "3<br/>";
-         } if (empty($newPassword)) {
+         }
+         if (empty($newPassword)) {
              $NewPasswordErr = "Enter new password";
              $PasswordErrCount =+ 1;
              echo "4<br/>";
-         } if (strlen($newPassword) > 50) {
+         }
+         if (strlen($newPassword) > 50) {
              $NewPasswordErr = "Password is too long";
              $PasswordErrCount =+ 1;
              echo "5<br/>";
-         } if (strlen($newPassword) < 8) {
+         }
+         if (strlen($newPassword) < 8) {
              $NewPasswordErr = "Password is too short";
              $PasswordErrCount =+ 1;
              echo "6<br/>";
-         } if (!$uppercase && !$lowercase && !$number && !$specialChars) {
+         }
+         if (!$uppercase && !$lowercase && !$number && !$specialChars) {
              $NewPasswordErr = "Make sure to include uppercase, lowercase, numeric and special characters in password";
              $PasswordErrCount =+ 1;
              echo "7<br/>";
-         } if ($newPassword != $confPassword) {
+         }
+         if ($newPassword != $confPassword) {
              $confPasswordErr = "Password does not matched";
              $PasswordErrCount =+ 1;
              echo "8<br/>";
-         } if($PasswordErrCount == 0)
-         {
+         }
+         if ($PasswordErrCount == 0) {
              $oldEncryptedPassword = sha1($oldPassword);
              $newEncryptedPassword = sha1($newPassword);
              $userEmail = $_SESSION['USER'];
              $updatePassword = "UPDATE tbl_user SET password = '$newEncryptedPassword' WHERE email = '$userEmail' AND password = '$oldEncryptedPassword'";
              $updatePasswordFire = mysqli_query($conn, $updatePassword);
 
-             if($updatePasswordFire)
-             {
+             if ($updatePasswordFire) {
                  $changeSuccessMsg = "Password has been changed successfully";
-                 //echo $changeSuccessMsg;
-             }
-             else
-             {
+             //echo $changeSuccessMsg;
+             } else {
                  $changeFailedMsg = "Something went wrong";
                  //echo $changeFailedMsg;
              }
+         } else {
+             //echo $PasswordErrCount;
          }
-         else {
-            //echo $PasswordErrCount;
-
-         }
-}
-     else if(isset($_POST['btnsave'])){
+     } elseif (isset($_POST['btnsave'])) {
          $Currency = mysqli_real_escape_string($conn, $_POST['currency']);
          $ComapanyName = mysqli_real_escape_string($conn, $_POST['company']);
          $Address = mysqli_real_escape_string($conn, $_POST['address']);
@@ -130,65 +129,52 @@
          $PostalCodeErr = "";
          $ErrorCount = 0;
 
-         if($Currency == "Select Payment Currency")
-         {
+         if ($Currency == "Select Payment Currency") {
              $CurrencyErr = "Please select a payment currency";
              $ErrorCount += 1;
          }
-         if(empty($ComapanyName))
-         {
+         if (empty($ComapanyName)) {
              $CompanyNameErr = "Please enter your company name";
              $ErrorCount += 1;
          }
-         if(strlen($ComapanyName)<2)
-         {
+         if (strlen($ComapanyName)<2) {
              $CompanyNameErr = "Please enter a valid company name";
              $ErrorCount += 1;
          }
-         if(strlen($ComapanyName)>50)
-         {
+         if (strlen($ComapanyName)>50) {
              $CompanyNameErr = "Company name is too big";
              $ErrorCount += 1;
          }
-         if(empty($Address))
-         {
+         if (empty($Address)) {
              $AddressErr = "Please enter address";
              $ErrorCount += 1;
          }
-         if(strlen($Address)<10)
-         {
+         if (strlen($Address)<10) {
              $AddressErr = "Address should be at least of 10 characters";
              $ErrorCount += 1;
          }
-         if(strlen($Address)>150)
-         {
+         if (strlen($Address)>150) {
              $AddressErr = "Address is too long, max 150 characters";
              $ErrorCount += 1;
          }
-         if(empty($PostalCode))
-         {
+         if (empty($PostalCode)) {
              $PostalCodeErr = "Please enter postal code";
              $ErrorCount += 1;
          }
-         if(strlen($PostalCode)<6 || strlen($PostalCode)>8 && strlen($PostalCode) == 7)
-         {
+         if (strlen($PostalCode)<6 || strlen($PostalCode)>8 && strlen($PostalCode) == 7) {
              $PostalCodeErr = "Invalid postal code";
              $ErrorCount += 1;
          }
-         if($ErrorCount == 0)
-         {
+         if ($ErrorCount == 0) {
              $DetailsUpdate = "UPDATE tbl_user SET currency = '$Currency', company = '$ComapanyName', address = '$Address', postalcode = '$PostalCode' WHERE email = '$user'";
              $DetailsUpdateFire = mysqli_query($conn, $DetailsUpdate);
 
-             if($DetailsUpdateFire)
-             {
+             if ($DetailsUpdateFire) {
                  header("location:account.php?detailsupdate=success");
-             }
-             else{
+             } else {
                  echo mysqli_error($conn);
              }
-         }
-         else{
+         } else {
              echo $ErrorCount;
          }
      }
@@ -282,18 +268,18 @@
                 </div>
                 <div class="col-md-6 text-right my-auto">
                     <p class="my-md-4 header-links">
-                        <?php if(isset($_SESSION['USER'])){ ?>
+                        <?php if (isset($_SESSION['USER'])) { ?>
                         <a href="account.php?nosession=false&ref=index" class="px-2">
                             <?php echo $_SESSION['USER'] ?>
                         </a>
-                        <?php }else{ ?>
+                        <?php } else { ?>
                         <a href="../authentication/register.php?nosession=true&ref=index" class="px-2">Create an
                             account</a>
                         <?php } ?>
-                        <?php if(isset($_SESSION['USER'])){ ?>
+                        <?php if (isset($_SESSION['USER'])) { ?>
                         <a href="../authentication/logout.php?securelogout=success" class="px-2">Logout
                         </a>
-                        <?php }else{ ?>
+                        <?php } else { ?>
                         <a href="../authentication/login.php?nosession=true&ref=index" class="px-2">Login</a>
                         <?php } ?>
                     </p>
@@ -330,7 +316,7 @@
                                 <h3>General Information</h3>
                                 <form method="post">
                                     <table class="myaccount-details-table">
-                                        <?php while($getDetailsRows = mysqli_fetch_array($getDetailsFire)){ ?>
+                                        <?php while ($getDetailsRows = mysqli_fetch_array($getDetailsFire)) { ?>
                                         <tr>
                                             <td>
                                                 <h5>First Name</h5>
@@ -374,7 +360,7 @@
                                             </td>
                                             <td>
                                                 <div class="dropdown myaccount-details-phpcontent">
-                                                    <?php if(empty($getDetailsRows['currency'])){ ?>
+                                                    <?php if (empty($getDetailsRows['currency'])) { ?>
                                                     <select name="currency" id="currency" class="btn dropdown-select">
                                                         <option value="Select Payment Currency">Select Payment Currency
                                                         </option>
@@ -382,7 +368,7 @@
                                                         <option value="Euro">Euro</option>
                                                         <option value="British Pounds">British Pounds</option>
                                                     </select>
-                                                    <?php }else{ ?>
+                                                    <?php } else { ?>
                                                     <h5 class="myaccount-details-phpcontent">:
                                                         <?php echo $getDetailsRows['currency'] ?></h5>
                                                     <?php } ?>
@@ -394,12 +380,12 @@
                                                 <h5>Company Name</h5>
                                             </td>
                                             <td>
-                                                <?php if(empty($getDetailsRows['company'])){ ?>
+                                                <?php if (empty($getDetailsRows['company'])) { ?>
                                                 <h5 class="myaccount-details-phpcontent">
                                                     <input type="text" name="company" id="" minlength="3" maxlength="50"
                                                         pattern="([A-Za-z0-9]+)" required>
                                                 </h5>
-                                                <?php }else{ ?>
+                                                <?php } else { ?>
                                                 <h5 class="myaccount-details-phpcontent">:
                                                     <?php echo $getDetailsRows['company'] ?></h5>
                                                 <?php } ?>
@@ -417,12 +403,12 @@
                                                 <h5>Address</h5>
                                             </td>
                                             <td>
-                                                <?php if(empty($getDetailsRows['address'])){ ?>
+                                                <?php if (empty($getDetailsRows['address'])) { ?>
                                                 <h5 class="myaccount-details-phpcontent">
                                                     <input type="text" name="address" id="" required minlength="10"
                                                         maxlength="150">
                                                 </h5>
-                                                <?php }else{ ?>
+                                                <?php } else { ?>
                                                 <h5 class="myaccount-details-phpcontent">:
                                                     <?php echo $getDetailsRows['address'] ?></h5>
                                                 <?php } ?>
@@ -432,13 +418,13 @@
                                             <td>
                                                 <h5>Postal Code</h5>
                                             </td>
-                                            <td><?php if(empty($getDetailsRows['postalcode'])){ ?>
+                                            <td><?php if (empty($getDetailsRows['postalcode'])) { ?>
 
                                                 <h5 class="myaccount-details-phpcontent">
                                                     <input type="number" name="postalcode" id="" required
                                                         pattern="([0-9]){6} [0-9]){8}">
                                                 </h5>
-                                                <?php }else{ ?>
+                                                <?php } else { ?>
                                                 <h5 class="myaccount-details-phpcontent">:
                                                     <?php echo $getDetailsRows['postalcode'] ?></h5>
                                                 <?php } ?>
@@ -448,19 +434,19 @@
                                         <tr>
                                             <td>
                                                 <?php
-                                                if(empty($getDetailsRows['currency'])
+                                                if (empty($getDetailsRows['currency'])
                                                     &&
                                                     empty($getDetailsRows['company'])
                                                 &&
                                                     empty($getDetailsRows['address'])
                                                 &&
-                                                    empty($getDetailsRows['postalcode'])){ ?>
+                                                    empty($getDetailsRows['postalcode'])) { ?>
                                                 <input class="btn order-btn-1 d-block py-2 m-5" id="btnSave"
                                                     type="submit" value="Save" name="btnsave">
 
-                                                <?php }else{
-                                                    echo "Details Updated <br/>";
-                                                } ?>
+                                                <?php } else {
+                                                        echo "Details Updated <br/>";
+                                                    } ?>
                                             </td>
                                         </tr>
                                     </table>

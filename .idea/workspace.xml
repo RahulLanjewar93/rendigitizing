@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b0d27ad-2d8e-4061-88ce-481b35598ab3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user/profile/vectorart.php" beforeDir="false" afterPath="$PROJECT_DIR$/user/profile/vectorart.php" afterDir="false" />
-    </list>
+    <list default="true" id="0b0d27ad-2d8e-4061-88ce-481b35598ab3" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -139,7 +136,7 @@
       <workItem from="1586953896956" duration="9330000" />
       <workItem from="1587016477817" duration="2253000" />
       <workItem from="1587032625951" duration="5522000" />
-      <workItem from="1587132971288" duration="3393000" />
+      <workItem from="1587132971288" duration="3999000" />
     </task>
     <task id="LOCAL-00001" summary="GitDemo Added">
       <created>1586708442056</created>

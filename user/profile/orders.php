@@ -1,9 +1,23 @@
 <?php
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
   session_start();
   require_once "../../db/connection/conn.php";
-
   if(isset($_SESSION['USER']))
   {
+    $userEmail = $_SESSION['USER'];
+    $searchInput = $_POST['searchinput'];
+    $searchKeyword = mysqli_real_escape_string($conn, $searchInput);
+    
+    if(isset($_POST['btnsearch']))
+    {
+        $searchResult = "SELECT * FROM tbl_order WHERE user = '$userEmail' AND category = 'Emboridery Image' AND ( 
+        design_name LIKE '%".$searchKeyword."%' OR ponumber LIKE '%".$searchKeyword."%' OR turnarround LIKE '%".$searchKeyword."%' 
+        OR stitch LIKE '%".$searchKeyword."%' OR application LIKE '%".$searchKeyword."%' OR fabric LIKE '%".$searchKeyword."%' 
+        OR thread LIKE '%".$searchKeyword."%' OR dimension LIKE '%".$searchKeyword."%' OR dimension_width LIKE '%".$searchKeyword."%' 
+        OR dimension_height LIKE '%".$searchKeyword."%' OR order_flag LIKE '%".$searchKeyword."%')";
+
+        $searchResultFire = mysqli_query($conn, $searchResult);
+    }
       //Pagination
       if(isset($_GET['page']))
       {
@@ -16,16 +30,11 @@
 
       $num_per_page = 05;
       $start_from = ($page-1)*05;
-      $fetchei = "SELECT * FROM tbl_order WHERE category = 'Emboridery Image' LIMIT $start_from, $num_per_page";
+      $fetchei = "SELECT * FROM tbl_order WHERE user = '$userEmail' AND category = 'Emboridery Image' LIMIT $start_from, $num_per_page";
       $fetcheiFire = mysqli_query($conn, $fetchei);
+      //echo $userEmail;
 
-      if(mysqli_num_rows($fetcheiFire)>1)
-      {
-          //
-      }
-      else{
-          $eiOrderEmptyMessage = "No orders availabe right now";
-      }
+      
   }
   else{
       header("location:http://localhost/RenDigitizingUpdated/user/authentication/login.php?nosession=true");
@@ -147,9 +156,10 @@
                 <h1 class="profile-text-area">Embroidery Images</h1>
               </div>
               <div class="col-md-6">
-                <div class="myOrderSearchArea"> 
-                  <input class="search-text d-inline-block" type="text" placeholder="Enter product name" form="searchForm">
-                  <button class="btn d-inline-block" form="searchForm" type="submit">
+                <div class="myOrderSearchArea">
+                  <input class="search-text d-inline-block" type="text" name="searchinput"
+                    placeholder="Enter product name" form="searchForm">
+                  <button class="btn d-inline-block" form="searchForm" name="btnsearch" type="submit">
                     <li class="nav-item border rounded-circle mx-2 search-icon ">
                       <i class="fas fa-search p-2"></i>
                     </li>
@@ -157,7 +167,7 @@
                 </div>
                 <nav aria-label="Page navigation example" class="my-2">
                   <?php
-                    $getEIRecords = "SELECT * FROM tbl_order WHERE category = 'Emboridery Image'";
+                    $getEIRecords = "SELECT * FROM tbl_order WHERE user = '$userEmail' AND category = 'Emboridery Image'";
                     $getEIRecordsFire = mysqli_query($conn, $getEIRecords);
                     $total_records = mysqli_num_rows($getEIRecordsFire);
 
@@ -197,6 +207,7 @@
                 </nav>
               </div>
             </div>
+            <?php if(mysqli_num_rows($fetcheiFire) > 0){ ?>
             <table class="table table-striped table-items">
               <thead>
                 <tr>
@@ -208,7 +219,7 @@
                 </tr>
               </thead>
               <tbody>
-                <?php while($rows = mysqli_fetch_array($fetcheiFire)){ ?>
+                <?php if(!isset($_POST['btnsearch'])){ while($rows = mysqli_fetch_array($fetcheiFire)){ ?>
                 <tr>
                   <td> <img class="table-image py-2"
                       src="Uploads/DesignImages/<?php echo $rows['emboridery_design_image']?>" alt=""> </td>
@@ -227,74 +238,36 @@
                     </div>
                   </td>
                 </tr>
-                <?php } ?>
+                <?php }
+                }else if(mysqli_num_rows($searchResultFire)>0){
+                ?>
+                <?php while($searchrows = mysqli_fetch_array($searchResultFire)){ ?>
+                <tr>
+                  <td> <img class="table-image py-2"
+                      src="Uploads/DesignImages/<?php echo $searchrows['emboridery_design_image']?>" alt=""> </td>
+                  <td><?php echo $searchrows['design_name'] ?></td>
+                  <td> <?php echo $searchrows['price'] ?> </td>
+                  <td> <?php echo $searchrows['order_flag'] ?> </td>
+                  <td>
+                    <div class="row order-button-group d-block">
+                      <div class="col-md-12">
+                        <?php $OrderId = mysqli_real_escape_string($conn, $searchrows['order_id']); ?>
+                        <a class="btn order-btn-1 d-block py-2" href="view.php?orderid=<?php echo $OrderId ?>">View</a>
+                        <a class="btn order-btn-2 d-block py-2"
+                          href="cancel.php?orderid=<?php echo $OrderId ?>">Cancel</a></div>
+                    </div>
+                  </td>
+                </tr>
+                <?php } }
+                else
+                {
+                  echo "No order found";
+                } ?>
               </tbody>
             </table>
-
-            <!-- Modal Area -->
-
-            <!-- viewModal -->
-            <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-              aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title profile-text-area" id="exampleModalLabel">Are you sure you want to cancel
-                      your order?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                  <div class="order-button-group">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <button type="button" class="btn btn-secondary order-btn-3 py-2 my-2">Yes</button>
-                        </div>
-                        <div class="col-md-6">
-                          <button type="button" class="btn btn-primary order-btn-1 py-2 my-2">No</button>
-                        </div>
-                      </div>
-                    </div>  
-                  </div>
-                  <div class="modal-footer">
-                  <h5 class="profile-text-area noticeArea">Notice : Something Something</h5>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- cancelModal -->
-            <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-              aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title profile-text-area" id="exampleModalLabel">Are you sure you want to cancel
-                      your order?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                  <div class="order-button-group">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <button type="button" class="btn btn-secondary order-btn-3 py-2 my-2">Yes</button>
-                        </div>
-                        <div class="col-md-6">
-                          <button type="button" class="btn btn-primary order-btn-1 py-2 my-2">No</button>
-                        </div>
-                      </div>
-                    </div>  
-                  </div>
-                  <div class="modal-footer">
-                  <h5 class="profile-text-area noticeArea">Notice : Something Something</h5>
-                  </div>
-                </div>
-              </div>
-            </div>
-
+            <?php } else {
+              echo "No Orders Found !";
+            } ?>
             <nav aria-label="Page navigation example" class="my-2">
 
               <ul class="pagination justify-content-end" id="Pagination">
@@ -315,9 +288,9 @@
                 </li>
                 <?php } ?>
                 <?php
-                            if($i>$page)
-                            {
-                      ?>
+                    if($i>$page)
+                    {
+                ?>
                 <li class="page-item">
                   <a class="page-link" href="orders.php?page=<?php echo ($page+1)?>" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
@@ -403,12 +376,12 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
   </script>
   <script>
-        var x = window.matchMedia("(max-width: 800px)");
-        if (x.matches) {
-            $(".profile-area-content").removeClass("p-5").addClass("py-2 px-2");
-            $(".profile-text-area").addClass("my-3");
-        }
-    </script>
+    var x = window.matchMedia("(max-width: 800px)");
+    if (x.matches) {
+      $(".profile-area-content").removeClass("p-5").addClass("py-2 px-2");
+      $(".profile-text-area").addClass("my-3");
+    }
+  </script>
 </body>
 
 </html>
