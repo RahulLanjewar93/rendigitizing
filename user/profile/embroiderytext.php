@@ -251,20 +251,20 @@ else{
                 <?php } } else if(mysqli_num_rows($searchResultFire)>0){ while($searchRows = mysqli_fetch_array($searchResultFire)){ ?>
                 <tr>
 
-                  <td><?php echo $searchRows['emboridery_text'] ?></td>
-                  <td> <?php echo $searchRows['design_name'] ?> </td>
-                  <td> <?php echo $searchRows['price'] ?> </td>
-                  <td> <?php echo $searchRows['order_flag'] ?> </td>
-                  <td>
-                    <div class="row order-button-group d-block">
-                      <div class="col-md-12">
-                        <?php $OrderId = mysqli_real_escape_string($conn, $searchRows['order_id']) ?>
-                        <a href="view.php?orderid=<?php echo $OrderId?>" class="btn order-btn-1 d-block py-2">View</a>
-                        <a href="cancel.php?orderid=<?php echo $OrderId?>"
-                          class="btn order-btn-2 d-block py-2">Cancel</a></div>
-                    </div>
-                  </td>
-                </tr>
+                    <td><?php echo $searchRows['emboridery_text'] ?></td>
+                    <td> <?php echo $searchRows['design_name'] ?> </td>
+                    <td> <?php echo $searchRows['price'] ?> </td>
+                    <td> <?php echo $searchRows['order_flag'] ?> </td>
+                    <td>
+                        <div class="row order-button-group d-block">
+                            <div class="col-md-12">
+                              <?php $OrderId = mysqli_real_escape_string($conn, $searchRows['order_id']) ?>
+                              <a href="view.php?orderid=<?php echo $OrderId?>" class="btn order-btn-1 d-block py-2 btnview">View</a>
+                              <a href="cancel.php?orderid=<?php echo $OrderId?>"
+        class="btn order-btn-2 d-block py-2 btncancel">Cancel</a></div>
+                            </div>
+                      </td>
+</tr>
                 <?php } }
                 else{
                   echo "No orders found";
@@ -292,10 +292,15 @@ else{
                     <div class="order-button-group">
                       <div class="row">
                         <div class="col-md-6">
-                          <button type="button" class="btn btn-secondary order-btn-3 py-2 my-2">Yes</button>
+
+
+                          <!--<button type="button" class="btn btn-secondary order-btn-3 py-2 my-2">Yes</button>
                         </div>
                         <div class="col-md-6">
-                          <button type="button" class="btn btn-primary order-btn-1 py-2 my-2">No</button>
+                          <button type="button" class="btn btn-primary order-btn-1 py-2 my-2">No</button>-->
+
+                          <input type="text" name="" id="">
+
                         </div>
                       </div>
                     </div>
@@ -342,8 +347,7 @@ else{
               $('#viewModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var orderId = button.data('whatever') // Extract info from data-* attributes
-                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                
                 var modal = $(this)
                 modal.find('.modal-title').text('New message to ' + orderId)
                 modal.find('.modal-body input').val(orderId)
@@ -352,8 +356,7 @@ else{
               $('#cancelModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var orderId = button.data('whatever') // Extract info from data-* attributes
-                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                
                 var modal = $(this)
                 modal.find('.modal-title').text('New message to ' + orderId)
                 modal.find('.modal-body input').val(orderId)
