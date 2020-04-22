@@ -146,8 +146,9 @@ else{
                 <h1 class="profile-text-area">Embroidery Text</h1>
               </div>
               <div class="col-md-6">
-              <div class="myOrderSearchArea">
-                  <input class="search-text d-inline-block" type="text" form="searchForm" placeholder="Enter product name">
+                <div class="myOrderSearchArea">
+                  <input class="search-text d-inline-block" type="text" form="searchForm"
+                    placeholder="Enter product name">
                   <button class="btn d-inline-block" form="searchForm">
                     <li class="nav-item border rounded-circle mx-2 search-icon ">
                       <i class="fas fa-search p-2"></i>
@@ -210,7 +211,7 @@ else{
               <tbody>
                 <?php
                     while ($rows = mysqli_fetch_array($fetchetFire)){
-              ?>
+                ?>
                 <tr>
 
                   <td><?php echo $rows['emboridery_text'] ?></td>
@@ -241,14 +242,15 @@ else{
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title profile-text-area" id="exampleModalLabel">Are you sure you want to cancel
-                      your order?</h5>
+                    <h5 class="modal-title profile-text-area" id="exampleModalLabel">Viewing Details For Order id:
+                    <?php echo $OrderId?>
+                    </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body">
-                  <div class="order-button-group">
+                    <div class="order-button-group">
                       <div class="row">
                         <div class="col-md-6">
                           <button type="button" class="btn btn-secondary order-btn-3 py-2 my-2">Yes</button>
@@ -257,10 +259,10 @@ else{
                           <button type="button" class="btn btn-primary order-btn-1 py-2 my-2">No</button>
                         </div>
                       </div>
-                    </div>  
+                    </div>
                   </div>
                   <div class="modal-footer">
-                  <h5 class="profile-text-area noticeArea">Notice : Something Something</h5>
+                    <h5 class="profile-text-area noticeArea">Notice : Something Something</h5>
                   </div>
                 </div>
               </div>
@@ -279,7 +281,7 @@ else{
                     </button>
                   </div>
                   <div class="modal-body">
-                  <div class="order-button-group">
+                    <div class="order-button-group">
                       <div class="row">
                         <div class="col-md-6">
                           <button type="button" class="btn btn-secondary order-btn-3 py-2 my-2">Yes</button>
@@ -288,10 +290,10 @@ else{
                           <button type="button" class="btn btn-primary order-btn-1 py-2 my-2">No</button>
                         </div>
                       </div>
-                    </div>  
+                    </div>
                   </div>
                   <div class="modal-footer">
-                  <h5 class="profile-text-area noticeArea">Notice : Something Something</h5>
+                    <h5 class="profile-text-area noticeArea">Notice : Something Something</h5>
                   </div>
                 </div>
               </div>
@@ -405,12 +407,15 @@ else{
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
   </script>
   <script>
-        var x = window.matchMedia("(max-width: 800px)");
-        if (x.matches) {
-            $(".profile-area-content").removeClass("p-5").addClass("py-2 px-2");
-            $(".profile-text-area").addClass("my-3");
-        }
-    </script>
+    var x = window.matchMedia("(max-width: 800px)");
+    if (x.matches) {
+      $(".profile-area-content").removeClass("p-5").addClass("py-2 px-2");
+      $(".profile-text-area").addClass("my-3");
+    }
+  </script>
+  <script>
+
+  </script>
 </body>
 
 </html>
