@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ERROR | E_WARNING | E_PARSE);
+//error_reporting(E_ERROR | E_WARNING | E_PARSE);
 session_start();
 require_once "../../db/connection/conn.php";
 
@@ -247,6 +247,21 @@ else{
                       </div>
                     </div>
                   </td>
+                  <div class="d-none">
+                  
+                  <td> <?php echo $rows['ponumber'] ?> </td>
+                  <td> <?php echo $rows['turnarround'] ?> </td>
+                  <td> <?php echo $rows['dimension'] ?> </td>
+                  <td> <?php echo $rows['dimension_width'] ?> </td>
+                  <td> <?php echo $rows['dimension_height'] ?> </td>
+                  <td> <?php echo $rows['have_bg_color'] ?> </td>
+                  <td> <?php echo $rows['stitch'] ?> </td>
+                  <td> <?php echo $rows['application'] ?> </td>
+                  <td> <?php echo $rows['fabric'] ?> </td>
+                  <td> <?php echo $rows['thread'] ?> </td>
+                  <td> <?php echo $rows['applique'] ?> </td>
+                  <td> <?php echo $rows['comments'] ?> </td>
+
                 </tr>
                 <?php } } else if(mysqli_num_rows($searchResultFire)>0){ while($searchRows = mysqli_fetch_array($searchResultFire)){ ?>
                 <tr>
@@ -319,7 +334,9 @@ else{
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title profile-text-area" id="exampleModalLabel">Are you sure you want to cancel
-                      your order?</h5>
+                      your order?
+                      <?php echo $updateCancel ?>
+                      </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -356,7 +373,21 @@ else{
               $('#cancelModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var orderId = button.data('whatever') // Extract info from data-* attributes
-                
+                document.cookie = "OrderID = " + orderId;
+                <?php 
+                $ID = $_COOKIE['OrderID'];
+                    $updateCancel = "UPDATE tbl_order SET order_flag = 'CANCELLED' WHERE order_id = $ID";
+                  
+                    $updateCancelFire = mysqli_query($conn, $updateCancel);
+
+                    if($updateCancel)
+                    {
+                      echo "1";
+                    }
+                    else{
+                      echo "0";
+                    }
+                ?>
                 var modal = $(this)
                 modal.find('.modal-title').text('New message to ' + orderId)
                 modal.find('.modal-body input').val(orderId)

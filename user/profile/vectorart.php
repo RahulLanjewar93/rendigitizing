@@ -261,6 +261,24 @@ else{
                       </div>
                     </div>
                   </td>
+                  <div style="display:none;">
+                      <td> <?php echo $rows['ponumber']?> </td>
+                      <td> <?php echo $rows['turnarround']?> </td>
+
+                      <?php if(!empty($rows['emboridery_vector_supporting_image'])){ ?>
+                      <td> <img src="Uploads/Vector/SupportingImages/<?php echo $rows['emboridery_vector_supporting_image']?>"> </td>
+                      <?php } ?>
+
+                      <td> <?php echo $rows['dimension']?> </td>
+                      <td> <?php echo $rows['dimension_width']?> </td>
+                      <td> <?php echo $rows['dimension_height']?> </td>
+                      <td> <?php echo $rows['have_bg_color']?> </td>
+                      <td> <?php echo $rows['vector_format']?> </td>
+                      <td> <?php echo $rows['application']?> </td>
+                      <td> <?php echo $rows['printing_process']?> </td>
+                      <td> <?php echo $rows['color']?> </td>
+                      <td> <?php echo $rows['comments']?> </td>
+                  </div>
                 </tr>
                 <?php } } else if(mysqli_num_rows($searchResultFire) > 0) { while($resultRows = mysqli_fetch_array($searchResultFire)) { ?>
 

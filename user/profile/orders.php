@@ -237,6 +237,25 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                       </div>
                     </div>
                   </td>
+                  <div class="d-none">
+                  <td> <?php echo $rows['ponumber'] ?> </td>
+                  <td> <?php echo $rows['turnarround'] ?> </td>
+
+                  <?php if(!empty($rows['emboridery_supporting_image'])){ ?>
+
+                  <td> <img src="Uploads/SupportingImages/<?php echo $rows['emboridery_supporting_image'] ?>"> </td>
+
+                  <?php } ?>
+
+                  <td> <?php echo $rows['dimension'] ?> </td>
+                  <td> <?php echo $rows['dimension_width'] ?> </td>
+                  <td> <?php echo $rows['dimension_height'] ?> </td>
+                  <td> <?php echo $rows['have_bg_color'] ?> </td>
+                  <td> <?php echo $rows['stitch'] ?> </td>
+                  <td> <?php echo $rows['application'] ?> </td>
+                  <td> <?php echo $rows['thread'] ?> </td>
+                  <td> <?php echo $rows['applique'] ?> </td>
+                  <td> <?php echo $rows['comments'] ?> </td>
                 </tr>
                 <?php }
                 }else if(mysqli_num_rows($searchResultFire)>0){
