@@ -331,7 +331,7 @@ else{
                               </tr>
                               <tr>
                                 <td><h5 class="profile-text-area">Turn Around</h5></td>
-                                <td id="modalTurnaround"></td>
+                                <td id="modalTurnAround"></td>
                               
                               </tr>
                               <tr>
@@ -341,7 +341,7 @@ else{
                               </tr>
                               <tr>
                                 <td><h5 class="profile-text-area">Width</h5></td>
-                                <td id="modalDimnesionWidth"></td>
+                                <td id="modalDimensionWidth"></td>
                               
                               </tr>
                               <tr>
@@ -562,14 +562,15 @@ else{
       $('#modalTurnAround').html(data[5]);
       $('#modalDimension').html(data[6]);
       $('#modalDimensionWidth').html(data[7]);
-      $('#modalDimesnionHeight').html(data[8]);
-      $('#modalHaveBgColour').html(data[9]);
+      $('#modalDimensionHeight').html(data[8]);
+      $('#modalHaveBgColor').html(data[9]);
       $('#modalStitch').html(data[10]);
       $('#modalApplication').html(data[11]);
-      $('#modalThread').html(data[12]);
-      $('#modalApplique').html(data[13]);
-      $('#modalComments').html(data[14]);
-      $('#modalOrderAt').html(data[15]);
+      $('#modalFabric').html(data[12])
+      $('#modalThread').html(data[13]);
+      $('#modalApplique').html(data[14]);
+      $('#modalComments').html(data[15]);
+      $('#modalOrderAt').html(data[16]);
     });
 
     $('#viewModal').on('show.bs.modal', function (event) {
