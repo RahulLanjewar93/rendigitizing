@@ -925,7 +925,7 @@ body::-webkit-scrollbar-track {
 }
 
 .errortd {
-    border:0px;
+    border: 0px;
 }
 
 .errorArea {
@@ -1026,7 +1026,7 @@ body::-webkit-scrollbar-track {
     outline: outset;
     outline-color: #f06789;
     outline-width: 2px;
-    
+
 }
 
 .activeTab2 {
@@ -1034,7 +1034,7 @@ body::-webkit-scrollbar-track {
     outline: outset;
     outline-color: #faaa2a;
     outline-width: 2px;
-    
+
 }
 
 .activeTab3 {
@@ -1042,7 +1042,7 @@ body::-webkit-scrollbar-track {
     outline: outset;
     outline-color: #a742e2;
     outline-width: 2px;
-    
+
 }
 
 .myaccount-details-area button {
@@ -1051,7 +1051,7 @@ body::-webkit-scrollbar-track {
 
 
 #demo {
-    font-size:16px;
+    font-size: 16px;
     padding: 0px;
     text-align: center;
     margin: 0 auto;
@@ -1069,7 +1069,13 @@ body::-webkit-scrollbar-track {
 
 @media (min-width:800px) {
     #sidebar {
-        display: flex!important;
+        display: flex !important;
+    }
+
+
+    .modalParent {
+        max-width: 600px;
+        width: 600px;
     }
 }
 
@@ -1116,11 +1122,11 @@ body::-webkit-scrollbar-track {
     .row1 .p-5 {
         padding: 2px 0;
     }
-    
+
     #sideBar {
         display: none;
     }
-    
+
 
     .slide {
         display: block;
@@ -1147,7 +1153,7 @@ body::-webkit-scrollbar-track {
         z-index: 222;
         margin-top: 15%;
         margin-left: 3%;
-    } 
+    }
 
     .btn-mobile {
         border-radius: 200px;
@@ -1160,7 +1166,16 @@ body::-webkit-scrollbar-track {
         border: none;
     }
 
-    .reach-out-buttons table  tr {
+    .reach-out-buttons table tr {
         border: none;
     }
+}
+
+#modalTable td {
+    width: 50%;
+    max-width: 300px;
+    text-align: center;
+    overflow: hidden;
+    overflow-wrap: break-word;
+
 }

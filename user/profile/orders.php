@@ -226,6 +226,21 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                   <td><?php echo $rows['design_name'] ?></td>
                   <td> <?php echo $rows['price'] ?> </td>
                   <td> <?php echo $rows['order_flag'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['ponumber'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['turnarround'] ?> </td>
+                  <?php if(!empty($rows['emboridery_supporting_image'])){ ?>
+                  <td class="d-none"> <img
+                      src="Uploads/SupportingImages/<?php echo $rows['emboridery_supporting_image'] ?>"> </td>
+                  <?php } ?>
+                  <td class="d-none"> <?php echo $rows['dimension'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['dimension_width'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['dimension_height'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['have_bg_color'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['stitch'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['application'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['thread'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['applique'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['comments'] ?> </td>
                   <td>
                     <div class="row order-button-group d-block">
                       <div class="col-md-12">

@@ -3,31 +3,26 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 session_start();
 require_once "../../db/connection/conn.php";
 
-if(isset($_SESSION['USER']))
-{
-  //Search
-  $userEmail = $_SESSION['USER'];
+if (isset($_SESSION['USER'])) {
+    //Search
+    $userEmail = $_SESSION['USER'];
     $searchInput = $_POST['searchinput'];
     $searchKeyword = mysqli_real_escape_string($conn, $searchInput);
     
-    if(isset($_POST['btnsearch']))
-    {
-      $searchResult = "SELECT * FROM tbl_order WHERE user = '$userEmail' AND category = 'Emboridery Text' AND ( 
+    if (isset($_POST['btnsearch'])) {
+        $searchResult = "SELECT * FROM tbl_order WHERE user = '$userEmail' AND category = 'Emboridery Text' AND ( 
       emboridery_text LIKE '%".$searchKeyword."%' OR design_name LIKE '%".$searchKeyword."%' OR ponumber LIKE '%".$searchKeyword."%' OR turnarround LIKE '%".$searchKeyword."%' 
       OR stitch LIKE '%".$searchKeyword."%' OR application LIKE '%".$searchKeyword."%' OR fabric LIKE '%".$searchKeyword."%' 
       OR thread LIKE '%".$searchKeyword."%' OR dimension LIKE '%".$searchKeyword."%' OR dimension_width LIKE '%".$searchKeyword."%' 
       OR dimension_height LIKE '%".$searchKeyword."%' OR order_flag LIKE '%".$searchKeyword."%')";
 
-      $searchResultFire = mysqli_query($conn, $searchResult);
+        $searchResultFire = mysqli_query($conn, $searchResult);
     }
     //Pagination
-    if(isset($_GET['page']))
-    {
-      $page = $_GET['page'];
-    }
-    else
-    {
-      $page = 1;
+    if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+    } else {
+        $page = 1;
     }
 
     $num_per_page = 05;
@@ -35,15 +30,14 @@ if(isset($_SESSION['USER']))
     $fetchet = "SELECT * FROM tbl_order WHERE user = '$userEmail' AND category = 'Emboridery Text' LIMIT $start_from, $num_per_page";
     $fetchetFire = mysqli_query($conn, $fetchet);
 
-    /*if(mysqli_num_rows($fetchetFire)>1)
-    {
-        //
-    }
-    else{
-        $eiOrderEmptyMessage = "No orders availabe right now";
-    }*/
+/*if(mysqli_num_rows($fetchetFire)>1)
+{
+    //
 }
 else{
+    $eiOrderEmptyMessage = "No orders availabe right now";
+}*/
+} else {
     header("location:http://localhost/RenDigitizingUpdated/user/authentication/login.php?nosession=true");
 }
 ?>
@@ -105,18 +99,18 @@ else{
 
         <div class="col-md-6 text-right my-auto">
           <p class="my-md-4 header-links">
-            <?php if(isset($_SESSION['USER'])){ ?>
+            <?php if (isset($_SESSION['USER'])) { ?>
             <a href="account.php?nosession=false&ref=index" class="px-2">
               <?php echo $_SESSION['USER'] ?>
             </a>
-            <?php }else{ ?>
+            <?php } else { ?>
             <a href="../authentication/register.php?nosession=true&ref=index" class="px-2">Create an
               account</a>
             <?php } ?>
-            <?php if(isset($_SESSION['USER'])){ ?>
+            <?php if (isset($_SESSION['USER'])) { ?>
             <a href="../authentication/logout.php?securelogout=success" class="px-2">Logout
             </a>
-            <?php }else{ ?>
+            <?php } else { ?>
             <a href="../authentication/login.php?nosession=true&ref=index" class="px-2">Login</a>
             <?php } ?>
         </div>
@@ -184,37 +178,37 @@ else{
 
                   <ul class="pagination justify-content-end" id="Pagination">
                     <?php
-                          if($page>1)
-                          { ?>
+                          if ($page>1) { ?>
                     <li class="page-item">
-                      <a class="page-link" href="embroiderytext.php?page=<?php echo ($page-1) ?>" aria-label="Previous">
+                      <a class="page-link" href="embroiderytext.php?page=<?php echo($page-1) ?>" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                         <span class="sr-only">Previous</span>
                       </a>
                     </li>
                     <?php } ?>
                     <?php
-                          for($i=1; $i<$total_pages; $i++)
-                          {?>
+                          for ($i=1; $i<$total_pages; $i++) {?>
                     <li class="page-item"><a class="page-link"
                         href="embroiderytext.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
                     <?php } ?>
                     <?php
-                          if($i>$page)
-                          {
+                          if ($i>$page) {
                               ?>
                     <li class="page-item">
-                      <a class="page-link" href="embroiderytext.php?page=<?php echo ($page+1)?>" aria-label="Next">
+                      <a class="page-link" href="embroiderytext.php?page=<?php echo($page+1)?>" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                         <span class="sr-only">Next</span>
                       </a>
                     </li>
-                    <?php } ?>
+                    <?php
+                          } ?>
                   </ul>
                 </nav>
               </div>
             </div>
-            <?php if(mysqli_num_rows($fetchetFire) > 0){ ?>
+            <?php
+            if (mysqli_num_rows($fetchetFire) > 0) {
+                ?>
             <table class="table table-striped table-items">
               <thead>
                 <tr>
@@ -227,20 +221,31 @@ else{
               </thead>
               <tbody>
                 <?php
-                if(!isset($_POST['btnsearch'])) { while ($rows = mysqli_fetch_array($fetchetFire))
-                  {
-                  ?>
+                if (!isset($_POST['btnsearch'])) {
+                    while ($rows = mysqli_fetch_array($fetchetFire)) {
+                ?>
                 <tr>
-
                   <td><?php echo $rows['emboridery_text'] ?></td>
                   <td> <?php echo $rows['design_name'] ?> </td>
                   <td> <?php echo $rows['price'] ?> </td>
                   <td> <?php echo $rows['order_flag'] ?> </td>
-                  <td> 
-                    <div class="row order-button-group d-block">
+                  <td class="d-none"> <?php echo $rows['ponumber'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['turnarround'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['dimension'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['dimension_width'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['dimension_height'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['have_bg_color'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['stitch'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['application'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['thread'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['applique'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['comments'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['order_at'] ?> </td>
+                  <td>
+                    <div class="row order-button-group d-fblock">
                       <div class="col-md-12">
                         <?php $OrderId = mysqli_real_escape_string($conn, $rows['order_id']); ?>
-                        <button class="btn order-btn-1 d-block py-2 my-2" data-toggle="modal" data-target="#viewModal"
+                        <button class="btn order-btn-1 d-block py-2 my-2 viewButton" data-toggle="modal" data-target="#viewModal" 
                           data-whatever="<?php echo $OrderId?>">View</button>
                         <button class="btn order-btn-3 d-block py-2 my-2" data-toggle="modal" data-target="#cancelModal"
                           data-whatever="<?php echo $OrderId?>">Cancel</button>
@@ -248,40 +253,48 @@ else{
                     </div>
                   </td>
                 </tr>
-                <?php } } else if(mysqli_num_rows($searchResultFire)>0){ while($searchRows = mysqli_fetch_array($searchResultFire)){ ?>
+                <?php
+                    }
+                } elseif (mysqli_num_rows($searchResultFire)>0) {
+                    while ($searchRows = mysqli_fetch_array($searchResultFire)) {
+                        ?>
                 <tr>
 
-                    <td><?php echo $searchRows['emboridery_text'] ?></td>
-                    <td> <?php echo $searchRows['design_name'] ?> </td>
-                    <td> <?php echo $searchRows['price'] ?> </td>
-                    <td> <?php echo $searchRows['order_flag'] ?> </td>
-                    <td>
-                        <div class="row order-button-group d-block">
-                            <div class="col-md-12">
-                              <?php $OrderId = mysqli_real_escape_string($conn, $searchRows['order_id']) ?>
-                              <a href="view.php?orderid=<?php echo $OrderId?>" class="btn order-btn-1 d-block py-2 btnview">View</a>
-                              <a href="cancel.php?orderid=<?php echo $OrderId?>" class="btn order-btn-2 d-block py-2 btncancel">Cancel</a></div>
-                            </div>
-                      </td>
-</tr>
-                <?php } }
-                else{
-                  echo "No orders found";
+                  <td><?php echo $searchRows['emboridery_text'] ?></td>
+                  <td> <?php echo $searchRows['design_name'] ?> </td>
+                  <td> <?php echo $searchRows['price'] ?> </td>
+                  <td> <?php echo $searchRows['order_flag'] ?> </td>
+                  <td>
+                    <div class="row order-button-group d-block">
+                      <div class="col-md-12">
+                        <?php $OrderId = mysqli_real_escape_string($conn, $searchRows['order_id']) ?>
+                        <button class="btn order-btn-1 d-block py-2 btnview">View</button>
+                        <button class="btn order-btn-2 d-block py-2 btncancel">Cancel</button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <?php
+                    }
+                } else {
+                    echo "No orders found";
                 } ?>
               </tbody>
             </table>
-            <?php }else{ echo "No Records found"; } ?>
+            <?php
+            } else {
+                echo "No Records found";
+            } ?>
 
             <!-- Modal Area -->
 
             <!-- viewModal -->
             <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
               aria-hidden="true">
-              <div class="modal-dialog" role="document">
+              <div class="modal-dialog modalParent" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title profile-text-area" id="exampleModalLabel">Viewing Details For Order id:
-                      <?php echo $OrderId?>
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
@@ -290,17 +303,97 @@ else{
                   <div class="modal-body">
                     <div class="order-button-group">
                       <div class="row">
-                        <div class="col-md-6">
-
-
-                          <!--<button type="button" class="btn btn-secondary order-btn-3 py-2 my-2">Yes</button>
-                        </div>
-                        <div class="col-md-6">
-                          <button type="button" class="btn btn-primary order-btn-1 py-2 my-2">No</button>-->
-
-                          <input type="text" name="" id="">
-
-                        </div>
+                          <table class="table table-striped table-items" id="modalTable">
+                            <tbody>
+                              <tr>
+                                <td><h5 class="profile-text-area">Embroidery Text</h5></td>
+                                <td id="modalText"></td>
+                              </tr>
+                              <tr>
+                                <td><h5 class="profile-text-area">Design Name</h5></td>
+                                <td id="modalName"></td>
+                              </tr>
+                              <tr>
+                                <td><h5 class="profile-text-area">Price</h5></td>
+                                <td id="modalPrice"></td>
+                             
+                              </tr>
+                              <tr>
+                                <td><h5 class="profile-text-area">Status</h5></td>
+                                <td id="modalOrderFlag"></td>
+                              
+                              </tr>
+                              <tr>
+                                <td><h5 class="profile-text-area">PO Number</h5></td>
+                                <td id="modalPoNumber"></td>
+                              
+                              </tr>
+                              <tr>
+                                <td><h5 class="profile-text-area">Turn Around</h5></td>
+                                <td id="modalTurnaround"></td>
+                              
+                              </tr>
+                              <tr>
+                                <td><h5 class="profile-text-area">Dimension(Units)</h5></td>
+                                <td id="modalDimension"></td>
+                              
+                              </tr>
+                              <tr>
+                                <td><h5 class="profile-text-area">Width</h5></td>
+                                <td id="modalDimnesionWidth"></td>
+                              
+                              </tr>
+                              <tr>
+                                <td><h5 class="profile-text-area">Height</h5></td>
+                                <td id="modalDimensionHeight"></td>
+                              
+                              </tr>
+                              <tr>
+                                <td><h5 class="profile-text-area">Background Color</h5></td>
+                                <td id="modalHaveBgColor"></td>
+                              
+                              </tr>
+                              <tr>
+                                <td><h5 class="profile-text-area">Stitch</h5></td>
+                                <td id="modalStitch"></td>
+                              
+                              </tr>
+                              <tr>
+                                <td><h5 class="profile-text-area">Application</h5></td>
+                                <td id="modalApplication"></td>
+                              
+                              </tr>
+                              <tr>
+                                <td><h5 class="profile-text-area">Fabric</h5></td>
+                                <td id="modalFabric"></td>
+                             
+                              </tr>
+                              <tr>
+                                <td><h5 class="profile-text-area">Thread</h5></td>
+                                <td id="modalThread"></td>
+                             
+                              </tr>
+                              <tr>
+                                <td><h5 class="profile-text-area">Applique</h5></td>
+                                <td id="modalApplique"></td>
+                              
+                              </tr>
+                              <tr>
+                                <td><h5 class="profile-text-area">Comments</h5></td>
+                                <td id="modalComments"></td>
+                              
+                              </tr>
+                              <tr>
+                                <td><h5 class="profile-text-area">Time of order</h5></td>
+                                <td id="modalOrderAt"></td>
+                             
+                              </tr>
+                              <tr>
+                                <td><h5 class="profile-text-area">Order ID</h5></td>
+                                <td id="modalOrderId"></td>
+                              </tr>
+                            </tbody>
+                          </table>
                       </div>
                     </div>
                   </div>
@@ -327,10 +420,13 @@ else{
                     <div class="order-button-group">
                       <div class="row">
                         <div class="col-md-6">
-                          <button type="button" class="btn btn-secondary order-btn-3 py-2 my-2" onclick="deleteOrder()" >Yes</button>
+                          <button type="button" class="btn btn-secondary order-btn-3 py-2 my-2"
+                            onclick="deleteOrder()">Yes</button>
                         </div>
                         <div class="col-md-6">
-                          <button type="button" class="btn btn-primary order-btn-1 py-2 my-2" onclick="dontdeleteOrder()">No</button>
+                          <button type="button" class="btn btn-primary order-btn-1 py-2 my-2"
+                            onclick="dontdeleteOrder()"
+                            data-dismiss="modal" aria-label="Close">No</button>
                         </div>
                       </div>
                     </div>
@@ -342,62 +438,34 @@ else{
               </div>
             </div>
 
-            <script>
-              $('#viewModal').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget) // Button that triggered the modal
-                var orderId = button.data('whatever') // Extract info from data-* attributes
-                
-                var modal = $(this)
-                modal.find('.modal-title').text('New message to ' + orderId)
-                modal.find('.modal-body input').val(orderId)
-              })
-
-              $('#cancelModal').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget) // Button that triggered the modal
-                var orderId = button.data('whatever') // Extract info from data-* attributes
-                
-                
-                var modal = $(this)
-                modal.find('.modal-title').text('New message to ' + orderId)
-                modal.find('.modal-body input').val(orderId)
-
-                function deleteOrder()
-                {
-                
-                }
-              })
-            </script>
-
             <nav aria-label="Page navigation example" class="my-2">
 
               <ul class="pagination justify-content-end" id="Pagination">
                 <?php
-                      if($page>1)
-                      { ?>
+                      if ($page>1) { ?>
                 <li class="page-item">
-                  <a class="page-link" href="embroiderytext.php?page=<?php echo ($page-1) ?>" aria-label="Previous">
+                  <a class="page-link" href="embroiderytext.php?page=<?php echo($page-1) ?>" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
                   </a>
                 </li>
                 <?php } ?>
                 <?php
-                      for($i=1; $i<$total_pages; $i++)
-                      {?>
+                      for ($i=1; $i<$total_pages; $i++) {?>
                 <li class="page-item"><a class="page-link"
                     href="embroiderytext.php?page=<?php echo $i ?>"><?php echo $i ?></a></li>
                 <?php } ?>
                 <?php
-                      if($i>$page)
-                      {
+                      if ($i>$page) {
                           ?>
                 <li class="page-item">
-                  <a class="page-link" href="embroiderytext.php?page=<?php echo ($page+1)?>" aria-label="Next">
+                  <a class="page-link" href="embroiderytext.php?page=<?php echo($page+1)?>" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>
                   </a>
                 </li>
-                <?php } ?>
+                <?php
+                      } ?>
               </ul>
             </nav>
           </div>
@@ -460,8 +528,6 @@ else{
         </div>
       </div>
     </div>
-
-
     <div class="footer-light p-2">
       <h3 align='center'>Copyright all right Reserved</h3>
     </div>
@@ -474,6 +540,58 @@ else{
   </script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+  </script>
+  <script>
+    $('.viewButton').on('click', function () {
+
+      $('#viewModal').modal('show');
+      var tr = $(this).closest('tr');
+      console.log(this);
+      var data = tr.children("td").map(function () {
+        return $(this).text();
+      }).get();
+
+      console.log(data);
+
+      $('#modalText').html(data[0]);
+      $('#modalName').html(data[1]);
+      $('#modalPrice').html(data[2]);
+      $('#modalOrderFlag').html(data[3]);
+      $('#modalPoNumber').html(data[4]);
+      $('#modalTurnAround').html(data[5]);
+      $('#modalDimension').html(data[6]);
+      $('#modalDimensionWidth').html(data[7]);
+      $('#modalDimesnionHeight').html(data[8]);
+      $('#modalHaveBgColour').html(data[9]);
+      $('#modalStitch').html(data[10]);
+      $('#modalApplication').html(data[11]);
+      $('#modalThread').html(data[12]);
+      $('#modalApplique').html(data[13]);
+      $('#modalComments').html(data[14]);
+      $('#modalOrderAt').html(data[15]);
+    });
+
+    $('#viewModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget); 
+      var orderId = button.data('whatever'); // Extract info from data-* attributes
+
+      var modal = $(this);
+      modal.find('.modal-title').text('Viewing Details for' + orderId);
+
+      $('#modalOrderId').html(orderId);
+    });
+
+    $('#cancelModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget); // Button that triggered the modal
+      var orderId = button.data('whatever'); // Extract info from data-* attributes
+
+      var modal = $(this);
+      modal.find('.modal-title').text('Are you sure you want to cancel');
+
+      function deleteOrder() {
+
+      }
+    });
   </script>
   <script>
     var x = window.matchMedia("(max-width: 800px)");

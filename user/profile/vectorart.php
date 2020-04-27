@@ -261,6 +261,24 @@ else{
                       </div>
                     </div>
                   </td>
+                  
+                      <td class="d-none"> <?php echo $rows['ponumber']?> </td>
+                      <td class="d-none"> <?php echo $rows['turnarround']?> </td>
+
+                      <?php if(!empty($rows['emboridery_vector_supporting_image'])){ ?>
+                      <td class="d-none"> <img src="Uploads/Vector/SupportingImages/<?php echo $rows['emboridery_vector_supporting_image']?>"> </td>
+                      <?php } ?>
+
+                      <td class="d-none"> <?php echo $rows['dimension']?> </td>
+                      <td class="d-none"> <?php echo $rows['dimension_width']?> </td>
+                      <td class="d-none"> <?php echo $rows['dimension_height']?> </td>
+                      <td class="d-none"> <?php echo $rows['have_bg_color']?> </td>
+                      <td class="d-none"> <?php echo $rows['vector_format']?> </td>
+                      <td class="d-none"> <?php echo $rows['application']?> </td>
+                      <td class="d-none"> <?php echo $rows['printing_process']?> </td>
+                      <td class="d-none"> <?php echo $rows['color']?> </td>
+                      <td class="d-none"> <?php echo $rows['comments']?> </td>
+                  
                 </tr>
                 <?php } } else if(mysqli_num_rows($searchResultFire) > 0) { while($resultRows = mysqli_fetch_array($searchResultFire)) { ?>
 
