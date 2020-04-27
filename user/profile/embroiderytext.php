@@ -12,22 +12,22 @@ if(isset($_SESSION['USER']))
     
     if(isset($_POST['btnsearch']))
     {
-        $searchResult = "SELECT * FROM tbl_order WHERE user = '$userEmail' AND category = 'Emboridery Text' AND ( 
-        emboridery_text LIKE '%".$searchKeyword."%' OR design_name LIKE '%".$searchKeyword."%' OR ponumber LIKE '%".$searchKeyword."%' OR turnarround LIKE '%".$searchKeyword."%' 
-        OR stitch LIKE '%".$searchKeyword."%' OR application LIKE '%".$searchKeyword."%' OR fabric LIKE '%".$searchKeyword."%' 
-        OR thread LIKE '%".$searchKeyword."%' OR dimension LIKE '%".$searchKeyword."%' OR dimension_width LIKE '%".$searchKeyword."%' 
-        OR dimension_height LIKE '%".$searchKeyword."%' OR order_flag LIKE '%".$searchKeyword."%')";
+      $searchResult = "SELECT * FROM tbl_order WHERE user = '$userEmail' AND category = 'Emboridery Text' AND ( 
+      emboridery_text LIKE '%".$searchKeyword."%' OR design_name LIKE '%".$searchKeyword."%' OR ponumber LIKE '%".$searchKeyword."%' OR turnarround LIKE '%".$searchKeyword."%' 
+      OR stitch LIKE '%".$searchKeyword."%' OR application LIKE '%".$searchKeyword."%' OR fabric LIKE '%".$searchKeyword."%' 
+      OR thread LIKE '%".$searchKeyword."%' OR dimension LIKE '%".$searchKeyword."%' OR dimension_width LIKE '%".$searchKeyword."%' 
+      OR dimension_height LIKE '%".$searchKeyword."%' OR order_flag LIKE '%".$searchKeyword."%')";
 
-        $searchResultFire = mysqli_query($conn, $searchResult);
+      $searchResultFire = mysqli_query($conn, $searchResult);
     }
     //Pagination
     if(isset($_GET['page']))
     {
-        $page = $_GET['page'];
+      $page = $_GET['page'];
     }
     else
     {
-        $page = 1;
+      $page = 1;
     }
 
     $num_per_page = 05;
@@ -229,14 +229,14 @@ else{
                 <?php
                 if(!isset($_POST['btnsearch'])) { while ($rows = mysqli_fetch_array($fetchetFire))
                   {
-              ?>
+                  ?>
                 <tr>
 
                   <td><?php echo $rows['emboridery_text'] ?></td>
                   <td> <?php echo $rows['design_name'] ?> </td>
                   <td> <?php echo $rows['price'] ?> </td>
                   <td> <?php echo $rows['order_flag'] ?> </td>
-                  <td>
+                  <td> 
                     <div class="row order-button-group d-block">
                       <div class="col-md-12">
                         <?php $OrderId = mysqli_real_escape_string($conn, $rows['order_id']); ?>
@@ -260,8 +260,7 @@ else{
                             <div class="col-md-12">
                               <?php $OrderId = mysqli_real_escape_string($conn, $searchRows['order_id']) ?>
                               <a href="view.php?orderid=<?php echo $OrderId?>" class="btn order-btn-1 d-block py-2 btnview">View</a>
-                              <a href="cancel.php?orderid=<?php echo $OrderId?>"
-        class="btn order-btn-2 d-block py-2 btncancel">Cancel</a></div>
+                              <a href="cancel.php?orderid=<?php echo $OrderId?>" class="btn order-btn-2 d-block py-2 btncancel">Cancel</a></div>
                             </div>
                       </td>
 </tr>
@@ -357,12 +356,14 @@ else{
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var orderId = button.data('whatever') // Extract info from data-* attributes
                 
+                
                 var modal = $(this)
                 modal.find('.modal-title').text('New message to ' + orderId)
                 modal.find('.modal-body input').val(orderId)
 
-                function deleteOrder(){
-                  
+                function deleteOrder()
+                {
+                
                 }
               })
             </script>
