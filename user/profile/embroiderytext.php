@@ -236,6 +236,7 @@ else{
                   <td class="d-none"> <?php echo $rows['dimension_height'] ?> </td>
                   <td class="d-none"> <?php echo $rows['have_bg_color'] ?> </td>
                   <td class="d-none"> <?php echo $rows['stitch'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['fabric'] ?> </td>
                   <td class="d-none"> <?php echo $rows['application'] ?> </td>
                   <td class="d-none"> <?php echo $rows['thread'] ?> </td>
                   <td class="d-none"> <?php echo $rows['applique'] ?> </td>
