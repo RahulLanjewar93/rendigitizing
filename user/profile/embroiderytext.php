@@ -236,20 +236,21 @@ else{
                   <td class="d-none"> <?php echo $rows['dimension_height'] ?> </td>
                   <td class="d-none"> <?php echo $rows['have_bg_color'] ?> </td>
                   <td class="d-none"> <?php echo $rows['stitch'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['fabric'] ?> </td>
                   <td class="d-none"> <?php echo $rows['application'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['fabric'] ?> </td>
                   <td class="d-none"> <?php echo $rows['thread'] ?> </td>
                   <td class="d-none"> <?php echo $rows['applique'] ?> </td>
                   <td class="d-none"> <?php echo $rows['comments'] ?> </td>
                   <td class="d-none"> <?php echo $rows['order_at'] ?> </td>
+                  <td class="d-none orderId"> <?php echo $rows['order_id'] ?> </td>
                   <td>
                     <div class="row order-button-group d-fblock">
                       <div class="col-md-12">
                         <?php $OrderId = mysqli_real_escape_string($conn, $rows['order_id']); ?>
-                        <button class="btn order-btn-1 d-block py-2 my-2 viewButton" data-toggle="modal" data-target="#viewModal" 
-                          data-whatever="<?php echo $OrderId?>">View</button>
-                        <button class="btn order-btn-3 d-block py-2 my-2" data-toggle="modal" data-target="#cancelModal"
-                          data-whatever="<?php echo $OrderId?>">Cancel</button>
+                        <button class="btn order-btn-1 d-block py-2 my-2 viewButton" data-toggle="modal"
+                          data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
+                        <button class="btn order-btn-3 d-block py-2 my-2 cancelButton" data-toggle="modal"
+                          data-target="#cancelModal" data-whatever="<?php echo $OrderId?>">Cancel</button>
                       </div>
                     </div>
                   </td>
@@ -295,7 +296,8 @@ else{
               <div class="modal-dialog modalParent" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title profile-text-area" id="exampleModalLabel">Viewing Details For Order id:
+                    <h5 class="modal-title profile-text-area" id="viewHeaderModalLabel">
+                      Viewing Details For Order id:
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
@@ -304,97 +306,131 @@ else{
                   <div class="modal-body">
                     <div class="order-button-group">
                       <div class="row">
-                          <table class="table table-striped table-items" id="modalTable">
-                            <tbody>
-                              <tr>
-                                <td><h5 class="profile-text-area">Embroidery Text</h5></td>
-                                <td id="modalText"></td>
-                              </tr>
-                              <tr>
-                                <td><h5 class="profile-text-area">Design Name</h5></td>
-                                <td id="modalName"></td>
-                              </tr>
-                              <tr>
-                                <td><h5 class="profile-text-area">Price</h5></td>
-                                <td id="modalPrice"></td>
-                             
-                              </tr>
-                              <tr>
-                                <td><h5 class="profile-text-area">Status</h5></td>
-                                <td id="modalOrderFlag"></td>
-                              
-                              </tr>
-                              <tr>
-                                <td><h5 class="profile-text-area">PO Number</h5></td>
-                                <td id="modalPoNumber"></td>
-                              
-                              </tr>
-                              <tr>
-                                <td><h5 class="profile-text-area">Turn Around</h5></td>
-                                <td id="modalTurnAround"></td>
-                              
-                              </tr>
-                              <tr>
-                                <td><h5 class="profile-text-area">Dimension(Units)</h5></td>
-                                <td id="modalDimension"></td>
-                              
-                              </tr>
-                              <tr>
-                                <td><h5 class="profile-text-area">Width</h5></td>
-                                <td id="modalDimensionWidth"></td>
-                              
-                              </tr>
-                              <tr>
-                                <td><h5 class="profile-text-area">Height</h5></td>
-                                <td id="modalDimensionHeight"></td>
-                              
-                              </tr>
-                              <tr>
-                                <td><h5 class="profile-text-area">Background Color</h5></td>
-                                <td id="modalHaveBgColor"></td>
-                              
-                              </tr>
-                              <tr>
-                                <td><h5 class="profile-text-area">Stitch</h5></td>
-                                <td id="modalStitch"></td>
-                              
-                              </tr>
-                              <tr>
-                                <td><h5 class="profile-text-area">Application</h5></td>
-                                <td id="modalApplication"></td>
-                              
-                              </tr>
-                              <tr>
-                                <td><h5 class="profile-text-area">Fabric</h5></td>
-                                <td id="modalFabric"></td>
-                             
-                              </tr>
-                              <tr>
-                                <td><h5 class="profile-text-area">Thread</h5></td>
-                                <td id="modalThread"></td>
-                             
-                              </tr>
-                              <tr>
-                                <td><h5 class="profile-text-area">Applique</h5></td>
-                                <td id="modalApplique"></td>
-                              
-                              </tr>
-                              <tr>
-                                <td><h5 class="profile-text-area">Comments</h5></td>
-                                <td id="modalComments"></td>
-                              
-                              </tr>
-                              <tr>
-                                <td><h5 class="profile-text-area">Time of order</h5></td>
-                                <td id="modalOrderAt"></td>
-                             
-                              </tr>
-                              <tr>
+                        <table class="table table-striped table-items" id="modalTable">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Embroidery Text</h5>
+                              </td>
+                              <td id="modalText"></td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Design Name</h5>
+                              </td>
+                              <td id="modalName"></td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Price</h5>
+                              </td>
+                              <td id="modalPrice"></td>
+
+                            </tr>
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Status</h5>
+                              </td>
+                              <td id="modalOrderFlag"></td>
+
+                            </tr>
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">PO Number</h5>
+                              </td>
+                              <td id="modalPoNumber"></td>
+
+                            </tr>
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Turn Around</h5>
+                              </td>
+                              <td id="modalTurnAround"></td>
+
+                            </tr>
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Dimension(Units)</h5>
+                              </td>
+                              <td id="modalDimension"></td>
+
+                            </tr>
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Width</h5>
+                              </td>
+                              <td id="modalDimensionWidth"></td>
+
+                            </tr>
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Height</h5>
+                              </td>
+                              <td id="modalDimensionHeight"></td>
+
+                            </tr>
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Background Color</h5>
+                              </td>
+                              <td id="modalHaveBgColor"></td>
+
+                            </tr>
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Stitch</h5>
+                              </td>
+                              <td id="modalStitch"></td>
+
+                            </tr>
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Application</h5>
+                              </td>
+                              <td id="modalApplication"></td>
+
+                            </tr>
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Fabric</h5>
+                              </td>
+                              <td id="modalFabric"></td>
+
+                            </tr>
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Thread</h5>
+                              </td>
+                              <td id="modalThread"></td>
+
+                            </tr>
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Applique</h5>
+                              </td>
+                              <td id="modalApplique"></td>
+
+                            </tr>
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Comments</h5>
+                              </td>
+                              <td id="modalComments"></td>
+
+                            </tr>
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Time of order</h5>
+                              </td>
+                              <td id="modalOrderAt"></td>
+
+                            </tr>
+                            <!-- <tr>
                                 <td><h5 class="profile-text-area">Order ID</h5></td>
                                 <td id="modalOrderId"></td>
-                              </tr>
-                            </tbody>
-                          </table>
+                              </tr> -->
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>
@@ -411,7 +447,8 @@ else{
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title profile-text-area" id="exampleModalLabel">Are you sure you want to cancel
+                    <h5 class="modal-title profile-text-area" id="cancelHeaderModalLabel">Are you sure you want to
+                      cancel
                       your order?</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
@@ -422,12 +459,11 @@ else{
                       <div class="row">
                         <div class="col-md-6">
                           <button type="button" class="btn btn-secondary order-btn-3 py-2 my-2"
-                            onclick="deleteOrder()">Yes</button>
+                            onclick="cancelOrder()">Yes</button>
                         </div>
                         <div class="col-md-6">
-                          <button type="button" class="btn btn-primary order-btn-1 py-2 my-2"
-                            onclick="dontdeleteOrder()"
-                            data-dismiss="modal" aria-label="Close">No</button>
+                          <button type="button" class="btn btn-primary order-btn-1 py-2 my-2" data-dismiss="modal"
+                            aria-label="Close">No</button>
                         </div>
                       </div>
                     </div>
@@ -437,6 +473,14 @@ else{
                   </div>
                 </div>
               </div>
+            </div>
+
+            <!-- Bootstrap Alert -->
+            <div class="alert alert-success" role="alert">
+              <h5 class="profile-text-area">
+                Order deleted Successfully
+              </h5>
+              <span id="failedDelete"></span>
             </div>
 
             <nav aria-label="Page navigation example" class="my-2">
@@ -554,7 +598,7 @@ else{
 
       console.log(data);
 
-      $('#modalText').html(data[0]);
+      $('#modalText').html(data[0]); //iska numbering change karna hoga wapas
       $('#modalName').html(data[1]);
       $('#modalPrice').html(data[2]);
       $('#modalOrderFlag').html(data[3]);
@@ -571,28 +615,41 @@ else{
       $('#modalApplique').html(data[14]);
       $('#modalComments').html(data[15]);
       $('#modalOrderAt').html(data[16]);
+      // $('#modalOrderId').html(data[17]);
+
+      document.getElementById("viewHeaderModalLabel").innerHTML = "Viewing order details for " + data[17];
     });
 
-    $('#viewModal').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget); 
-      var orderId = button.data('whatever'); // Extract info from data-* attributes
+    $('.cancelButton').on('click', function () {
 
-      var modal = $(this);
-      modal.find('.modal-title').text('Viewing Details for' + orderId);
+      $('#cancelModal').modal('show');
+      var tr = $(this).closest('tr');
+      console.log(this);
+      var data = tr.children("td.orderId").map(function () {
+        return $(this).text();
+      }).get();
+      console.log(data);
 
-      $('#modalOrderId').html(orderId);
-    });
+      function cancelOrder() { //upare bhi rename karde
+        var orderId = data[0]; //ye wala na ? yes but naya var
+        $.ajax({
+          url: "cancelorder.php",
+          type: "POST",
+          data: {
+            "orderId": orderId
+          },
+          success: function (response) { // ha correct, yad nai tha
+            // aur aur kya karna he abhi dekhna hai working hai ki nai p php ka script likhna hai
 
-    $('#cancelModal').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget); // Button that triggered the modal
-      var orderId = button.data('whatever'); // Extract info from data-* attributes
+            function toggleAlert() {
+              $(".alert").toggleClass('in out');
+              return false; // Keep close.bs.alert event from removing from DOM
+            };
 
-      var modal = $(this);
-      modal.find('.modal-title').text('Are you sure you want to cancel');
+          }
+        });
+      };
 
-      function deleteOrder() {
-
-      }
     });
   </script>
   <script>
