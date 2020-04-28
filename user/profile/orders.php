@@ -221,34 +221,38 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
               <tbody>
                 <?php if(!isset($_POST['btnsearch'])){ while($rows = mysqli_fetch_array($fetcheiFire)){ ?>
                 <tr>
-                  <td> <img class="table-image py-2"
-                      src="Uploads/DesignImages/<?php echo $rows['emboridery_design_image']?>" alt=""> </td>
+                  <td><img class="table-image py-2"
+                      src="Uploads/DesignImages/<?php echo $rows['emboridery_design_image']?>" alt=""><h6 class="d-none"><?php echo $rows['emboridery_design_image']?></h6></td>
+                  <?php if(!empty($rows['emboridery_supporting_image'])){ ?>
+                  <td><img class="table-image py-2"
+                      src="Uploads/SupportingImages/<?php echo $rows['emboridery_supporting_image']?>">
+                    <h6 class="d-none"><?php echo $rows['emboridery_supporting_image'] ?></h6>  </td>
+                  <?php } ?>
                   <td><?php echo $rows['design_name'] ?></td>
                   <td> <?php echo $rows['price'] ?> </td>
                   <td> <?php echo $rows['order_flag'] ?> </td>
                   <td class="d-none"> <?php echo $rows['ponumber'] ?> </td>
                   <td class="d-none"> <?php echo $rows['turnarround'] ?> </td>
-                  <?php if(!empty($rows['emboridery_supporting_image'])){ ?>
-                  <td class="d-none"> <img
-                      src="Uploads/SupportingImages/<?php echo $rows['emboridery_supporting_image'] ?>"> </td>
-                  <?php } ?>
                   <td class="d-none"> <?php echo $rows['dimension'] ?> </td>
                   <td class="d-none"> <?php echo $rows['dimension_width'] ?> </td>
                   <td class="d-none"> <?php echo $rows['dimension_height'] ?> </td>
                   <td class="d-none"> <?php echo $rows['have_bg_color'] ?> </td>
                   <td class="d-none"> <?php echo $rows['stitch'] ?> </td>
                   <td class="d-none"> <?php echo $rows['application'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['fabric'] ?> </td>
                   <td class="d-none"> <?php echo $rows['thread'] ?> </td>
                   <td class="d-none"> <?php echo $rows['applique'] ?> </td>
                   <td class="d-none"> <?php echo $rows['comments'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['order_at'] ?> </td>
+                  <td class="d-none orderId"> <?php echo $rows['order_id'] ?> </td>
                   <td>
                     <div class="row order-button-group d-block">
                       <div class="col-md-12">
                         <?php $OrderId = mysqli_real_escape_string($conn, $rows['order_id']); ?>
-                        <button class="btn order-btn-1 d-block py-2 my-2" data-toggle="modal" data-target="#viewModal"
-                          data-whatever="<?php echo $OrderId?>">View</button>
-                        <button class="btn order-btn-3 d-block py-2 my-2" data-toggle="modal" data-target="#cancelModal"
-                          data-whatever="<?php echo $OrderId?>">Cancel</button>
+                        <button class="btn order-btn-1 d-block py-2 my-2 viewButton" data-toggle="modal"
+                          data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
+                        <button class="btn order-btn-3 d-block py-2 my-2 cancelButton" data-toggle="modal"
+                          data-target="#cancelModal" data-whatever="<?php echo $OrderId?>">Cancel</button>
                       </div>
                     </div>
                   </td>
@@ -283,42 +287,274 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
             <?php } else {
               echo "No Orders Found !";
             } ?>
-            <nav aria-label="Page navigation example" class="my-2">
 
-              <ul class="pagination justify-content-end" id="Pagination">
-                <?php
+            <!-- Modal Area -->
+
+            <!-- viewModal -->
+            <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog modalParent" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title profile-text-area" id="viewHeaderModalLabel">
+                      Viewing Details For Order id:
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="order-button-group">
+                      <div class="row">
+                        <table class="table table-striped table-items" id="modalTable">
+                          <tbody>
+
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Embroidery Text</h5>
+                              </td>
+                              <td id="modalMainImage"><button class="btn order-btn-1 d-block py-2 my-2 mainImageButton" data-toggle="modal"
+                                  data-target="#imageModal" data-whatever="">Show Design Image</button></td>
+                            </tr>
+
+                            <?php if(!empty($rows['emboridery_supporting_image'])){ ?>
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Supporting Image</h5>
+                              </td>
+                              <td id="modalSupportingAgent"><button class="btn order-btn-1 d-block py-2 my-2 supportingImageButton"
+                                  data-toggle="modal" data-target="#imageModal" data-whatever=""></button></td>
+                            </tr>
+                            <?php } ?>
+
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Design Name</h5>
+                              </td>
+                              <td id="modalName"></td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Price</h5>
+                              </td>
+                              <td id="modalPrice"></td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Status</h5>
+                              </td>
+                              <td id="modalOrderFlag"></td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">PO Number</h5>
+                              </td>
+                              <td id="modalPoNumber"></td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Turn Around</h5>
+                              </td>
+                              <td id="modalTurnAround"></td>
+                            </tr>
+
+
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Dimension(Units)</h5>
+                              </td>
+                              <td id="modalDimension"></td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Width</h5>
+                              </td>
+                              <td id="modalDimensionWidth"></td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Height</h5>
+                              </td>
+                              <td id="modalDimensionHeight"></td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Background Color</h5>
+                              </td>
+                              <td id="modalHaveBgColor"></td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Stitch</h5>
+                              </td>
+                              <td id="modalStitch"></td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Application</h5>
+                              </td>
+                              <td id="modalApplication"></td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Fabric</h5>
+                              </td>
+                              <td id="modalFabric"></td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Thread</h5>
+                              </td>
+                              <td id="modalThread"></td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Applique</h5>
+                              </td>
+                              <td id="modalApplique"></td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Comments</h5>
+                              </td>
+                              <td id="modalComments"></td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Time of order</h5>
+                              </td>
+                              <td id="modalOrderAt"></td>
+                            </tr>
+
+                            <tr>
+                              <td>
+                                <h5 class="profile-text-area">Order ID</h5>
+                              </td>
+                              <td id="modalOrderId"></td>
+                            </tr>
+
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <h5 class="profile-text-area noticeArea">Notice : Something Something</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- cancelModal -->
+            <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title profile-text-area" id="cancelHeaderModalLabel">Are you sure you want to
+                      cancel
+                      your order?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="order-button-group">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <button type="button" class="btn btn-secondary order-btn-3 py-2 my-2"
+                            id="confirmDeleteOrderButton">Yes</button>
+                        </div>
+                        <div class="col-md-6">
+                          <button type="button" class="btn btn-primary order-btn-1 py-2 my-2" data-dismiss="modal"
+                            aria-label="Close">No</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <h5 class="profile-text-area noticeArea">Notice : Something Something</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Image Modal -->
+            <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title profile-text-area" id="cancelHeaderModalLabel">Image</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="order-button-group">
+                      <div class="row">
+                       <img src="" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <h5 class="profile-text-area noticeArea">Notice : Something Something</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <nav aria-label="Page navigation example" class="my-2">
+
+            <ul class="pagination justify-content-end" id="Pagination">
+              <?php
                       if($page>1)
                       { ?>
-                <li class="page-item">
-                  <a class="page-link" href="orders.php?page=<?php echo ($page-1) ?>" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                </li>
-                <?php } ?>
-                <?php
+              <li class="page-item">
+                <a class="page-link" href="orders.php?page=<?php echo ($page-1) ?>" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only">Previous</span>
+                </a>
+              </li>
+              <?php } ?>
+              <?php
                       for($i=1; $i<$total_pages; $i++)
                       {?>
-                <li class="page-item"><a class="page-link" href="orders.php?page=<?php echo $i ?>"><?php echo $i ?></a>
-                </li>
-                <?php } ?>
-                <?php
+              <li class="page-item"><a class="page-link" href="orders.php?page=<?php echo $i ?>"><?php echo $i ?></a>
+              </li>
+              <?php } ?>
+              <?php
                     if($i>$page)
                     {
                 ?>
-                <li class="page-item">
-                  <a class="page-link" href="orders.php?page=<?php echo ($page+1)?>" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Next</span>
-                  </a>
-                </li>
-                <?php } ?>
-              </ul>
-            </nav>
-          </div>
+              <li class="page-item">
+                <a class="page-link" href="orders.php?page=<?php echo ($page+1)?>" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
+              <?php } ?>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>
+  </div>
   </div>
 
 
@@ -389,6 +625,104 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
   </script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+  </script>
+  <script>
+    $('.viewButton').on('click', function () {
+
+      $('#viewModal').modal('show');
+      var tr = $(this).closest('tr');
+      var data = tr.children("td").map(function () {
+        return $(this).text();
+      }).get();
+
+      console.log(data);
+
+      if (data.length == 18) {
+        $('#modalMainImage button').attr("data-whatever", "Uploads/DesignImages/" + data[0]);
+        $('#modalSupportingImage button').attr("data-whatever", "Uploads/SupportingImages/" + data[1]);
+        $('#modalName').html(data[2]);
+        $('#modalPrice').html(data[3]);
+        $('#modalOrderFlag').html(data[4]);
+        $('#modalPoNumber').html(data[5]);
+        $('#modalTurnAround').html(data[6]);
+        $('#modalDimension').html(data[7]);
+        $('#modalDimensionWidth').html(data[8]);
+        $('#modalDimensionHeight').html(data[9]);
+        $('#modalHaveBgColor').html(data[10]);
+        $('#modalStitch').html(data[11]);
+        $('#modalApplication').html(data[12]);
+        $('#modalFabric').html(data[13]);
+        $('#modalThread').html(data[14]);
+        $('#modalApplique').html(data[15]);
+        $('#modalComments').html(data[16]);
+        $('#modalOrderAt').html(data[17]);
+        $('#modalOrderId').html(data[18]);
+      } else {
+        $('#modalMainImage button').attr("data-whatever", "Uploads/DesignImages/" + data[0]);
+        $('#modalName').html(data[1]);
+        $('#modalPrice').html(data[2]);
+        $('#modalOrderFlag').html(data[3]);
+        $('#modalPoNumber').html(data[4]);
+        $('#modalTurnAround').html(data[5]);
+        $('#modalDimension').html(data[6]);
+        $('#modalDimensionWidth').html(data[7]);
+        $('#modalDimensionHeight').html(data[8]);
+        $('#modalHaveBgColor').html(data[9]);
+        $('#modalStitch').html(data[10]);
+        $('#modalApplication').html(data[11]);
+        $('#modalFabric').html(data[12]);
+        $('#modalThread').html(data[13]);
+        $('#modalApplique').html(data[14]);
+        $('#modalComments').html(data[15]);
+        $('#modalOrderAt').html(data[16]);
+        $('#modalOrderId').html(data[17]);
+      }
+
+
+      document.getElementById("viewHeaderModalLabel").innerHTML = "Viewing order details for " + data[17];
+    });
+
+    function cancelOrder(orderId) {
+
+    };
+
+    $('.cancelButton').on('click', function () {
+
+      $('#cancelModal').modal('show');
+      var tr = $(this).closest('tr');
+      var data = tr.children("td.orderId").map(function () {
+        return $(this).text();
+      }).get();
+      console.log(data);
+      cancelOrder(data[0]);
+
+      $('#confirmDeleteOrderButton').on('click', function () {
+        var orderId = data[0];
+        $.ajax({
+          url: "cancelorder.php",
+          type: "POST",
+          data: {
+            "orderId": orderId
+          },
+          success: function (response) {
+            location.reload(true);
+            $("#deletedOrderText").html("Order" + orderId + "Deleted Successfully");
+          }
+        });
+      });
+    });
+  </script>
+  <script>
+    $('.mainImageButton').on('click', function (event) {
+      $('#imageModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget)
+      var imagePath = button.data('whatever');
+      console.log(imagePath);
+
+      
+      $('.modal-body img').attr("src",imagePath);
+    });
+    });
   </script>
   <script>
     var x = window.matchMedia("(max-width: 800px)");
