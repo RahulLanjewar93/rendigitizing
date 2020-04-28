@@ -249,8 +249,13 @@ else{
                         <?php $OrderId = mysqli_real_escape_string($conn, $rows['order_id']); ?>
                         <button class="btn order-btn-1 d-block py-2 my-2 viewButton" data-toggle="modal"
                           data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
+                        <?php if($rows['order_flag'] != "CANCELLED"){ ?>
                         <button class="btn order-btn-3 d-block py-2 my-2 cancelButton" data-toggle="modal"
                           data-target="#cancelModal" data-whatever="<?php echo $OrderId?>">Cancel</button>
+                        <?php } else{ ?>
+                        <button disabled class="btn order-btn-3 d-block py-2 my-2 cancelButton">Already
+                          Cancelled</button>
+                        <?php } ?>
                       </div>
                     </div>
                   </td>
@@ -459,7 +464,7 @@ else{
                       <div class="row">
                         <div class="col-md-6">
                           <button type="button" class="btn btn-secondary order-btn-3 py-2 my-2"
-                            onclick="cancelOrder()">Yes</button>
+                            id="confirmDeleteOrderButton">Yes</button>
                         </div>
                         <div class="col-md-6">
                           <button type="button" class="btn btn-primary order-btn-1 py-2 my-2" data-dismiss="modal"
@@ -476,12 +481,12 @@ else{
             </div>
 
             <!-- Bootstrap Alert -->
-            <div class="alert alert-success" role="alert">
+            <!-- <div class="alert alert-success in" role="alert">
               <h5 class="profile-text-area">
                 Order deleted Successfully
               </h5>
               <span id="failedDelete"></span>
-            </div>
+            </div> -->
 
             <nav aria-label="Page navigation example" class="my-2">
 
@@ -591,7 +596,6 @@ else{
 
       $('#viewModal').modal('show');
       var tr = $(this).closest('tr');
-      console.log(this);
       var data = tr.children("td").map(function () {
         return $(this).text();
       }).get();
@@ -620,36 +624,36 @@ else{
       document.getElementById("viewHeaderModalLabel").innerHTML = "Viewing order details for " + data[17];
     });
 
+    function cancelOrder(orderId) {
+
+    };
+
     $('.cancelButton').on('click', function () {
 
       $('#cancelModal').modal('show');
       var tr = $(this).closest('tr');
-      console.log(this);
       var data = tr.children("td.orderId").map(function () {
         return $(this).text();
       }).get();
       console.log(data);
+      cancelOrder(data[0]);
 
-      function cancelOrder() { //upare bhi rename karde
-        var orderId = data[0]; //ye wala na ? yes but naya var
+      $('#confirmDeleteOrderButton').on('click', function () {
+        var orderId = data[0];
         $.ajax({
           url: "cancelorder.php",
           type: "POST",
           data: {
             "orderId": orderId
           },
-          success: function (response) { // ha correct, yad nai tha
-            // aur aur kya karna he abhi dekhna hai working hai ki nai p php ka script likhna hai
+          success: function (response) {
+            location.reload(true);
+            $("#deletedOrderText").html("Order" + orderId + "Deleted Successfully");
 
-            function toggleAlert() {
-              $(".alert").toggleClass('in out');
-              return false; // Keep close.bs.alert event from removing from DOM
-            };
 
           }
         });
-      };
-
+      });
     });
   </script>
   <script>
