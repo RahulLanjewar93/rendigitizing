@@ -4,7 +4,7 @@ session_start();
 require_once "../../db/connection/conn.php";
 
 if (isset($_SESSION['USER'])) {
-    //Search
+    //Search 
     $userEmail = $_SESSION['USER'];
     $searchInput = $_POST['searchinput'];
     $searchKeyword = mysqli_real_escape_string($conn, $searchInput);
@@ -630,16 +630,15 @@ else{
       }).get();
       console.log(data);
 
-      function cancelOrder() { //upare bhi rename karde
-        var orderId = data[0]; //ye wala na ? yes but naya var
+      function cancelOrder() { 
+        var orderId = data[0]; 
         $.ajax({
           url: "cancelorder.php",
           type: "POST",
           data: {
             "orderId": orderId
           },
-          success: function (response) { // ha correct, yad nai tha
-            // aur aur kya karna he abhi dekhna hai working hai ki nai p php ka script likhna hai
+          success: function (response) {
 
             function toggleAlert() {
               $(".alert").toggleClass('in out');
