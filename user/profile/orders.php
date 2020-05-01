@@ -311,10 +311,9 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
                             <tr>
                               <td>
-                                <h5 class="profile-text-area">Embroidery Text</h5>
+                                <h5 class="profile-text-area">Main Image</h5>
                               </td>
-                              <td id="modalMainImage"><button class="btn order-btn-1 d-block py-2 my-2 mainImageButton" data-toggle="modal"
-                                  data-target="#imageModal" data-whatever="">Show Design Image</button></td>
+                              <td id="modalMainImage"><a href="" target="_blank" rel="noopener noreferrer"></td>
                             </tr>
 
                             <?php if(!empty($rows['emboridery_supporting_image'])){ ?>
@@ -322,8 +321,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                               <td>
                                 <h5 class="profile-text-area">Supporting Image</h5>
                               </td>
-                              <td id="modalSupportingAgent"><button class="btn order-btn-1 d-block py-2 my-2 supportingImageButton"
-                                  data-toggle="modal" data-target="#imageModal" data-whatever=""></button></td>
+                              <td id="modalSupportingImage"><a href="" target="_blank" rel="noopener noreferrer"></a></td>
                             </tr>
                             <?php } ?>
 
@@ -493,30 +491,6 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
               </div>
             </div>
 
-            <!-- Image Modal -->
-            <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-              aria-hidden="true">
-              <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title profile-text-area" id="cancelHeaderModalLabel">Image</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="order-button-group">
-                      <div class="row">
-                       <img src="" alt="">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="modal-footer">
-                  <h5 class="profile-text-area noticeArea">Notice : Something Something</h5>
-                </div>
-              </div>
-            </div>
           </div>
 
           <nav aria-label="Page navigation example" class="my-2">
@@ -637,9 +611,11 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
       console.log(data);
 
-      if (data.length == 18) {
-        $('#modalMainImage button').attr("data-whatever", "Uploads/DesignImages/" + data[0]);
-        $('#modalSupportingImage button').attr("data-whatever", "Uploads/SupportingImages/" + data[1]);
+      if (data.length == 18) {                                  // If supporting image exists
+        $('#modalMainImage a').attr("href", "Uploads/DesignImages/" + data[0]);
+        $('#modalMainImage a').html(data[0]);
+        $('#modalSupportingImage a').attr("href", "Uploads/SupportingImages/" + data[1]);
+        $('#modalSupportingImage a').html(data[1]);
         $('#modalName').html(data[2]);
         $('#modalPrice').html(data[3]);
         $('#modalOrderFlag').html(data[4]);
@@ -657,8 +633,9 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
         $('#modalComments').html(data[16]);
         $('#modalOrderAt').html(data[17]);
         $('#modalOrderId').html(data[18]);
-      } else {
-        $('#modalMainImage button').attr("data-whatever", "Uploads/DesignImages/" + data[0]);
+      } else {                                                        // If supporting image is absent
+        $('#modalMainImage a').attr("href", "Uploads/DesignImages/" + data[0]);
+        $('#modalMainImage a').html(data[0]);
         $('#modalName').html(data[1]);
         $('#modalPrice').html(data[2]);
         $('#modalOrderFlag').html(data[3]);
@@ -710,18 +687,6 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
           }
         });
       });
-    });
-  </script>
-  <script>
-    $('.mainImageButton').on('click', function (event) {
-      $('#imageModal').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget)
-      var imagePath = button.data('whatever');
-      console.log(imagePath);
-
-      
-      $('.modal-body img').attr("src",imagePath);
-    });
     });
   </script>
   <script>
