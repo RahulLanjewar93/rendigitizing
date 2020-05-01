@@ -138,7 +138,7 @@ else{
                 </div>
             </div>
         </div>
-    </header>
+</header>
 
     <div class="container-fluid p-0 subNavbarHide">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
