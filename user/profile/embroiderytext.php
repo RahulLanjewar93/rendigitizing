@@ -430,10 +430,11 @@ else{
                               <td id="modalOrderAt"></td>
 
                             </tr>
-                            <!-- <tr>
+
+                            <tr>
                                 <td><h5 class="profile-text-area">Order ID</h5></td>
                                 <td id="modalOrderId"></td>
-                              </tr> -->
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -614,12 +615,12 @@ else{
       $('#modalHaveBgColor').html(data[9]);
       $('#modalStitch').html(data[10]);
       $('#modalApplication').html(data[11]);
-      $('#modalFabric').html(data[12])
+      $('#modalFabric').html(data[12]);
       $('#modalThread').html(data[13]);
       $('#modalApplique').html(data[14]);
       $('#modalComments').html(data[15]);
       $('#modalOrderAt').html(data[16]);
-      // $('#modalOrderId').html(data[17]);
+      $('#modalOrderId').html(data[17]);
 
       document.getElementById("viewHeaderModalLabel").innerHTML = "Viewing order details for " + data[17];
     });
