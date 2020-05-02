@@ -4,12 +4,12 @@ date_default_timezone_set('Asia/Kolkata');
 require_once "../db/connection/conn.php";
 function redirectSuccess()
 {
-    header("location:http://rendigitizing.com/user/authentication/login.php?verification=success");
+    header("location:http://localhost/RendigitizingUpdated/user/authentication/login.php?verification=success");
     exit();
 }
 function redirectFail()
 {
-    header("location:http://rendigitizing.com/user/authentication/login.php?verification=fail");
+    header("location:http://localhost/RendigitizingUpdated/user/authentication/login.php?verification=fail");
     exit();
 }
 if(!isset($_GET['email']) && !isset($_GET['token']))

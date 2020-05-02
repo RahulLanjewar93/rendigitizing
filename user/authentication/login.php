@@ -41,7 +41,9 @@ if(!isset($_SESSION['USER'])) {
             if (mysqli_num_rows($verifyLoginFire) > 0) {
                 if ($userStatus['user_status'] == "ACTIVE") {
 
-                    $emailConfirmationCheck = "SELECT isemailconfirm FROM tbl_user WHERE email = '$email' AND isemailconfirm = 'YES'";
+                    $emailConfirmationCheck = 
+                    "SELECT isemailconfirm FROM tbl_user WHERE 
+                    email = '$email' AND isemailconfirm = 'YES'";
                     $emailConfirmationCheckFire = mysqli_query($conn, $emailConfirmationCheck);
 
                     if (mysqli_num_rows($emailConfirmationCheckFire) > 0) {
@@ -52,9 +54,12 @@ if(!isset($_SESSION['USER'])) {
                         //echo "Go verify email";
                         $confirmationMsgErr = "Please verify email address to get login access";
                     }
-                } else {
+                } else if($userStatus['user_status'] == "PENDING") {
 
-                    $userStatusErr = "User is blocked by admin,<br/>Please contact admin to get access back";
+                    $userStatusErr = "Please verify email address to get login access";
+                } else if($userStatus['user_status'] == "BLOCKED") {
+
+                    $userStatusErr = "Your Account is Blocked";
                 }
                 //Remember Me Implementation
                 if (!empty($_POST["remember-me"])) {
