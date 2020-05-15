@@ -263,6 +263,7 @@ else{
                         <?php $OrderId = mysqli_real_escape_string($conn, $rows['order_id']); ?>
                         <button class="btn order-btn-1 d-block py-2 my-2 viewButton" data-toggle="modal"
                           data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
+                          <button class="btn order-btn-2 d-block py-2 my-2 primary">Edit</button>
                         <button class="btn order-btn-3 d-block py-2 my-2 cancelButton" data-toggle="modal"
                           data-target="#cancelModal" data-whatever="<?php echo $OrderId?>">Cancel</button>
                       </div>
@@ -283,9 +284,12 @@ else{
                     <div class="row order-button-group d-block">
                       <div class="col-md-12">
                         <?php $OrderId = mysqli_real_escape_string($conn, $resultRows['order_id']); ?>
-                        <a href="view.php?orderid=<?php echo $OrderId?>" class="btn order-btn-1 d-block py-2 viewButton">View</a>
-                        <a href="cancel.php?orderid=<?php echo $OrderId?>"
-                          class="btn order-btn-2 d-block py-2">Cancel</a></div>
+                        <button class="btn order-btn-1 d-block py-2 my-2 viewButton" data-toggle="modal"
+                          data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
+                          <button class="btn order-btn-2 d-block py-2 my-2 primary">Edit</button>
+                        <button class="btn order-btn-3 d-block py-2 my-2 cancelButton" data-toggle="modal"
+                          data-target="#cancelModal" data-whatever="<?php echo $OrderId?>">Cancel</button>
+                          </div>
                     </div>
                   </td>
                 </tr>
