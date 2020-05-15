@@ -251,6 +251,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                         <?php $OrderId = mysqli_real_escape_string($conn, $rows['order_id']); ?>
                         <button class="btn order-btn-1 d-block py-2 my-2 viewButton" data-toggle="modal"
                           data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
+                          <button class="btn order-btn-2 d-block py-2 my-2 primary">Edit</button>
                         <button class="btn order-btn-3 d-block py-2 my-2 cancelButton" data-toggle="modal"
                           data-target="#cancelModal" data-whatever="<?php echo $OrderId?>">Cancel</button>
                       </div>

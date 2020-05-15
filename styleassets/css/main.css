@@ -835,7 +835,7 @@ progress[value]::-webkit-progress-bar {
 }
 
 .myaccount-change-password {
-    margin: 10px;
+    margin: 0px 10px;
 }
 
 .myaccount-change-password input {
@@ -1081,6 +1081,14 @@ body::-webkit-scrollbar-track {
 
 @media (max-width:800px) {
 
+    #modalTable td {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+        overflow: hidden;
+        overflow-wrap: break-word;
+    }
+
     .myaccount-details-area button {
         margin-left: 0px;
     }
@@ -1169,6 +1177,15 @@ body::-webkit-scrollbar-track {
     .reach-out-buttons table tr {
         border: none;
     }
+
+    .editOrderButtonArea {
+        padding: 0px;
+        text-align: center;
+    }
+
+    textarea {
+        width: 100%;
+    }
 }
 
 #modalTable td {
@@ -1178,4 +1195,32 @@ body::-webkit-scrollbar-track {
     overflow: hidden;
     overflow-wrap: break-word;
 
+}
+
+@media (max-width:800px) {
+    #modalTable td {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+        overflow: hidden;
+        overflow-wrap: break-word;
+    }
+}
+
+.dimensionBox input {
+    padding: 2px 4px;
+    text-align: center;
+}
+
+.editOrderButtonArea {
+    float: right;
+    padding-right: 50px;
+}
+
+.editOrderButtonArea button {
+    margin: 0px 5px;
+}
+
+.error {
+    color: red;
 }
