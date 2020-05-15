@@ -268,6 +268,20 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                   <td><?php echo $searchrows['design_name'] ?></td>
                   <td> <?php echo $searchrows['price'] ?> </td>
                   <td> <?php echo $searchrows['order_flag'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['ponumber'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['turnarround'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['dimension'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['dimension_width'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['dimension_height'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['have_bg_color'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['stitch'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['application'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['fabric'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['thread'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['applique'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['comments'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['order_at'] ?> </td>
+                  <td class="d-none orderId"> <?php echo $rows['order_id'] ?> </td>
                   <td>
                     <div class="row order-button-group d-block">
                       <div class="col-md-12">

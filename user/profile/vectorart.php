@@ -280,6 +280,19 @@ else{
                   <td><?php echo $resultRows['design_name']?></td>
                   <td> <?php echo $resultRows['price']?> </td>
                   <td> <?php echo $resultRows['order_flag']?> </td>
+                  <td class="d-none"> <?php echo $rows['ponumber']?> </td>
+                  <td class="d-none"> <?php echo $rows['turnarround']?> </td>
+                  <td class="d-none"> <?php echo $rows['dimension']?> </td>
+                  <td class="d-none"> <?php echo $rows['dimension_width']?> </td>
+                  <td class="d-none"> <?php echo $rows['dimension_height']?> </td>
+                  <td class="d-none"> <?php echo $rows['have_bg_color']?> </td>
+                  <td class="d-none"> <?php echo $rows['vector_format']?> </td>
+                  <td class="d-none"> <?php echo $rows['application']?> </td>
+                  <td class="d-none"> <?php echo $rows['printing_process']?> </td>
+                  <td class="d-none"> <?php echo $rows['color']?> </td>
+                  <td class="d-none"> <?php echo $rows['comments']?> </td>
+                  <td class="d-none"> <?php echo $rows['order_at']?> </td>
+                  <td class="d-none orderId"> <?php echo $rows['order_id']?> </td>
                   <td>
                     <div class="row order-button-group d-block">
                       <div class="col-md-12">
