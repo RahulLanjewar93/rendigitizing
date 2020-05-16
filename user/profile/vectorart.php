@@ -263,7 +263,7 @@ else{
                         <?php $OrderId = mysqli_real_escape_string($conn, $rows['order_id']); ?>
                         <button class="btn order-btn-1 d-block py-2 my-2 viewButton" data-toggle="modal"
                           data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
-                          <button class="btn order-btn-2 d-block py-2 my-2 primary">Edit</button>
+                          <a href="edit.php?cat=va&id=<?php echo $rows['order_id'] ?>" class="btn order-btn-2 d-block py-2 my-2 primary" style="color: white">Edit</a>
                           <?php if($rows['order_flag'] != "CANCELLED"){ ?>
                         <button class="btn order-btn-3 d-block py-2 my-2 cancelButton" data-toggle="modal"
                           data-target="#cancelModal" data-whatever="<?php echo $OrderId?>">Cancel</button>
@@ -304,7 +304,9 @@ else{
                         <?php $OrderId = mysqli_real_escape_string($conn, $resultRows['order_id']); ?>
                         <button class="btn order-btn-1 d-block py-2 my-2 viewButton" data-toggle="modal"
                           data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
-                          <button class="btn order-btn-2 d-block py-2 my-2 primary">Edit</button>
+                          
+                          <a href="edit.php?cat=va&id=<?php echo $resultRows['order_id'] ?>" class="btn order-btn-2 d-block py-2 my-2 primary" style="color: white">Edit</a>
+                          
                           <?php if($resultRows['order_flag'] != "CANCELLED"){ ?>
                         <button class="btn order-btn-3 d-block py-2 my-2 cancelButton" data-toggle="modal"
                           data-target="#cancelModal" data-whatever="<?php echo $OrderId?>">Cancel</button>
