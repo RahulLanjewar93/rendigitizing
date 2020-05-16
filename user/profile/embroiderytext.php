@@ -250,8 +250,13 @@ else{
                         <button class="btn order-btn-1 d-block py-2 my-2 viewButton" data-toggle="modal"
                           data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
                           <button class="btn order-btn-2 d-block py-2 my-2 primary">Edit</button>
+                          <?php if($rows['order_flag'] != "CANCELLED"){ ?>
                         <button class="btn order-btn-3 d-block py-2 my-2 cancelButton" data-toggle="modal"
                           data-target="#cancelModal" data-whatever="<?php echo $OrderId?>">Cancel</button>
+                          <?php
+                          } else{ ?>
+                          <button class="btn order-btn-3 d-block py-2 my-2 disabled">CANCELLED</button>
+                          <?php } ?>
                       </div>
                     </div>
                   </td>
@@ -267,29 +272,34 @@ else{
                   <td> <?php echo $searchRows['design_name'] ?> </td>
                   <td> <?php echo $searchRows['price'] ?> </td>
                   <td> <?php echo $searchRows['order_flag'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['ponumber'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['turnarround'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['dimension'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['dimension_width'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['dimension_height'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['have_bg_color'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['stitch'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['application'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['fabric'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['thread'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['applique'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['comments'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['order_at'] ?> </td>
-                  <td class="d-none orderId"> <?php echo $rows['order_id'] ?> </td>
+                  <td class="d-none"> <?php echo $searchRows['ponumber'] ?> </td>
+                  <td class="d-none"> <?php echo $searchRows['turnarround'] ?> </td>
+                  <td class="d-none"> <?php echo $searchRows['dimension'] ?> </td>
+                  <td class="d-none"> <?php echo $searchRows['dimension_width'] ?> </td>
+                  <td class="d-none"> <?php echo $searchRows['dimension_height'] ?> </td>
+                  <td class="d-none"> <?php echo $searchRows['have_bg_color'] ?> </td>
+                  <td class="d-none"> <?php echo $searchRows['stitch'] ?> </td>
+                  <td class="d-none"> <?php echo $searchRows['application'] ?> </td>
+                  <td class="d-none"> <?php echo $searchRows['fabric'] ?> </td>
+                  <td class="d-none"> <?php echo $searchRows['thread'] ?> </td>
+                  <td class="d-none"> <?php echo $searchRows['applique'] ?> </td>
+                  <td class="d-none"> <?php echo $searchRows['comments'] ?> </td>
+                  <td class="d-none"> <?php echo $searchRows['order_at'] ?> </td>
+                  <td class="d-none orderId"> <?php echo $searchRows['order_id'] ?> </td>
                   <td>
                     <div class="row order-button-group d-block">
-                      <div class="col-md-12">
-                        <?php $OrderId = mysqli_real_escape_string($conn, $searchRows['order_id']) ?>
+                    <div class="col-md-12">
+                        <?php $OrderId = mysqli_real_escape_string($conn, $searchRows['order_id']); ?>
                         <button class="btn order-btn-1 d-block py-2 my-2 viewButton" data-toggle="modal"
                           data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
                           <button class="btn order-btn-2 d-block py-2 my-2 primary">Edit</button>
+                          <?php if($searchRows['order_flag'] != "CANCELLED"){ ?>
                         <button class="btn order-btn-3 d-block py-2 my-2 cancelButton" data-toggle="modal"
                           data-target="#cancelModal" data-whatever="<?php echo $OrderId?>">Cancel</button>
+                        <?php
+                        } else{ ?>
+                        <button class="btn order-btn-3 d-block py-2 my-2 disabled">CANCELLED</button>
+                         <?php } ?>
                       </div>
                     </div>
                   </td>

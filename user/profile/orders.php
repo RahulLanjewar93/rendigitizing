@@ -252,8 +252,13 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                         <button class="btn order-btn-1 d-block py-2 my-2 viewButton" data-toggle="modal"
                           data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
                           <button class="btn order-btn-2 d-block py-2 my-2 primary">Edit</button>
+                          <?php if($rows['order_flag'] != "CANCELLED"){ ?>
                         <button class="btn order-btn-3 d-block py-2 my-2 cancelButton" data-toggle="modal"
                           data-target="#cancelModal" data-whatever="<?php echo $OrderId?>">Cancel</button>
+                        <?php
+                        } else{ ?>
+                        <button class="btn order-btn-3 d-block py-2 my-2 disabled">CANCELLED</button>
+                         <?php } ?>
                       </div>
                     </div>
                   </td>
@@ -261,36 +266,46 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                 <?php }
                 }else if(mysqli_num_rows($searchResultFire)>0){
                 ?>
-                <?php while($searchrows = mysqli_fetch_array($searchResultFire)){ ?>
+                <?php while($resultRows = mysqli_fetch_array($searchResultFire)){ ?>
                 <tr>
-                  <td> <img class="table-image py-2"
-                      src="Uploads/DesignImages/<?php echo $searchrows['emboridery_design_image']?>" alt=""> </td>
-                  <td><?php echo $searchrows['design_name'] ?></td>
-                  <td> <?php echo $searchrows['price'] ?> </td>
-                  <td> <?php echo $searchrows['order_flag'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['ponumber'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['turnarround'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['dimension'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['dimension_width'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['dimension_height'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['have_bg_color'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['stitch'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['application'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['fabric'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['thread'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['applique'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['comments'] ?> </td>
-                  <td class="d-none"> <?php echo $rows['order_at'] ?> </td>
-                  <td class="d-none orderId"> <?php echo $rows['order_id'] ?> </td>
+                <td><img class="table-image py-2"
+                      src="Uploads/DesignImages/<?php echo $resultRows['emboridery_design_image']?>" alt=""><h6 class="d-none"><?php echo $resultRows['emboridery_design_image']?></h6></td>
+                  <?php if(!empty($resultRows['emboridery_supporting_image'])){ ?>
+                  <td><img class="table-image py-2"
+                      src="Uploads/SupportingImages/<?php echo $resultRows['emboridery_supporting_image']?>">
+                    <h6 class="d-none"><?php echo $resultRows['emboridery_supporting_image'] ?></h6>  </td>
+                  <?php } ?>
+                  <td><?php echo $resultRows['design_name'] ?></td>
+                  <td> <?php echo $resultRows['price'] ?> </td>
+                  <td> <?php echo $resultRows['order_flag'] ?> </td>
+                  <td class="d-none"> <?php echo $resultRows['ponumber'] ?> </td>
+                  <td class="d-none"> <?php echo $resultRows['turnarround'] ?> </td>
+                  <td class="d-none"> <?php echo $resultRows['dimension'] ?> </td>
+                  <td class="d-none"> <?php echo $resultRows['dimension_width'] ?> </td>
+                  <td class="d-none"> <?php echo $resultRows['dimension_height'] ?> </td>
+                  <td class="d-none"> <?php echo $resultRows['have_bg_color'] ?> </td>
+                  <td class="d-none"> <?php echo $resultRows['stitch'] ?> </td>
+                  <td class="d-none"> <?php echo $resultRows['application'] ?> </td>
+                  <td class="d-none"> <?php echo $resultRows['fabric'] ?> </td>
+                  <td class="d-none"> <?php echo $resultRows['thread'] ?> </td>
+                  <td class="d-none"> <?php echo $resultRows['applique'] ?> </td>
+                  <td class="d-none"> <?php echo $resultRows['comments'] ?> </td>
+                  <td class="d-none"> <?php echo $resultRows['order_at'] ?> </td>
+                  <td class="d-none orderId"> <?php echo $resultRows['order_id'] ?> </td>
                   <td>
                     <div class="row order-button-group d-block">
                       <div class="col-md-12">
-                        <?php $OrderId = mysqli_real_escape_string($conn, $searchrows['order_id']); ?>
+                        <?php $OrderId = mysqli_real_escape_string($conn, $resultRows['order_id']); ?>
                         <button class="btn order-btn-1 d-block py-2 my-2 viewButton" data-toggle="modal"
                           data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
                           <button class="btn order-btn-2 d-block py-2 my-2 primary">Edit</button>
+                          <?php if($resultRows['order_flag'] != "CANCELLED"){ ?>
                         <button class="btn order-btn-3 d-block py-2 my-2 cancelButton" data-toggle="modal"
                           data-target="#cancelModal" data-whatever="<?php echo $OrderId?>">Cancel</button>
+                        <?php
+                        } else{ ?>
+                        <button class="btn order-btn-3 d-block py-2 my-2 disabled">CANCELLED</button>
+                         <?php } ?>
                           </div>
                     </div>
                   </td>
