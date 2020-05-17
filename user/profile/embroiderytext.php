@@ -249,7 +249,7 @@ else{
                         <?php $OrderId = mysqli_real_escape_string($conn, $rows['order_id']); ?>
                         <button class="btn order-btn-1 d-block py-2 my-2 viewButton" data-toggle="modal"
                           data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
-                          <button class="btn order-btn-2 d-block py-2 my-2 primary">Edit</button>
+                        <button class="btn order-btn-2 d-block py-2 my-2 primary">Edit</button>
                         <button class="btn order-btn-3 d-block py-2 my-2 cancelButton" data-toggle="modal"
                           data-target="#cancelModal" data-whatever="<?php echo $OrderId?>">Cancel</button>
                       </div>
@@ -262,18 +262,31 @@ else{
                     while ($searchRows = mysqli_fetch_array($searchResultFire)) {
                         ?>
                 <tr>
-
-                  <td><?php echo $searchRows['emboridery_text'] ?></td>
-                  <td> <?php echo $searchRows['design_name'] ?> </td>
-                  <td> <?php echo $searchRows['price'] ?> </td>
-                  <td> <?php echo $searchRows['order_flag'] ?> </td>
+                  <td><?php echo $rows['emboridery_text'] ?></td>
+                  <td> <?php echo $rows['design_name'] ?> </td>
+                  <td> <?php echo $rows['price'] ?> </td>
+                  <td> <?php echo $rows['order_flag'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['ponumber'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['turnarround'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['dimension'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['dimension_width'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['dimension_height'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['have_bg_color'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['stitch'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['application'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['fabric'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['thread'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['applique'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['comments'] ?> </td>
+                  <td class="d-none"> <?php echo $rows['order_at'] ?> </td>
+                  <td class="d-none orderId"> <?php echo $rows['order_id'] ?> </td>
                   <td>
                     <div class="row order-button-group d-block">
                       <div class="col-md-12">
                         <?php $OrderId = mysqli_real_escape_string($conn, $searchRows['order_id']) ?>
                         <button class="btn order-btn-1 d-block py-2 my-2 viewButton" data-toggle="modal"
                           data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
-                          <button class="btn order-btn-2 d-block py-2 my-2 primary">Edit</button>
+                        <button class="btn order-btn-2 d-block py-2 my-2 primary">Edit</button>
                         <button class="btn order-btn-3 d-block py-2 my-2 cancelButton" data-toggle="modal"
                           data-target="#cancelModal" data-whatever="<?php echo $OrderId?>">Cancel</button>
                       </div>
@@ -431,8 +444,10 @@ else{
                             </tr>
 
                             <tr>
-                                <td><h5 class="profile-text-area">Order ID</h5></td>
-                                <td id="modalOrderId"></td>
+                              <td>
+                                <h5 class="profile-text-area">Order ID</h5>
+                              </td>
+                              <td id="modalOrderId"></td>
                             </tr>
                           </tbody>
                         </table>
