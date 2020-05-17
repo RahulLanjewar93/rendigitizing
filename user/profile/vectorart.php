@@ -263,9 +263,14 @@ else{
                         <?php $OrderId = mysqli_real_escape_string($conn, $rows['order_id']); ?>
                         <button class="btn order-btn-1 d-block py-2 my-2 viewButton" data-toggle="modal"
                           data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
-                          <button class="btn order-btn-2 d-block py-2 my-2 primary">Edit</button>
+                          <a href="edit.php?cat=va&id=<?php echo $rows['order_id'] ?>" class="btn order-btn-2 d-block py-2 my-2 primary" style="color: white">Edit</a>
+                          <?php if($rows['order_flag'] != "CANCELLED"){ ?>
                         <button class="btn order-btn-3 d-block py-2 my-2 cancelButton" data-toggle="modal"
                           data-target="#cancelModal" data-whatever="<?php echo $OrderId?>">Cancel</button>
+                        <?php
+                        } else{ ?>
+                        <button class="btn order-btn-3 d-block py-2 my-2  disabled">CANCELLED</button>
+                         <?php } ?>
                       </div>
                     </div>
                   </td>
@@ -273,22 +278,42 @@ else{
                 <?php } } else if(mysqli_num_rows($searchResultFire) > 0) { while($resultRows = mysqli_fetch_array($searchResultFire)) { ?>
 
                 <tr>
-                  <td> <img class="table-image py-2"
-                      src="Uploads/Vector/DesignImages/<?php echo $resultRows['emboridery_vector_design_image']?>"
-                      alt="">
-                  </td>
+                <td><img class="table-image py-2" src="Uploads/Vector/DesignImages/<?php echo $resultRows['emboridery_vector_design_image']?>" alt=""><h6 class="d-none"><?php echo $resultRows['emboridery_vector_design_image']?></h6></td>
+                  <?php if(!empty($resultRows['emboridery_vector_supporting_image'])){ ?>
+                  <td class="d-none"><img src="Uploads/Vector/SupportingImages/<?php echo $resultRows['emboridery_vector_supporting_image']?>"><h6 class="d-none"><?php echo $resultRows['emboridery_vector_supporting_image']?></h6></td>
+                  <?php } ?>
                   <td><?php echo $resultRows['design_name']?></td>
                   <td> <?php echo $resultRows['price']?> </td>
                   <td> <?php echo $resultRows['order_flag']?> </td>
+                  <td class="d-none"> <?php echo $resultRows['ponumber']?> </td>
+                  <td class="d-none"> <?php echo $resultRows['turnarround']?> </td>
+                  <td class="d-none"> <?php echo $resultRows['dimension']?> </td>
+                  <td class="d-none"> <?php echo $resultRows['dimension_width']?> </td>
+                  <td class="d-none"> <?php echo $resultRows['dimension_height']?> </td>
+                  <td class="d-none"> <?php echo $resultRows['have_bg_color']?> </td>
+                  <td class="d-none"> <?php echo $resultRows['vector_format']?> </td>
+                  <td class="d-none"> <?php echo $resultRows['application']?> </td>
+                  <td class="d-none"> <?php echo $resultRows['printing_process']?> </td>
+                  <td class="d-none"> <?php echo $resultRows['color']?> </td>
+                  <td class="d-none"> <?php echo $resultRows['comments']?> </td>
+                  <td class="d-none"> <?php echo $resultRows['order_at']?> </td>
+                  <td class="d-none orderId"> <?php echo $resultRows['order_id']?> </td>
                   <td>
                     <div class="row order-button-group d-block">
                       <div class="col-md-12">
                         <?php $OrderId = mysqli_real_escape_string($conn, $resultRows['order_id']); ?>
                         <button class="btn order-btn-1 d-block py-2 my-2 viewButton" data-toggle="modal"
                           data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
-                          <button class="btn order-btn-2 d-block py-2 my-2 primary">Edit</button>
+                          
+                          <a href="edit.php?cat=va&id=<?php echo $resultRows['order_id'] ?>" class="btn order-btn-2 d-block py-2 my-2 primary" style="color: white">Edit</a>
+                          
+                          <?php if($resultRows['order_flag'] != "CANCELLED"){ ?>
                         <button class="btn order-btn-3 d-block py-2 my-2 cancelButton" data-toggle="modal"
                           data-target="#cancelModal" data-whatever="<?php echo $OrderId?>">Cancel</button>
+                        <?php
+                        } else{ ?>
+                        <button class="btn order-btn-3 d-block py-2 my-2 disabled">CANCELLED</button>
+                         <?php } ?>
                           </div>
                     </div>
                   </td>

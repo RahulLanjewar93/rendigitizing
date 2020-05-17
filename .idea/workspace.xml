@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b0d27ad-2d8e-4061-88ce-481b35598ab3" name="Default Changelist" comment="" />
+    <list default="true" id="0b0d27ad-2d8e-4061-88ce-481b35598ab3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -138,6 +140,8 @@
       <workItem from="1587032625951" duration="5522000" />
       <workItem from="1587132971288" duration="3999000" />
       <workItem from="1587628379621" duration="38000" />
+      <workItem from="1588612326071" duration="98000" />
+      <workItem from="1588686863506" duration="20000" />
     </task>
     <task id="LOCAL-00001" summary="GitDemo Added">
       <created>1586708442056</created>
@@ -245,10 +249,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="92" y="92" width="1182" height="544" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1366.728@0.0.1366.728" timestamp="1584383339210" />
-    <state x="424" y="259" key="com.intellij.ide.util.TipDialog" timestamp="1587628428866">
+    <state x="424" y="259" key="com.intellij.ide.util.TipDialog" timestamp="1588686866104">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="424" y="259" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1587628428866" />
+    <state x="424" y="259" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1588686866104" />
     <state x="499" y="281" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587032921979">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

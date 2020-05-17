@@ -98,6 +98,8 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                 <?php $type = 1 ?>
 
                 <!-- Embroidery Image -->
+
+
                 <?php if($type ==1) {?>
                 <div class="col-md-9 profile-area-content p-5">
                     <h1 class="profile-text-area my-3"> Edit Order</h1>
@@ -115,7 +117,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
                     <div class="row">
                         <div class="col-md-6">
-                            <form action="">
+                            <form action="" id="editEmbroideryImageForm">
                                 <div class="container myaccount-details-area" id="emImage">
                                     <table class="myaccount-details-table">
                                         <tr>
@@ -216,7 +218,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                                         </td>
                                         <td>
                                             <select name="backgroundcolorinclusion" id="backgroundcolorinclusion"
-                                                class="btn dropdown-select">
+                                                class="btn dropdown-select" form="editEmbroideryImageForm">
                                                 <?php while ($includeRows = mysqli_fetch_array($fetchIncludeFire)) { ?>
                                                 <option value="<?php echo $includeRows['yes_or_no'] ?>">
                                                     <?php echo $includeRows['yes_or_no'] ?></option>
@@ -229,7 +231,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                                             <h5>Stitch</h5>
                                         </td>
                                         <td>
-                                            <select name="stitch" id="stitch" class="btn dropdown-select">
+                                            <select name="stitch" id="stitch" class="btn dropdown-select" form="editEmbroideryImageForm">
                                                 <?php while ($stitchRows = mysqli_fetch_array($fetchStitchFire)) { ?>
                                                 <option value="<?php echo $stitchRows['stitch'] ?>">
                                                     <?php echo $stitchRows['stitch'] ?></option>
@@ -243,7 +245,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                                             <h5>Application</h5>
                                         </td>
                                         <td>
-                                            <select name="application" id="application" class="btn dropdown-select">
+                                            <select name="application" id="application" class="btn dropdown-select" form="editEmbroideryImageForm">
                                                 <?php while ($applicationRows = mysqli_fetch_array($fetchApplicationFire)) { ?>
                                                 <option value="<?php echo $applicationRows['application'] ?>">
                                                     <?php echo $applicationRows['application'] ?></option>
@@ -257,7 +259,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                                             <h5>Fabric</h5>
                                         </td>
                                         <td>
-                                            <select name="fabric" id="fabric" class="btn dropdown-select">
+                                            <select name="fabric" id="fabric" class="btn dropdown-select" form="editEmbroideryImageForm">
                                                 <?php while ($fabricRows = mysqli_fetch_array($fetchFabricFire)) { ?>
                                                 <option value="<?php echo $fabricRows['fabric'] ?>">
                                                     <?php echo $fabricRows['fabric'] ?></option>
@@ -271,7 +273,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                                             <h5>Thread</h5>
                                         </td>
                                         <td>
-                                            <select name="thread" id="thread" class="btn dropdown-select">
+                                            <select name="thread" id="thread" class="btn dropdown-select" form="editEmbroideryImageForm">
                                                 <?php while ($threadRows = mysqli_fetch_array($fetchThreadFire)) { ?>
                                                 <option value="<?php echo $threadRows['thread'] ?>">
                                                     <?php echo $threadRows['thread'] ?></option>
@@ -285,7 +287,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                                             <h5>Applique</h5>
                                         </td>
                                         <td>
-                                            <select name="applique" id="applique" class="btn dropdown-select">
+                                            <select name="applique" id="applique" class="btn dropdown-select" form="editEmbroideryImageForm">
                                                 <?php while ($appliqueRows = mysqli_fetch_array($fetchAppliqueFire)) { ?>
                                                 <option value="<?php echo $appliqueRows['applique'] ?>">
                                                     <?php echo $appliqueRows['applique'] ?></option>
@@ -299,7 +301,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                                         </td>
                                         <td>
                                             <textarea name="comment" id="comment" cols="40" rows="5"
-                                                value='<?php echo isset($_POST['comment']) ? $_POST['comment'] : ''; ?>'></textarea>
+                                                value='<?php echo isset($_POST['comment']) ? $_POST['comment'] : ''; ?>' form="editEmbroideryImageForm"></textarea>
                                             <span class="error"><?php echo $CommentsErr ?></span>
                                         </td>
                                     </tr>
@@ -311,6 +313,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                 </div>
 
                 <!-- Embroidery Text -->
+                
                 <?php }  elseif ($type ==2) {?>
                 <div class="col-md-9 profile-area-content p-5">
                     <h1 class="profile-text-area my-3"> Edit Order</h1>
@@ -328,7 +331,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
                     <div class="row">
                         <div class="col-md-6">
-                            <form action="">
+                            <form action="" id="editEmbroideryTextForm">
                                 <div class="container myaccount-details-area" id="emImage">
                                     <table class="myaccount-details-table">
                                         <tr>
@@ -418,7 +421,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                                             <h5>Include the background color?</h5>
                                         </td>
                                         <td>
-                                            <select name="backgroundcolorinclusiontext"
+                                            <select name="backgroundcolorinclusiontext" form="editEmbroideryTextForm"
                                                 id="backgroundcolorinclusiontext" class="btn dropdown-select">
                                                 <option value="YES">Yes</option>
                                                 <option value="NO">No</option>
@@ -430,7 +433,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                                             <h5>Stitch</h5>
                                         </td>
                                         <td>
-                                            <select name="stitchtext" id="stitchtext" class="btn dropdown-select">
+                                            <select name="stitchtext" id="stitchtext" form="editEmbroideryTextForm" class="btn dropdown-select">
                                                 <option value="Select One">Select One</option>
                                                 <option value="Melco OFM">Melco OFM</option>
                                                 <option value="Toyota 100">Toyota 100</option>
@@ -459,7 +462,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                                             <h5>Application</h5>
                                         </td>
                                         <td>
-                                            <select name="applicationtext" id="applicationtext"
+                                            <select name="applicationtext" id="applicationtext" form="editEmbroideryTextForm"
                                                 class="btn dropdown-select">
                                                 <option value="Select One">Select One</option>
                                                 <option value="Chest Front">Chest Front</option>
@@ -478,7 +481,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                                             <h5>Fabric</h5>
                                         </td>
                                         <td>
-                                            <select name="fabrictext" id="fabrictext" class="btn dropdown-select">
+                                            <select name="fabrictext" id="fabrictext" form="editEmbroideryTextForm" class="btn dropdown-select">
                                                 <option value="Select One">Select One</option>
                                                 <option value="Cotton / Twill">Cotton / Twill</option>
                                                 <option value="Wool">Wool</option>
@@ -501,7 +504,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                                             <h5>Thread</h5>
                                         </td>
                                         <td>
-                                            <select name="threadtext" id="threadtext" class="btn dropdown-select">
+                                            <select name="threadtext" id="threadtext" form="editEmbroideryTextForm" class="btn dropdown-select">
                                                 <option value="Select One">Select One</option>
                                                 <option value="Ackeman Isacord 40">Ackeman Isacord 40</option>
                                                 <option value="Ackeman Isacord 30">Ackeman Isacord 30</option>
@@ -525,8 +528,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                                             <h5>Applique</h5>
                                         </td>
                                         <td>
-                                            <select name="appliquetext" id="appliquetext" class="btn dropdown-select">
-
+                                            <select name="appliquetext" id="appliquetext" form="editEmbroideryTextForm" class="btn dropdown-select">
                                                 <option value="Yes">Yes</option>
                                                 <option value="No">No</option>
                                             </select>
@@ -537,12 +539,11 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                                             <h5>Comments</h5>
                                         </td>
                                         <td>
-                                            <textarea form="form2" name="commenttext" id="commenttext" cols="40"
+                                            <textarea form="editEmbroideryTextForm" name="commenttext" id="commenttext" cols="40"
                                                 rows="5"></textarea>
                                             <span class="error"><?php echo $CommentsTextErr ?></span>
                                         </td>
                                     </tr>
-
                                 </table>
                             </div>
                         </div>
@@ -550,6 +551,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                 </div>
 
                 <!-- Vector Art -->
+                
                 <?php }elseif ($type == 3) { ?>
                 <div class="col-md-9 profile-area-content p-5">
                     <h1 class="profile-text-area my-3"> Edit Order</h1>
@@ -567,7 +569,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
                     <div class="row">
                         <div class="col-md-6">
-                            <form action="">
+                            <form action="" id="editVectorArtForm">
                                 <div class="container myaccount-details-area" id="emImage">
                                     <table class="myaccount-details-table">
                                         <tr>
@@ -663,7 +665,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                                             <h5>Include the background color?</h5>
                                         </td>
                                         <td>
-                                            <select name="backgroundcolorinclusionvector"
+                                            <select name="backgroundcolorinclusionvector" form="editVectorArtForm"
                                                 id="backgroundcolorinclusionvector" class="btn dropdown-select">
 
                                                 <option value="Yes">Yes</option>
@@ -676,7 +678,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                                             <h5>Format</h5>
                                         </td>
                                         <td>
-                                            <select name="formatvector" id="formatvector" class="btn dropdown-select">
+                                            <select name="formatvector" form="editVectorArtForm" id="formatvector" class="btn dropdown-select">
                                                 <option value="Select One">Select One</option>
                                                 <option value="svg">svg</option>
                                                 <option value=".ai">.ai</option>
@@ -692,7 +694,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                                             <h5>Application</h5>
                                         </td>
                                         <td>
-                                            <select name="applicationvector" id="applicationvector"
+                                            <select name="applicationvector" id="applicationvector" form="editVectorArtForm"
                                                 class="btn dropdown-select">
                                                 <option value="Select One">Select One</option>
                                                 <option value="Vector Art">Vector Art</option>
@@ -713,7 +715,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                                             <h5>Printing Process</h5>
                                         </td>
                                         <td>
-                                            <select name="printingprocessvector" id="printingprocessvector"
+                                            <select name="printingprocessvector" id="printingprocessvector" form="editVectorArtForm"
                                                 class="btn dropdown-select">
                                                 <option value="Select One">Select One</option>
                                                 <option value="Spot Colours">Spot Colours</option>
@@ -728,7 +730,7 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                                             <h5>Color</h5>
                                         </td>
                                         <td>
-                                            <select name="colorvector" id="colorvector" class="btn dropdown-select">
+                                            <select name="colorvector" id="colorvector" class="btn dropdown-select" form="editVectorArtForm">
                                                 <option value="Select One">Select One</option>
                                                 <option value="As per part">As per part</option>
                                                 <option value="1-color logo">1-color logo</option>
@@ -742,12 +744,11 @@ error_reporting(E_ERROR | E_WARNING | E_PARSE);
                                             <h5>Comments</h5>
                                         </td>
                                         <td>
-                                            <textarea form="form3" name="commentvector" id="commentvector" cols="40"
+                                            <textarea form="editVectorArtForm" name="commentvector" id="commentvector" cols="40"
                                                 rows="5"></textarea>
                                             <span class="error"><?php echo $CommentsVectorErr?></span>
                                         </td>
                                     </tr>
-
                                 </table>
                             </div>
                         </div>
