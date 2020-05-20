@@ -4,10 +4,13 @@ session_start();
 require_once "../../db/connection/conn.php";
 
 if (isset($_SESSION['USER'])) {
+
+  
     //Search
     $userEmail = $_SESSION['USER'];
     $searchInput = $_POST['searchinput'];
     $searchKeyword = mysqli_real_escape_string($conn, $searchInput);
+
     
     if (isset($_POST['btnsearch'])) {
         $searchResult = "SELECT * FROM tbl_order WHERE user = '$userEmail' AND category = 'Emboridery Text' AND ( 
@@ -55,6 +58,11 @@ else{
   <script src="https://kit.fontawesome.com/4851c149c0.js" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
+    <style>
+      a.disabled:hover {
+      cursor: not-allowed;
+}
+    </style>
   <script>
     function openSlideMenu() {
 
@@ -249,15 +257,18 @@ else{
                         <?php $OrderId = mysqli_real_escape_string($conn, $rows['order_id']); ?>
                         <button class="btn order-btn-1 d-block py-2 my-2 viewButton" data-toggle="modal"
                           data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
-
+                          <?php if($rows['order_flag'] != "CANCELLED"){ ?>
                           <a href="edit.php?cat=et&id=<?php echo $rows['order_id'] ?>" class="btn order-btn-2 d-block py-2 my-2 primary" style="color: white">Edit</a>
+                          <?php }else{ ?>
+                            <a href="#" class="btn order-btn-2 d-block py-2 my-2 primary disabled" style="color: white">Edit</a>
+                          <?php } ?>
 
                           <?php if($rows['order_flag'] != "CANCELLED"){ ?>
                         <button class="btn order-btn-3 d-block py-2 my-2 cancelButton" data-toggle="modal"
                           data-target="#cancelModal" data-whatever="<?php echo $OrderId?>">Cancel</button>
                           <?php
                           } else{ ?>
-                          <button class="btn order-btn-3 d-block py-2 my-2 disabled">CANCELLED</button>
+                          <a class="btn order-btn-3 d-block py-2 my-2 disabled" style="color:white">CANCELLED</a>
                           <?php } ?>
                       </div>
                     </div>
@@ -295,14 +306,18 @@ else{
                         <button class="btn order-btn-1 d-block py-2 my-2 viewButton" data-toggle="modal"
                           data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
                           
+                          <?php if($searchRows['order_flag'] != "CANCELLED"){ ?>
                           <a href="edit.php?cat=et&id=<?php echo $searchRows['order_id'] ?>" class="btn order-btn-2 d-block py-2 my-2 primary" style="color: white">Edit</a>
+                          <?php }else{ ?>
+                            <a href="#" class="btn order-btn-2 d-block py-2 my-2 primary disabled" style="color: white">Edit</a>
+                          <?php } ?>
 
                           <?php if($searchRows['order_flag'] != "CANCELLED"){ ?>
                         <button class="btn order-btn-3 d-block py-2 my-2 cancelButton" data-toggle="modal"
                           data-target="#cancelModal" data-whatever="<?php echo $OrderId?>">Cancel</button>
                         <?php
                         } else{ ?>
-                        <button class="btn order-btn-3 d-block py-2 my-2 disabled">CANCELLED</button>
+                        <a class="btn order-btn-3 d-block py-2 my-2 disabled" style="color: white">CANCELLED</a>
                          <?php } ?>
                       </div>
                     </div>
@@ -459,8 +474,10 @@ else{
                             </tr>
 
                             <tr>
-                                <td><h5 class="profile-text-area">Order ID</h5></td>
-                                <td id="modalOrderId"></td>
+                              <td>
+                                <h5 class="profile-text-area">Order ID</h5>
+                              </td>
+                              <td id="modalOrderId"></td>
                             </tr>
                           </tbody>
                         </table>

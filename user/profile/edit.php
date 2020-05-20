@@ -11,6 +11,10 @@ $userIP = getUserIpAddr();
 $userEmail = $_SESSION['USER'];
 if (isset($_SESSION['USER']))
 {
+    $category = mysqli_real_escape_string($conn, $_GET['cat']);
+  $orderId = mysqli_real_escape_string($conn, $_GET['id']);
+  echo "Exmple = ". $category." ".$orderId;
+
     $userEmail = $_SESSION['USER'];
 
     //Turnaround
@@ -794,10 +798,15 @@ if (isset($_SESSION['USER']))
                     <a href="placeorder.php">Place an Order</a>
                     <a href="../authentication/logout.php?logout=success&from=orders">Home</a>
                 </div>
-                <?php $type = 2 ?> 
 
+                <?php
+                $cat = "";
+                $id = 0;
+                ?>
                 <!-- Embroidery Image -->
-                <?php if($type ==1) {?>
+
+
+                <?php if($category == "ei") {?>
                 <div class="col-md-9 profile-area-content p-5">
                     <h1 class="profile-text-area my-3"> Edit Order</h1>
                     <div class="row">
@@ -806,8 +815,8 @@ if (isset($_SESSION['USER']))
                         </div>
                         <div class="col-md-6">
                             <div class="editOrderButtonArea row">
-                                <button class="btn order-btn-1 d-block py-2 my-2">Save</button>
-                                <button class="btn order-btn-3 d-block py-2 my-2">Discard And Go Back</button>
+                                <a class="btn order-btn-1 d-block py-2 my-2" style="color: white">Save</a>
+                                <a class="btn order-btn-3 d-block py-2 my-2" style="color: white">Discard And Go Back</a>
                             </div>
                         </div>
                     </div>
@@ -915,7 +924,7 @@ if (isset($_SESSION['USER']))
                                         </td>
                                         <td>
                                             <select name="backgroundcolorinclusion" id="backgroundcolorinclusion"
-                                                class="btn dropdown-select">
+                                                class="btn dropdown-select" form="editEmbroideryImageForm">
                                                 <?php while ($includeRows = mysqli_fetch_array($fetchIncludeFire)) { ?>
                                                 <option value="<?php echo $includeRows['yes_or_no'] ?>">
                                                     <?php echo $includeRows['yes_or_no'] ?></option>
@@ -928,7 +937,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Stitch</h5>
                                         </td>
                                         <td>
-                                            <select name="stitch" id="stitch" class="btn dropdown-select">
+                                            <select name="stitch" id="stitch" class="btn dropdown-select" form="editEmbroideryImageForm">
                                                 <?php while ($stitchRows = mysqli_fetch_array($fetchStitchFire)) { ?>
                                                 <option value="<?php echo $stitchRows['stitch'] ?>">
                                                     <?php echo $stitchRows['stitch'] ?></option>
@@ -942,7 +951,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Application</h5>
                                         </td>
                                         <td>
-                                            <select name="application" id="application" class="btn dropdown-select">
+                                            <select name="application" id="application" class="btn dropdown-select" form="editEmbroideryImageForm">
                                                 <?php while ($applicationRows = mysqli_fetch_array($fetchApplicationFire)) { ?>
                                                 <option value="<?php echo $applicationRows['application'] ?>">
                                                     <?php echo $applicationRows['application'] ?></option>
@@ -956,7 +965,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Fabric</h5>
                                         </td>
                                         <td>
-                                            <select name="fabric" id="fabric" class="btn dropdown-select">
+                                            <select name="fabric" id="fabric" class="btn dropdown-select" form="editEmbroideryImageForm">
                                                 <?php while ($fabricRows = mysqli_fetch_array($fetchFabricFire)) { ?>
                                                 <option value="<?php echo $fabricRows['fabric'] ?>">
                                                     <?php echo $fabricRows['fabric'] ?></option>
@@ -970,7 +979,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Thread</h5>
                                         </td>
                                         <td>
-                                            <select name="thread" id="thread" class="btn dropdown-select">
+                                            <select name="thread" id="thread" class="btn dropdown-select" form="editEmbroideryImageForm">
                                                 <?php while ($threadRows = mysqli_fetch_array($fetchThreadFire)) { ?>
                                                 <option value="<?php echo $threadRows['thread'] ?>">
                                                     <?php echo $threadRows['thread'] ?></option>
@@ -984,7 +993,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Applique</h5>
                                         </td>
                                         <td>
-                                            <select name="applique" id="applique" class="btn dropdown-select">
+                                            <select name="applique" id="applique" class="btn dropdown-select" form="editEmbroideryImageForm">
                                                 <?php while ($appliqueRows = mysqli_fetch_array($fetchAppliqueFire)) { ?>
                                                 <option value="<?php echo $appliqueRows['applique'] ?>">
                                                     <?php echo $appliqueRows['applique'] ?></option>
@@ -998,7 +1007,7 @@ if (isset($_SESSION['USER']))
                                         </td>
                                         <td>
                                             <textarea name="comment" id="comment" cols="40" rows="5"
-                                                value='<?php echo isset($_POST['comment']) ? $_POST['comment'] : ''; ?>'></textarea>
+                                                value='<?php echo isset($_POST['comment']) ? $_POST['comment'] : ''; ?>' form="editEmbroideryImageForm"></textarea>
                                             <span class="error"><?php echo $CommentsErr ?></span>
                                         </td>
                                     </tr>
@@ -1009,7 +1018,8 @@ if (isset($_SESSION['USER']))
                 </div>
 
                 <!-- Embroidery Text -->
-                <?php }  elseif ($type ==2) {?>
+                
+                <?php }  elseif ($category == "et") {?>
                 <div class="col-md-9 profile-area-content p-5">
                     <h1 class="profile-text-area my-3"> Edit Order</h1>
                     <div class="row">
@@ -1018,8 +1028,8 @@ if (isset($_SESSION['USER']))
                         </div>
                         <div class="col-md-6">
                             <div class="editOrderButtonArea row">
-                                <button class="btn order-btn-1 d-block py-2 my-2">Save</button>
-                                <button class="btn order-btn-3 d-block py-2 my-2">Discard And Go Back</button>
+                                <a class="btn order-btn-1 d-block py-2 my-2" style="color: white">Save</a>
+                                <a class="btn order-btn-3 d-block py-2 my-2" style="color: white">Discard And Go Back</a>
                             </div>
                         </div>
                     </div>
@@ -1116,7 +1126,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Include the background color?</h5>
                                         </td>
                                         <td>
-                                            <select name="backgroundcolorinclusiontext"
+                                            <select name="backgroundcolorinclusiontext" form="editEmbroideryTextForm"
                                                 id="backgroundcolorinclusiontext" class="btn dropdown-select">
                                                 <option value="YES">Yes</option>
                                                 <option value="NO">No</option>
@@ -1128,7 +1138,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Stitch</h5>
                                         </td>
                                         <td>
-                                            <select name="stitchtext" id="stitchtext" class="btn dropdown-select">
+                                            <select name="stitchtext" id="stitchtext" form="editEmbroideryTextForm" class="btn dropdown-select">
                                                 <option value="Select One">Select One</option>
                                                 <option value="Melco OFM">Melco OFM</option>
                                                 <option value="Toyota 100">Toyota 100</option>
@@ -1157,7 +1167,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Application</h5>
                                         </td>
                                         <td>
-                                            <select name="applicationtext" id="applicationtext"
+                                            <select name="applicationtext" id="applicationtext" form="editEmbroideryTextForm"
                                                 class="btn dropdown-select">
                                                 <option value="Select One">Select One</option>
                                                 <option value="Chest Front">Chest Front</option>
@@ -1176,7 +1186,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Fabric</h5>
                                         </td>
                                         <td>
-                                            <select name="fabrictext" id="fabrictext" class="btn dropdown-select">
+                                            <select name="fabrictext" id="fabrictext" form="editEmbroideryTextForm" class="btn dropdown-select">
                                                 <option value="Select One">Select One</option>
                                                 <option value="Cotton / Twill">Cotton / Twill</option>
                                                 <option value="Wool">Wool</option>
@@ -1199,7 +1209,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Thread</h5>
                                         </td>
                                         <td>
-                                            <select name="threadtext" id="threadtext" class="btn dropdown-select">
+                                            <select name="threadtext" id="threadtext" form="editEmbroideryTextForm" class="btn dropdown-select">
                                                 <option value="Select One">Select One</option>
                                                 <option value="Ackeman Isacord 40">Ackeman Isacord 40</option>
                                                 <option value="Ackeman Isacord 30">Ackeman Isacord 30</option>
@@ -1223,8 +1233,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Applique</h5>
                                         </td>
                                         <td>
-                                            <select name="appliquetext" id="appliquetext" class="btn dropdown-select">
-
+                                            <select name="appliquetext" id="appliquetext" form="editEmbroideryTextForm" class="btn dropdown-select">
                                                 <option value="Yes">Yes</option>
                                                 <option value="No">No</option>
                                             </select>
@@ -1235,12 +1244,11 @@ if (isset($_SESSION['USER']))
                                             <h5>Comments</h5>
                                         </td>
                                         <td>
-                                            <textarea form="form2" name="commenttext" id="commenttext" cols="40"
+                                            <textarea form="editEmbroideryTextForm" name="commenttext" id="commenttext" cols="40"
                                                 rows="5"></textarea>
                                             <span class="error"><?php echo $CommentsTextErr ?></span>
                                         </td>
                                     </tr>
-
                                 </table>
                             </div>
                         </div>
@@ -1248,7 +1256,8 @@ if (isset($_SESSION['USER']))
                 </div>
 
                 <!-- Vector Art -->
-                <?php }elseif ($type == 3) { ?>
+                
+                <?php }elseif ($category == "va") { ?>
                 <div class="col-md-9 profile-area-content p-5">
                     <h1 class="profile-text-area my-3"> Edit Order</h1>
                     <div class="row">
@@ -1257,8 +1266,8 @@ if (isset($_SESSION['USER']))
                         </div>
                         <div class="col-md-6">
                             <div class="editOrderButtonArea row">
-                                <button class="btn order-btn-1 d-block py-2 my-2">Save</button>
-                                <button class="btn order-btn-3 d-block py-2 my-2">Discard And Go Back</button>
+                                <a href="#" class="btn order-btn-1 d-block py-2 my-2" style="color: white">Save</a>
+                                <a href="#" class="btn order-btn-3 d-block py-2 my-2" style="color: white">Discard And Go Back</a>
                             </div>
                         </div>
                     </div>
@@ -1445,7 +1454,6 @@ if (isset($_SESSION['USER']))
                                             <span class="error"><?php echo $CommentsVectorErr?></span>
                                         </td>
                                     </tr>
-
                                 </table>
                             </div>
                         </div>
