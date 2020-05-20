@@ -815,8 +815,8 @@ if (isset($_SESSION['USER']))
                         </div>
                         <div class="col-md-6">
                             <div class="editOrderButtonArea row">
-                                <a class="btn order-btn-1 d-block py-2 my-2" style="color: white">Save</a>
-                                <a class="btn order-btn-3 d-block py-2 my-2" style="color: white">Discard And Go Back</a>
+                                <button type="submit" form="editImage" class="btn order-btn-1 d-block py-2 my-2" style="color: white">Save</a>
+                                <a  class="btn order-btn-3 d-block py-2 my-2" style="color: white">Discard And Go Back</a>
                             </div>
                         </div>
                     </div>
@@ -840,7 +840,7 @@ if (isset($_SESSION['USER']))
                                                 <h5>Supporting Design</h5>
                                             </td>
                                             <td>
-                                                <input type="file" name="supportingimage" class="input-file">
+                                                <input type="file" name="supportingimage" class="input-file" form="editImage">
                                                 <span class="error"><?php echo $SupportingImageErr ?></span>
 
                                             </td>
@@ -851,7 +851,7 @@ if (isset($_SESSION['USER']))
                                             </td>
                                             <td>
                                                 <input type="text" name="designname" id=""
-                                                    value='<?php echo isset($_POST['designname']) ? $_POST['designname'] : ''; ?>'>
+                                                    value='<?php echo isset($_POST['designname']) ? $_POST['designname'] : ''; ?>' form="editImage">
                                                 <span class="error"><?php echo $DesignNameErr ?></span>
                                             </td>
                                         </tr>
@@ -861,7 +861,7 @@ if (isset($_SESSION['USER']))
                                             </td>
                                             <td>
                                                 <input type="text" name="ponumber" id=""
-                                                    value='<?php echo isset($_POST['ponumber']) ? $_POST['ponumber'] : ''; ?>'>
+                                                    value='<?php echo isset($_POST['ponumber']) ? $_POST['ponumber'] : ''; ?>' form="editImage">
                                                 <span class="error"><?php echo $PoNumberErr ?></span>
                                             </td>
                                         </tr>
@@ -871,8 +871,7 @@ if (isset($_SESSION['USER']))
                                             </td>
                                             <td>
                                                 <div class="dropdown myaccount-details-phpcontent">
-                                                    <select name="turnaround" id="turnaround"
-                                                        class="btn dropdown-select">
+                                                    <select name="turnaround" id="turnaround" class="btn dropdown-select" form="editImage">
                                                         <?php while ($turnaroundRows = mysqli_fetch_array($fetchTurnaroundFire)) { ?>
                                                         <option value="<?php echo $turnaroundRows['turnaround'] ?>">
                                                             <?php echo $turnaroundRows['turnaround'] ?></option>
@@ -889,19 +888,15 @@ if (isset($_SESSION['USER']))
                                             <td>
                                                 <div class="row dimensionBox">
                                                     <div class="col-md-4">
-                                                        <input type="text" placeholder="Width" name="width" id="width"
-                                                            value='<?php echo isset($_POST['width']) ? $_POST['width'] : ''; ?>'>
+                                                        <input type="text" placeholder="Width" name="width" id="width" value='<?php echo isset($_POST['width']) ? $_POST['width'] : ''; ?>' form="editImage">
                                                         <span class="error"><?php echo $DimensionWidthErr ?></span>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <input type="text" placeholder="Height" name="height"
-                                                            id="height"
-                                                            value='<?php echo isset($_POST['height']) ? $_POST['height'] : ''; ?>'>
+                                                        <input type="text" placeholder="Height" name="height" id="height" value='<?php echo isset($_POST['height']) ? $_POST['height'] : ''; ?>' form="editImage">
                                                         <span class="error"><?php echo $DimensionHeightErr ?></span>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <select name="dimension" id="dimension"
-                                                            class="btn dropdown-select">
+                                                        <select name="dimension" id="dimension" class="btn dropdown-select" form="editImage">
                                                             <option value="Inches">Inches</option>
                                                             <option value="cm">cm</option>
                                                             <option value="mm">mm</option>
@@ -923,8 +918,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Include the background color?</h5>
                                         </td>
                                         <td>
-                                            <select name="backgroundcolorinclusion" id="backgroundcolorinclusion"
-                                                class="btn dropdown-select" form="editEmbroideryImageForm">
+                                            <select name="backgroundcolorinclusion" id="backgroundcolorinclusion" class="btn dropdown-select" form="editImage">
                                                 <?php while ($includeRows = mysqli_fetch_array($fetchIncludeFire)) { ?>
                                                 <option value="<?php echo $includeRows['yes_or_no'] ?>">
                                                     <?php echo $includeRows['yes_or_no'] ?></option>
@@ -937,7 +931,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Stitch</h5>
                                         </td>
                                         <td>
-                                            <select name="stitch" id="stitch" class="btn dropdown-select" form="editEmbroideryImageForm">
+                                            <select name="stitch" id="stitch" class="btn dropdown-select" form="editImage">
                                                 <?php while ($stitchRows = mysqli_fetch_array($fetchStitchFire)) { ?>
                                                 <option value="<?php echo $stitchRows['stitch'] ?>">
                                                     <?php echo $stitchRows['stitch'] ?></option>
@@ -951,7 +945,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Application</h5>
                                         </td>
                                         <td>
-                                            <select name="application" id="application" class="btn dropdown-select" form="editEmbroideryImageForm">
+                                            <select name="application" id="application" class="btn dropdown-select" form="editImage">
                                                 <?php while ($applicationRows = mysqli_fetch_array($fetchApplicationFire)) { ?>
                                                 <option value="<?php echo $applicationRows['application'] ?>">
                                                     <?php echo $applicationRows['application'] ?></option>
@@ -965,7 +959,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Fabric</h5>
                                         </td>
                                         <td>
-                                            <select name="fabric" id="fabric" class="btn dropdown-select" form="editEmbroideryImageForm">
+                                            <select name="fabric" id="fabric" class="btn dropdown-select" form="editImage">
                                                 <?php while ($fabricRows = mysqli_fetch_array($fetchFabricFire)) { ?>
                                                 <option value="<?php echo $fabricRows['fabric'] ?>">
                                                     <?php echo $fabricRows['fabric'] ?></option>
@@ -979,7 +973,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Thread</h5>
                                         </td>
                                         <td>
-                                            <select name="thread" id="thread" class="btn dropdown-select" form="editEmbroideryImageForm">
+                                            <select name="thread" id="thread" class="btn dropdown-select" form="editImage">
                                                 <?php while ($threadRows = mysqli_fetch_array($fetchThreadFire)) { ?>
                                                 <option value="<?php echo $threadRows['thread'] ?>">
                                                     <?php echo $threadRows['thread'] ?></option>
@@ -993,7 +987,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Applique</h5>
                                         </td>
                                         <td>
-                                            <select name="applique" id="applique" class="btn dropdown-select" form="editEmbroideryImageForm">
+                                            <select name="applique" id="applique" class="btn dropdown-select" form="editImage">
                                                 <?php while ($appliqueRows = mysqli_fetch_array($fetchAppliqueFire)) { ?>
                                                 <option value="<?php echo $appliqueRows['applique'] ?>">
                                                     <?php echo $appliqueRows['applique'] ?></option>
@@ -1007,7 +1001,7 @@ if (isset($_SESSION['USER']))
                                         </td>
                                         <td>
                                             <textarea name="comment" id="comment" cols="40" rows="5"
-                                                value='<?php echo isset($_POST['comment']) ? $_POST['comment'] : ''; ?>' form="editEmbroideryImageForm"></textarea>
+                                                value='<?php echo isset($_POST['comment']) ? $_POST['comment'] : ''; ?>' form="editImage"></textarea>
                                             <span class="error"><?php echo $CommentsErr ?></span>
                                         </td>
                                     </tr>
@@ -1028,7 +1022,7 @@ if (isset($_SESSION['USER']))
                         </div>
                         <div class="col-md-6">
                             <div class="editOrderButtonArea row">
-                                <a class="btn order-btn-1 d-block py-2 my-2" style="color: white">Save</a>
+                                <button type="submit" class="btn order-btn-1 d-block py-2 my-2" style="color: white">Save</a>
                                 <a class="btn order-btn-3 d-block py-2 my-2" style="color: white">Discard And Go Back</a>
                             </div>
                         </div>
@@ -1045,7 +1039,7 @@ if (isset($_SESSION['USER']))
                                             </td>
                                             <td>
                                                 <textarea name="text" id="" cols="30" rows="5"
-                                                    placeholder="Enter Text Here"></textarea>
+                                                    placeholder="Enter Text Here" form="editText"></textarea>
                                                 <span class="error"><?php echo $TextErr ?></span>
 
                                             </td>
@@ -1055,7 +1049,7 @@ if (isset($_SESSION['USER']))
                                                 <h5>Design Name</h5>
                                             </td>
                                             <td>
-                                                <input type="text" name="designnametext" id="ponumber">
+                                                <input type="text" name="designnametext" id="ponumber" form="editText">
                                                 <span class="error"><?php echo $DesignNameTextErr ?></span>
                                             </td>
                                         </tr>
@@ -1064,7 +1058,7 @@ if (isset($_SESSION['USER']))
                                                 <h5>PO Number</h5>
                                             </td>
                                             <td>
-                                                <input type="text" name="ponumbertext" id="ponumber">
+                                                <input type="text" name="ponumbertext" id="ponumber" form="editText">
                                                 <span class="error"><?php echo $PoNumberTextErr ?></span>
                                             </td>
                                         </tr>
@@ -1075,7 +1069,7 @@ if (isset($_SESSION['USER']))
                                             <td>
                                                 <div class="dropdown myaccount-details-phpcontent">
                                                     <select name="turnaroundtext" id="turnaroundtext"
-                                                        class="btn dropdown-select">
+                                                        class="btn dropdown-select" form="editText">
 
                                                         <option value="Select Plan">Select Plan</option>
                                                         <option value="Budget - 24 Hours">Budget - 24 Hours</option>
@@ -1095,17 +1089,17 @@ if (isset($_SESSION['USER']))
                                                 <div class="row dimensionBox">
                                                     <div class="col-md-4">
                                                         <input type="text" placeholder="Width" name="widthtext"
-                                                            id="widthtext">
+                                                            id="widthtext" form="editText">
                                                         <span class="error"><?php echo $DimensionWidthTextErr ?></span>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <input type="text" placeholder="Height" name="heighttext"
-                                                            id="heighttext">
+                                                            id="heighttext" form="editText">
                                                         <span class="error"><?php echo $DimensionHeightTextErr ?></span>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <select name="dimensiontext" id="dimensiontext"
-                                                            class="btn dropdown-select">
+                                                            class="btn dropdown-select" form="editText">
                                                             <option value="Inches">Inches</option>
                                                             <option value="cm">cm</option>
                                                             <option value="mm">mm</option>
@@ -1126,7 +1120,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Include the background color?</h5>
                                         </td>
                                         <td>
-                                            <select name="backgroundcolorinclusiontext" form="editEmbroideryTextForm"
+                                            <select name="backgroundcolorinclusiontext" form="editText"
                                                 id="backgroundcolorinclusiontext" class="btn dropdown-select">
                                                 <option value="YES">Yes</option>
                                                 <option value="NO">No</option>
@@ -1138,7 +1132,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Stitch</h5>
                                         </td>
                                         <td>
-                                            <select name="stitchtext" id="stitchtext" form="editEmbroideryTextForm" class="btn dropdown-select">
+                                            <select name="stitchtext" id="stitchtext" form="editText" class="btn dropdown-select">
                                                 <option value="Select One">Select One</option>
                                                 <option value="Melco OFM">Melco OFM</option>
                                                 <option value="Toyota 100">Toyota 100</option>
@@ -1167,7 +1161,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Application</h5>
                                         </td>
                                         <td>
-                                            <select name="applicationtext" id="applicationtext" form="editEmbroideryTextForm"
+                                            <select name="applicationtext" id="applicationtext" form="editText"
                                                 class="btn dropdown-select">
                                                 <option value="Select One">Select One</option>
                                                 <option value="Chest Front">Chest Front</option>
@@ -1186,7 +1180,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Fabric</h5>
                                         </td>
                                         <td>
-                                            <select name="fabrictext" id="fabrictext" form="editEmbroideryTextForm" class="btn dropdown-select">
+                                            <select name="fabrictext" id="fabrictext" form="editText" class="btn dropdown-select">
                                                 <option value="Select One">Select One</option>
                                                 <option value="Cotton / Twill">Cotton / Twill</option>
                                                 <option value="Wool">Wool</option>
@@ -1209,7 +1203,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Thread</h5>
                                         </td>
                                         <td>
-                                            <select name="threadtext" id="threadtext" form="editEmbroideryTextForm" class="btn dropdown-select">
+                                            <select name="threadtext" id="threadtext" form="editText" class="btn dropdown-select">
                                                 <option value="Select One">Select One</option>
                                                 <option value="Ackeman Isacord 40">Ackeman Isacord 40</option>
                                                 <option value="Ackeman Isacord 30">Ackeman Isacord 30</option>
@@ -1233,7 +1227,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Applique</h5>
                                         </td>
                                         <td>
-                                            <select name="appliquetext" id="appliquetext" form="editEmbroideryTextForm" class="btn dropdown-select">
+                                            <select name="appliquetext" id="appliquetext" form="editText" class="btn dropdown-select">
                                                 <option value="Yes">Yes</option>
                                                 <option value="No">No</option>
                                             </select>
@@ -1244,7 +1238,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Comments</h5>
                                         </td>
                                         <td>
-                                            <textarea form="editEmbroideryTextForm" name="commenttext" id="commenttext" cols="40"
+                                            <textarea form="editText" name="commenttext" id="commenttext" cols="40"
                                                 rows="5"></textarea>
                                             <span class="error"><?php echo $CommentsTextErr ?></span>
                                         </td>
@@ -1291,7 +1285,7 @@ if (isset($_SESSION['USER']))
                                                 <h5>Supporting Design</h5>
                                             </td>
                                             <td>
-                                                <input type="file" class="input-file" name="imagesupportingvector">
+                                                <input type="file" class="input-file" name="editVector">
                                                 <span class="error"><?php echo $SupportingImageErr?></span>
                                             </td>
                                         </tr>
@@ -1300,7 +1294,7 @@ if (isset($_SESSION['USER']))
                                                 <h5>Design Name</h5>
                                             </td>
                                             <td>
-                                                <input type="text" name="designnamevector" id="designnamevector">
+                                                <input type="text" name="designnamevector" id="designnamevector" form="editVector">
                                                 <span class="error"><?php echo $DesignNameVectorErr?></span>
                                             </td>
                                         </tr>
@@ -1309,7 +1303,7 @@ if (isset($_SESSION['USER']))
                                                 <h5>PO Number</h5>
                                             </td>
                                             <td>
-                                                <input type="text" name="ponumbervector" id="ponumbervector">
+                                                <input type="text" name="ponumbervector" id="ponumbervector" form="editVector">
                                                 <span class="error"><?php echo $PoNumberVectorErr?></span>
                                             </td>
                                         </tr>
@@ -1320,7 +1314,7 @@ if (isset($_SESSION['USER']))
                                             <td>
                                                 <div class="dropdown myaccount-details-phpcontent">
                                                     <select name="turnaroundvector" id="turnaroundvector"
-                                                        class="btn dropdown-select">
+                                                        class="btn dropdown-select" form="editVector">
                                                         <option value="Select Plan">Select Plan</option>
                                                         <option value="Budget - 24 Hours">Budget - 24 Hours</option>
                                                         <option value="Standard - 12 Hours">Standard - 12 Hours
@@ -1339,17 +1333,17 @@ if (isset($_SESSION['USER']))
                                             <div class="row dimensionBox">
                                                 <div class="col-md-4">
                                                     <input type="text" placeholder="Width" name="widthvector"
-                                                        id="widthvector">
+                                                        id="widthvector" form="editVector">
                                                     <span class="error"><?php echo $DimensionWidthVectorErr?></span>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <input type="text" placeholder="Height" name="heightvector"
-                                                        id="heightvector">
+                                                        id="heightvector" form="editVector">
                                                     <span class="error"><?php echo $DimensionHeightVectorErr?></span>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <select name="dimensionvector" id="dimensionvector"
-                                                        class="btn dropdown-select">
+                                                        class="btn dropdown-select" form="editVector">
                                                         <option value="Inches">Inches</option>
                                                         <option value="cm">cm</option>
                                                         <option value="mm">mm</option>
@@ -1371,7 +1365,7 @@ if (isset($_SESSION['USER']))
                                         </td>
                                         <td>
                                             <select name="backgroundcolorinclusionvector"
-                                                id="backgroundcolorinclusionvector" class="btn dropdown-select" form="editEmImageForm">
+                                                id="backgroundcolorinclusionvector" class="btn dropdown-select" form="editVector">
 
                                                 <option value="Yes">Yes</option>
                                                 <option value="No">No</option>
@@ -1383,7 +1377,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Format</h5>
                                         </td>
                                         <td>
-                                            <select name="formatvector" id="formatvector" class="btn dropdown-select" form="editEmImageForm">
+                                            <select name="formatvector" id="formatvector" class="btn dropdown-select" form="editVector">
                                                 <option value="Select One">Select One</option>
                                                 <option value="svg">svg</option>
                                                 <option value=".ai">.ai</option>
@@ -1400,7 +1394,7 @@ if (isset($_SESSION['USER']))
                                         </td>
                                         <td>
                                             <select name="applicationvector" id="applicationvector"
-                                                class="btn dropdown-select" form="editEmImageForm">
+                                                class="btn dropdown-select" form="editVector">
                                                 <option value="Select One">Select One</option>
                                                 <option value="Vector Art">Vector Art</option>
                                                 <option value="Silkscreen">Silkscreen</option>
@@ -1421,7 +1415,7 @@ if (isset($_SESSION['USER']))
                                         </td>
                                         <td>
                                             <select name="printingprocessvector" id="printingprocessvector"
-                                                class="btn dropdown-select" form="editEmImageForm">
+                                                class="btn dropdown-select" form="editVector">
                                                 <option value="Select One">Select One</option>
                                                 <option value="Spot Colours">Spot Colours</option>
                                                 <option value="CMYK (process color)">CMYK (process color)
@@ -1435,7 +1429,7 @@ if (isset($_SESSION['USER']))
                                             <h5>Color</h5>
                                         </td>
                                         <td>
-                                            <select name="colorvector" id="colorvector" class="btn dropdown-select" form="editEmImageForm">
+                                            <select name="colorvector" id="colorvector" class="btn dropdown-select" form="editVector">
                                                 <option value="Select One">Select One</option>
                                                 <option value="As per part">As per part</option>
                                                 <option value="1-color logo">1-color logo</option>
@@ -1450,7 +1444,7 @@ if (isset($_SESSION['USER']))
                                         </td>
                                         <td>
                                             <textarea form="form3" name="commentvector" id="commentvector" cols="40"
-                                                rows="5" form="editEmImageForm"></textarea>
+                                                rows="5" form="editVector"></textarea>
                                             <span class="error"><?php echo $CommentsVectorErr?></span>
                                         </td>
                                     </tr>
