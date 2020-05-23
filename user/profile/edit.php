@@ -122,6 +122,7 @@ require_once "edit-php.php";
                             <form action="" id="editImage">
                                 <div class="container myaccount-details-area" id="editImage">
                                     <table class="myaccount-details-table">
+                                        <?php while($orderRowTable1 = mysqli_num_rows($searchOrderFire)){ ?>
                                         <tr>
                                             <td>
                                                 <h5>Your Design</h5>
@@ -147,7 +148,7 @@ require_once "edit-php.php";
                                             </td>
                                             <td>
                                                 <input type="text" name="designname" id=""
-                                                    value='<?php echo isset($_POST['designname']) ? $_POST['designname'] : ''; ?>' form="editImage">
+                                                    value='<?php echo $orderRowTable1['design_name'] ?>' form="editImage">
                                                 <span class="error"><?php echo $DesignNameErr ?></span>
                                             </td>
                                         </tr>
@@ -157,7 +158,7 @@ require_once "edit-php.php";
                                             </td>
                                             <td>
                                                 <input type="text" name="ponumber" id=""
-                                                    value='<?php echo isset($_POST['ponumber']) ? $_POST['ponumber'] : ''; ?>' form="editImage">
+                                                    value='<?php echo $orderRowTable1['ponumber'] ?>' form="editImage">
                                                 <span class="error"><?php echo $PoNumberErr ?></span>
                                             </td>
                                         </tr>
@@ -168,6 +169,7 @@ require_once "edit-php.php";
                                             <td>
                                                 <div class="dropdown myaccount-details-phpcontent">
                                                     <select name="turnaround" id="turnaround" class="btn dropdown-select" form="editImage">
+                                                    <?php echo $orderRowTable1['turnaround'] ?>
                                                         <?php while ($turnaroundRows = mysqli_fetch_array($fetchTurnaroundFire)) { ?>
                                                         <option value="<?php echo $turnaroundRows['turnaround'] ?>">
                                                             <?php echo $turnaroundRows['turnaround'] ?></option>
@@ -184,11 +186,11 @@ require_once "edit-php.php";
                                             <td>
                                                 <div class="row dimensionBox">
                                                     <div class="col-md-4">
-                                                        <input type="text" placeholder="Width" name="width" id="width" value='<?php echo isset($_POST['width']) ? $_POST['width'] : ''; ?>' form="editImage">
+                                                        <input type="text" placeholder="Width" name="width" id="width" value='<?php echo $orderRowTable1['dimension_width'] ?>' form="editImage">
                                                         <span class="error"><?php echo $DimensionWidthErr ?></span>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <input type="text" placeholder="Height" name="height" id="height" value='<?php echo isset($_POST['height']) ? $_POST['height'] : ''; ?>' form="editImage">
+                                                        <input type="text" placeholder="Height" name="height" id="height" value='<?php echo $orderRowTable1['dimension_height'] ?>' form="editImage">
                                                         <span class="error"><?php echo $DimensionHeightErr ?></span>
                                                     </div>
                                                     <div class="col-md-4">
@@ -201,6 +203,7 @@ require_once "edit-php.php";
                                                 </div>
                                             </td>
                                         </tr>
+                                                        <?php } ?>
 
                                     </table>
                                 </div>
