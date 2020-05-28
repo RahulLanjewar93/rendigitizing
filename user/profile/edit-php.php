@@ -11,12 +11,13 @@ $userIP = getUserIpAddr();
 $userEmail = $_SESSION['USER'];
 if (isset($_SESSION['USER']))
 {
-    $category = mysqli_real_escape_string($conn, $_GET['cat']);
+  $category = mysqli_real_escape_string($conn, $_GET['cat']);
   $orderId = mysqli_real_escape_string($conn, $_GET['id']);
 
   $searchOrder = "SELECT * FROM tbl_order WHERE category='$category' AND order_id=$orderId AND user='$userEmail'";
   $searchOrderFire = mysqli_query($conn, $searchOrder);
 
+  echo $searchOrder;
   
 
     $userEmail = $_SESSION['USER'];

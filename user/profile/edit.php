@@ -94,15 +94,10 @@ require_once "edit-php.php";
                     <a href="placeorder.php">Place an Order</a>
                     <a href="../authentication/logout.php?logout=success&from=orders">Home</a>
                 </div>
-
-                <?php
-                $cat = "";
-                $id = 0;
-                ?>
                 <!-- Embroidery Image -->
 
 
-                <?php if($category == "ei") {?>
+                <?php if($category == "Emboridery Image") { ?>
                 <div class="col-md-9 profile-area-content p-5">
                     <h1 class="profile-text-area my-3"> Edit Order</h1>
                     <div class="row">
@@ -116,13 +111,16 @@ require_once "edit-php.php";
                             </div>
                         </div>
                     </div>
-
+ 
                     <div class="row">
                         <div class="col-md-6">
                             <form action="" id="editImage">
                                 <div class="container myaccount-details-area" id="editImage">
+                                <h1>Prefetch</h1>
+                                <?php while($orderRowTable1 = mysqli_fetch_array($searchOrderFire)) {
+                                    echo $orderRowTable1['design_name'];
+                                        ?>
                                     <table class="myaccount-details-table">
-                                        <?php while($orderRowTable1 = mysqli_num_rows($searchOrderFire)){ ?>
                                         <tr>
                                             <td>
                                                 <h5>Your Design</h5>
@@ -169,7 +167,7 @@ require_once "edit-php.php";
                                             <td>
                                                 <div class="dropdown myaccount-details-phpcontent">
                                                     <select name="turnaround" id="turnaround" class="btn dropdown-select" form="editImage">
-                                                    <?php echo $orderRowTable1['turnaround'] ?>
+                                                    <option value="<?php echo $orderRowTable1['turnarround'] ?>">Selected -><?php echo $orderRowTable1['turnarround'] ?></option>
                                                         <?php while ($turnaroundRows = mysqli_fetch_array($fetchTurnaroundFire)) { ?>
                                                         <option value="<?php echo $turnaroundRows['turnaround'] ?>">
                                                             <?php echo $turnaroundRows['turnaround'] ?></option>
@@ -195,6 +193,7 @@ require_once "edit-php.php";
                                                     </div>
                                                     <div class="col-md-4">
                                                         <select name="dimension" id="dimension" class="btn dropdown-select" form="editImage">
+                                                            <option value="<?php echo $orderRowTable1['dimension'] ?>">Selected -> <?php echo $orderRowTable1['dimension'] ?></option>
                                                             <option value="Inches">Inches</option>
                                                             <option value="cm">cm</option>
                                                             <option value="mm">mm</option>
@@ -203,22 +202,24 @@ require_once "edit-php.php";
                                                 </div>
                                             </td>
                                         </tr>
-                                                        <?php } ?>
-
                                     </table>
+                                    <?php } ?>
                                 </div>
                             </form>
                         </div>
                         <div class="col-md-6">
                             <div class="container myaccount-change-password" id="emImageDesc">
                                 <table>
+                                    <?php while($orderRowTable2 = mysqli_fetch_array($searchOrderFire)){ ?>
                                     <tr>
                                         <td>
                                             <h5>Include the background color?</h5>
                                         </td>
                                         <td>
                                             <select name="backgroundcolorinclusion" id="backgroundcolorinclusion" class="btn dropdown-select" form="editImage">
-                                                <?php while ($includeRows = mysqli_fetch_array($fetchIncludeFire)) { ?>
+                                            
+                                            <option value="<?php echo $orderRowTable2['have_bg_color'] ?>">Selected -> <?php echo $orderRowTable2['have_bg_color'] ?></option>
+                                                <?php while($includeRows = mysqli_fetch_array($fetchIncludeFire)) { ?>
                                                 <option value="<?php echo $includeRows['yes_or_no'] ?>">
                                                     <?php echo $includeRows['yes_or_no'] ?></option>
                                                 <?php } ?>
@@ -245,6 +246,8 @@ require_once "edit-php.php";
                                         </td>
                                         <td>
                                             <select name="application" id="application" class="btn dropdown-select" form="editImage">
+                                            orderRowTable1
+                                            <option value="S<?php echo $orderRowTable1['application'] ?>">Selected -> <?php echo $orderRowTable1['application'] ?></option>
                                                 <?php while ($applicationRows = mysqli_fetch_array($fetchApplicationFire)) { ?>
                                                 <option value="<?php echo $applicationRows['application'] ?>">
                                                     <?php echo $applicationRows['application'] ?></option>
@@ -304,6 +307,7 @@ require_once "edit-php.php";
                                             <span class="error"><?php echo $CommentsErr ?></span>
                                         </td>
                                     </tr>
+                                                <?php } ?>
                                 </table>
                             </div>
                         </div>
@@ -312,7 +316,7 @@ require_once "edit-php.php";
 
                 <!-- Embroidery Text -->
                 
-                <?php }  elseif ($category == "et") {?>
+                <?php } elseif($category == "Emboridery Text") { ?>
                 <div class="col-md-9 profile-area-content p-5">
                     <h1 class="profile-text-area my-3"> Edit Order</h1>
                     <div class="row">
@@ -369,7 +373,8 @@ require_once "edit-php.php";
                                                 <div class="dropdown myaccount-details-phpcontent">
                                                     <select name="turnaroundtext" id="turnaroundtext"
                                                         class="btn dropdown-select" form="editText">
-
+                                                        
+                                                        <option value="<?php echo $orderRowTable1['turnarround'] ?>">Selected -> <?php echo $orderRowTable1['turnarround'] ?></option>
                                                         <option value="Select Plan">Select Plan</option>
                                                         <option value="Budget - 24 Hours">Budget - 24 Hours</option>
                                                         <option value="Standard - 12 Hours">Standard - 12 Hours
@@ -550,7 +555,7 @@ require_once "edit-php.php";
 
                 <!-- Vector Art -->
                 
-                <?php }elseif ($category == "va") { ?>
+                <?php } else if ($category == "Vector Art") { ?>
                 <div class="col-md-9 profile-area-content p-5">
                     <h1 class="profile-text-area my-3"> Edit Order</h1>
                     <div class="row">
@@ -832,5 +837,4 @@ require_once "edit-php.php";
         }
     </script>
 </body>
-
 </html>

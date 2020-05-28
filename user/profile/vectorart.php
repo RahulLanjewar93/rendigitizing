@@ -265,7 +265,7 @@ else{
                           data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
 
                           <?php if($rows['order_flag'] != "CANCELLED"){ ?>
-                          <a href="edit.php?cat=va&id=<?php echo $rows['order_id'] ?>" class="btn order-btn-2 d-block py-2 my-2 primary" style="color: white">Edit</a>
+                          <a href="edit.php?cat=Vector Art&id=<?php echo $rows['order_id'] ?>" class="btn order-btn-2 d-block py-2 my-2 primary" style="color: white">Edit</a>
                           <?php }else{ ?>
                             <a href="#" class="btn order-btn-2 d-block py-2 my-2 primary disabled" style="color: white">Edit</a>
                           <?php } ?>
@@ -312,7 +312,7 @@ else{
                           data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
                           
                           <?php if($resultRows['order_flag'] != "CANCELLED"){ ?>
-                          <a href="edit.php?cat=va&id=<?php echo $resultRows['order_id'] ?>" class="btn order-btn-2 d-block py-2 my-2 primary" style="color: white">Edit</a>
+                          <a href="edit.php?cat=Vector Art&id=<?php echo $resultRows['order_id'] ?>" class="btn order-btn-2 d-block py-2 my-2 primary" style="color: white">Edit</a>
                           <?php }else{ ?>
                             <a href="#" class="btn order-btn-2 d-block py-2 my-2 primary disabled" style="color: white">Edit</a>
                           <?php } ?>

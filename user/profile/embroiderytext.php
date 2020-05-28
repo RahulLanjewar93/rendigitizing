@@ -258,7 +258,7 @@ else{
                         <button class="btn order-btn-1 d-block py-2 my-2 viewButton" data-toggle="modal"
                           data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
                           <?php if($rows['order_flag'] != "CANCELLED"){ ?>
-                          <a href="edit.php?cat=et&id=<?php echo $rows['order_id'] ?>" class="btn order-btn-2 d-block py-2 my-2 primary" style="color: white">Edit</a>
+                          <a href="edit.php?cat=Emboridery Text&id=<?php echo $rows['order_id'] ?>" class="btn order-btn-2 d-block py-2 my-2 primary" style="color: white">Edit</a>
                           <?php }else{ ?>
                             <a href="#" class="btn order-btn-2 d-block py-2 my-2 primary disabled" style="color: white">Edit</a>
                           <?php } ?>
@@ -307,7 +307,7 @@ else{
                           data-target="#viewModal" data-whatever="<?php echo $OrderId?>">View</button>
                           
                           <?php if($searchRows['order_flag'] != "CANCELLED"){ ?>
-                          <a href="edit.php?cat=et&id=<?php echo $searchRows['order_id'] ?>" class="btn order-btn-2 d-block py-2 my-2 primary" style="color: white">Edit</a>
+                          <a href="edit.php?cat=Emboridery Text&id=<?php echo $searchRows['order_id'] ?>" class="btn order-btn-2 d-block py-2 my-2 primary" style="color: white">Edit</a>
                           <?php }else{ ?>
                             <a href="#" class="btn order-btn-2 d-block py-2 my-2 primary disabled" style="color: white">Edit</a>
                           <?php } ?>
