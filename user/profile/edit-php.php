@@ -50,6 +50,8 @@ if (isset($_SESSION['USER']))
     $fetchApplique = "SELECT applique FROM tbl_applique";
     $fetchAppliqueFire = mysqli_query($conn, $fetchApplique);
 
+    
+
     //Image
     $DesignImageErr = "";
     $SupportingImageErr = "";
