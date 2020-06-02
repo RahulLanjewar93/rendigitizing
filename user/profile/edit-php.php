@@ -93,7 +93,7 @@ if (isset($_SESSION['USER']))
 
 
     //Placing order Image
-    if (isset($_POST['placeorderemimages']))
+    if (isset($_POST['embImage']))
     {
 
         $DesignName = mysqli_real_escape_string($conn, $_POST['designname']);
@@ -111,10 +111,10 @@ if (isset($_SESSION['USER']))
         $Comments = mysqli_real_escape_string($conn, $_POST['comment']);
 
 
-        if ($_FILES['designimage']['size'] == 0) {
-            $DesignImageErr = "Please upload one image";
-            $ErrorCounter += 1;
-        }
+        // if ($_FILES['designimage']['size'] == 0) {
+        //     $DesignImageErr = "Please upload one image";
+        //     $ErrorCounter += 1;
+        // }
         if (empty($DesignName)) {
             $DesignNameErr = "Please enter a design name";
             $ErrorCounter += 1;
@@ -190,31 +190,33 @@ if (isset($_SESSION['USER']))
 
         if ($ErrorCounter == 0) {
 
-            //Main Image
+    
+            
 
-            $targetDesignImage = "Uploads/designimages/" . basename($_FILES['designimage']['name']);
-            $mainImage = $_FILES['designimage']['name'];
-            $mainImageTemp = $_FILES['designimage']['tmp_name'];
-            $mainImageType = $_FILES['designimage']['type'];
 
-            if (move_uploaded_file($_FILES['designimage']['name'], $targetDesignImage) && strtolower($mainImageType) == "image/jpg" || strtolower($mainImageType) == "image/jpeg" || strtolower($mainImageType) == "image/png") {
-                //$Mainmsg = "Main Image Uploaded Successfully";
+
                 //Supporting Image
-                $targetSupportingImage = "Uploads/supportingimages/" . basename($_FILES['supportingimage']['name']);
-                $supportingImage = $_FILES['supportingimage']['name'];
-                $supportingImageTemp = $_FILES['supportingimage']['tmp_name'];
-                $supportingImagetyType = $_FILES['supportingimage']['type'];
-                if (move_uploaded_file($_FILES['supportingimage']['name'], $targetSupportingImage) && strtolower($supportingImagetyType) == "image/jpg" || strtolower($supportingImagetyType) == "image/jpeg" || strtolower($supportingImagetyType) == "image/png") {
-                    //$Supportingmsg = "Image Uploaded Successfully";
-                } else {
-                    //$Supportingmsg = "Invalid Image";
-                }
+                // $targetSupportingImage = "Uploads/supportingimages/" . basename($_FILES['supportingimage']['name']);
+                // $supportingImage = $_FILES['supportingimage']['name'];
+                // $supportingImageTemp = $_FILES['supportingimage']['tmp_name'];
+                // $supportingImagetyType = $_FILES['supportingimage']['type'];
+                
+                // if (move_uploaded_file($_FILES['supportingimage']['name'], $targetSupportingImage) && strtolower($supportingImagetyType) == "image/jpg" || strtolower($supportingImagetyType) == "image/jpeg" || strtolower($supportingImagetyType) == "image/png") 
+                // {
+                //     //$Supportingmsg = "Image Uploaded Successfully";
+                // } else 
+                // {
+                //     $Supportingmsg = "Invalid Image";
+                //     echo $supportingImage;
+                //     echo $Supportingmsg;
+                // }
 
                 //echo $Mainmsg;
                 //echo $Supportingmsg;
 
 
                 //Price calculation
+                
 
                 $ImageCategory = 10;
                 if ($TurnAround == "Budget - 24 Hours") {
@@ -241,79 +243,84 @@ if (isset($_SESSION['USER']))
                 $FinalPrice = $ImageCategory + $TurnAroundPrice + $ApplicationPrice;
 
 
-                $InsertImageEmboridery = "INSERT INTO tbl_order
-            (
-            emboridery_design_image,
-            emboridery_supporting_image,
-            design_name,
-            category,
-            ponumber,
-            turnarround,
-            dimension,
-            dimension_width,
-            dimension_height,
-            have_bg_color,
-            stitch,
-            application,
-            fabric,
-            thread,
-            applique,
-            comments,
-            price,
-            order_flag,
-            order_at,
-            user,
-            user_ip
-            )
-            VALUES
-            (
-            '$mainImage',
-            '$supportingImage',
-            '$DesignName',
-            'Emboridery Image',
-            '$PoNumber',
-            '$TurnAround',
-            '$Dimension',
-            '$DimensionWidth',
-            '$DimensionHeight',
-            '$IsBGColorInclude',
-            '$Stitch',
-            '$Application',
-            '$Fabric',
-            '$Thread',
-            '$Applique',
-            '$Comments',
-            $FinalPrice,
-            'NEW',
-            '$datetime',
-            '$userEmail',
-            '$userIP'
-            )";
+                $InsertImageEmboridery = "UPDATE tbl_order SET
+                emboridery_supporting_image = '$supportingImage', design_name = '$DesignName',
+                category = 'Emboridery Image', ponumber = '$PoNumber',
+                turnarround = '$TurnAround', dimension = '$Dimension',
+                dimension_width = '$DimensionWidth', dimension_height = '$DimensionHeight',
+                have_bg_color = '$IsBGColorInclude', stitch = '$Stitch',
+                application = '$Application', fabric = '$Fabric',
+                thread = '$Thread', applique = '$Applique',
+                comments = '$Comments', price = $FinalPrice,
+                order_flag = 'UPDATED', updated_at = '$datetime'
+                WHERE order_id = $orderId AND user = '$userEmail'";
+
+                    
+
+
+
+// File upload path
+
+// $targetDir = "Uploads/SupportingImages/";
+// $fileName =$_FILES["supportingimage"]["name"];
+// echo "Name ->".$fileName;
+// $tmpFile = $_FILES["supportingimage"]["tmp_name"];
+// $targetFilePath = $targetDir . $fileName;
+// $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+// if(!empty($fileName)){
+//     echo "File ->".$fileName;
+//     // Allow certain file formats
+//     $allowTypes = array('jpg','png','jpeg','gif','pdf');
+//     if(in_array($fileType, $allowTypes)){
+//         echo $targetFilePath;
+//         // Upload file to server
+//         if(move_uploaded_file($tmpFile, $targetFilePath)){
+//             // Insert image file name into database
+//             $insert = $db->query("INSERT into images (file_name, uploaded_on) VALUES ('".$fileName."', NOW())");
+//             if($insert){
+//                 $statusMsg = "The file ".$fileName. " has been uploaded successfully.";
+//                 echo $statusMsg;
+//             }else{
+//                 $statusMsg = "File upload failed, please try again.";
+//                 echo $statusMsg;
+//             } 
+//         }else{
+//             $statusMsg = "Sorry, there was an error uploading your file.";
+//             echo $statusMsg;
+//         }
+//     }else{
+//         $statusMsg = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
+//         echo $statusMsg;
+//     }
+// }else{
+//     $statusMsg = 'Please select a file to upload.';
+//     echo $statusMsg;
+// }
+
 
                 $InsertImageEmborideryFire = mysqli_query($conn, $InsertImageEmboridery);
 
 
                 if ($InsertImageEmborideryFire) {
-                    move_uploaded_file($mainImageTemp, $targetDesignImage);
+
+                    //move_uploaded_file($mainImageTemp, $targetDesignImage);
+                    if($_FILES[$supportingImage] != ""){
                     move_uploaded_file($supportingImageTemp, $targetSupportingImage);
-                    $orderSuccessMsg = "Order has been placed successfully";
+                        echo "Move executed";
+                }
+                    //$orderSuccessMsg = "Order has been placed successfully";
                     //echo $orderSuccessMsg;
                 } else {
                     echo mysqli_error($conn);
                 }
-            } else {
-
-                $ErrorNo = $ErrorCounter;
-
-                $Error = "Please Fix errors";
-            }
+            
         } else {
             $Mainmsg = "Invalid Image";
         }
 
 
     }
-    else if (isset($_POST['placeorderemtext']))
+    else if (isset($_POST['embText']))
     {
         $Text = mysqli_real_escape_string($conn, $_POST['text']);
         $DesignNameText = mysqli_real_escape_string($conn, $_POST['designnametext']);
@@ -434,57 +441,26 @@ if (isset($_SESSION['USER']))
             $FinalPriceText = $TextCategory + $TurnAroundPriceText + $ApplicationPriceText;
 
 
-            $InsertTextEmboridery = "INSERT INTO tbl_order
-            (
-            emboridery_text,
-            design_name,
-            category,
-            ponumber,
-            turnarround,
-            dimension,
-            dimension_width,
-            dimension_height,
-            have_bg_color,
-            stitch,
-            application,
-            fabric,
-            thread,
-            applique,
-            comments,
-            price,
-            order_flag,
-            order_at,
-            user,
-            user_ip
-            )
-            VALUES
-            (
-            '$Text',
-            '$DesignNameText',
-            'Emboridery Text',
-            '$PoNumberText',
-            '$TurnAroundText',
-            '$DimensionText',
-            '$DimensionWidthText',
-            '$DimensionHeightText',
-            '$IsBGColorIncludeText',
-            '$StitchText',
-            '$ApplicationText',
-            '$FabricText',
-            '$ThreadText',
-            '$AppliqueText',
-            '$CommentsText',
-            $FinalPriceText,
-            'NEW',
-            '$datetime',
-            '$userEmail',
-            '$userIP'
-            )";
+            $UpdateTextEmboridery = "UPDATE tbl_order SET
+            emboridery_text = '$Text', design_name = '$DesignNameText',
+            category = 'Emboridery Text', ponumber = '$PoNumberText',
+            turnarround = '$TurnAroundText', dimension = '$Dimension',
+            dimension_width = '$DimensionWidthText', dimension_height = '$DimensionHeightText',
+            have_bg_color = '$IsBGColorIncludeText', stitch = '$StitchText',
+            application = '$ApplicationText', fabric = '$FabricText',
+            thread = '$ThreadText', applique = '$AppliqueText',
+            comments = '$CommentsText', price = $FinalPriceText,
+            order_flag = 'UPDATED', updated_at = '$datetime'
+            WHERE order_id = $orderId";
 
-            $InsertTextEmborideryFire = mysqli_query($conn, $InsertTextEmboridery);
+            
+            
 
-            if ($InsertTextEmborideryFire) {
-                $EmborideryTextSuccessMsg = "Emboridery Text Order has been placed, Total amount : ".$FinalPriceText;
+            $UpdateTextEmborideryFire = mysqli_query($conn, $UpdateTextEmboridery);
+
+            if ($UpdateTextEmborideryFire) {
+                // $EmborideryTextSuccessMsg = "Emboridery Text Order has been placed, Total amount : ".$FinalPriceText;
+                header("location:http://localhost/rendigitizingupdated/user/profile/embroiderytext.php?updation=success");
             } else {
                 $EmborideryTextFailedMsg = "Something went wrong";
             }
@@ -495,7 +471,7 @@ if (isset($_SESSION['USER']))
 
 
     }
-    else if (isset($_POST['placeordervectorart'])) {
+    else if (isset($_POST['embVector'])) {
         //$DesignImageVector = mysqli_real_escape_string($conn,$_POST['imagedesignvector']);
         //$SupportingImageVector = mysqli_real_escape_string($conn,$_POST['imagesupportingvector']);
         $DesignNameVector = mysqli_real_escape_string($conn, $_POST['designnamevector']);

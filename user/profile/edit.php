@@ -1,5 +1,17 @@
 <?php
 require_once "edit-php.php";
+echo $EmborideryTextSuccessMsg;
+echo $EmborideryTextFailedMsg;
+$targetSupportingImage = "Uploads/Vector/SupportingImages/" . basename($_FILES['supportingimage']['name']);
+                    $supportingImage = $_FILES['supportingimage']['name'];
+                    $supportingImageTemp = $_FILES['supportingimage']['tmp_name'];
+                    $supportingImagetyType = $_FILES['supportingimage']['type'];
+                   echo $targetSupportingImage;
+                    if (move_uploaded_file($_FILES['supportingimage']['name'], $targetSupportingImage) && strtolower($supportingImagetyType) == "image/jpg" || strtolower($supportingImagetyType) == "image/jpeg" || strtolower($supportingImagetyType) == "image/png") {
+                        echo "Done";
+                    } else {
+                        echo "Not DOne";
+                    }
 ?>
 <html>
 
@@ -106,105 +118,114 @@ require_once "edit-php.php";
                         </div>
                         <div class="col-md-6">
                             <div class="editOrderButtonArea row">
-                                <button type="submit" form="editImage" class="btn order-btn-1 d-block py-2 my-2" style="color: white">Save</a>
-                                <a  class="btn order-btn-3 d-block py-2 my-2" style="color: white">Discard And Go Back</a>
+                                <button type="submit" name="embImage" form="editImage"
+                                    class="btn order-btn-1 d-block py-2 my-2" style="color: white">Save</button>
+                                <a class="btn order-btn-3 d-block py-2 my-2" style="color: white">Discard And Go
+                                    Back</a>
                             </div>
                         </div>
                     </div>
- 
+
                     <div class="row">
                         <div class="col-md-6">
-                            <form action="" id="editImage">
-                                <div class="container myaccount-details-area" id="editImage">
+                            <form id="editImage" method="POST" enctype="multipart/form-data>
+                                <div class=" container myaccount-details-area" id="editImage">
                                 <h1>Prefetch</h1>
                                 <?php while($orderRowTable1 = mysqli_fetch_array($searchOrderFire)) {
                                     echo $orderRowTable1['design_name'];
                                         ?>
-                                    <table class="myaccount-details-table">
-                                        <tr>
-                                            <td>
-                                                <h5>Your Design</h5>
-                                            </td>
-                                            <td>
-                                                <h6 class="error">Main Image cannot be edited</h6>
-                                                <span class="error"><?php echo $DesignImageErr ?></span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <h5>Supporting Design</h5>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="supportingimage" class="input-file" form="editImage">
-                                                <span class="error"><?php echo $SupportingImageErr ?></span>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <h5>Design Name</h5>
-                                            </td>
-                                            <td>
-                                                <input type="text" name="designname" id=""
-                                                    value='<?php echo $orderRowTable1['design_name'] ?>' form="editImage">
-                                                <span class="error"><?php echo $DesignNameErr ?></span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <h5>PO Number</h5>
-                                            </td>
-                                            <td>
-                                                <input type="text" name="ponumber" id=""
-                                                    value='<?php echo $orderRowTable1['ponumber'] ?>' form="editImage">
-                                                <span class="error"><?php echo $PoNumberErr ?></span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <h5>Turnaround</h5>
-                                            </td>
-                                            <td>
-                                                <div class="dropdown myaccount-details-phpcontent">
-                                                    <select name="turnaround" id="turnaround" class="btn dropdown-select" form="editImage">
-                                                    <option value="<?php echo $orderRowTable1['turnarround'] ?>">Selected -><?php echo $orderRowTable1['turnarround'] ?></option>
-                                                        <?php while ($turnaroundRows = mysqli_fetch_array($fetchTurnaroundFire)) { ?>
-                                                        <option value="<?php echo $turnaroundRows['turnaround'] ?>">
-                                                            <?php echo $turnaroundRows['turnaround'] ?></option>
-                                                        <?php } ?>
+                                <table class="myaccount-details-table">
+                                    <tr>
+                                        <td>
+                                            <h5>Your Design</h5>
+                                        </td>
+                                        <td>
+                                            <h6 class="error">Main Image cannot be edited</h6>
+                                            <span class="error"><?php echo $DesignImageErr ?></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5>Supporting Design</h5>
+                                        </td>
+                                        <td>
+                                            <input type="file" name="supportingimage" class="input-file">
+                                            <span class="error"><?php echo $SupportingImageErr ?></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5>Design Name</h5>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="designname" id=""
+                                                value='<?php echo $orderRowTable1['design_name'] ?>' form="editImage">
+                                            <span class="error"><?php echo $DesignNameErr ?></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5>PO Number</h5>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="ponumber" id=""
+                                                value='<?php echo $orderRowTable1['ponumber'] ?>' form="editImage">
+                                            <span class="error"><?php echo $PoNumberErr ?></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5>Turnaround</h5>
+                                        </td>
+                                        <td>
+                                            <div class="dropdown myaccount-details-phpcontent">
+                                                <select name="turnaround" id="turnaround" class="btn dropdown-select"
+                                                    form="editImage">
+                                                    <option value="<?php echo $orderRowTable1['turnarround'] ?>">
+                                                        Selected -><?php echo $orderRowTable1['turnarround'] ?></option>
+                                                    <?php while ($turnaroundRows = mysqli_fetch_array($fetchTurnaroundFire)) { ?>
+                                                    <option value="<?php echo $turnaroundRows['turnaround'] ?>">
+                                                        <?php echo $turnaroundRows['turnaround'] ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                                <span class="error"><?php echo $TurnAroundErr ?></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5>Dimensions</h5>
+                                        </td>
+                                        <td>
+                                            <div class="row dimensionBox">
+                                                <div class="col-md-4">
+                                                    <input type="text" placeholder="Width" name="width" id="width"
+                                                        value='<?php echo $orderRowTable1['dimension_width'] ?>'
+                                                        form="editImage">
+                                                    <span class="error"><?php echo $DimensionWidthErr ?></span>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="text" placeholder="Height" name="height" id="height"
+                                                        value='<?php echo $orderRowTable1['dimension_height'] ?>'
+                                                        form="editImage">
+                                                    <span class="error"><?php echo $DimensionHeightErr ?></span>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <select name="dimension" id="dimension" class="btn dropdown-select"
+                                                        form="editImage">
+                                                        <option value="<?php echo $orderRowTable1['dimension'] ?>">
+                                                            Selected -> <?php echo $orderRowTable1['dimension'] ?>
+                                                        </option>
+                                                        <option value="Inches">Inches</option>
+                                                        <option value="cm">cm</option>
+                                                        <option value="mm">mm</option>
                                                     </select>
-                                                    <span class="error"><?php echo $TurnAroundErr ?></span>
                                                 </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <h5>Dimensions</h5>
-                                            </td>
-                                            <td>
-                                                <div class="row dimensionBox">
-                                                    <div class="col-md-4">
-                                                        <input type="text" placeholder="Width" name="width" id="width" value='<?php echo $orderRowTable1['dimension_width'] ?>' form="editImage">
-                                                        <span class="error"><?php echo $DimensionWidthErr ?></span>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <input type="text" placeholder="Height" name="height" id="height" value='<?php echo $orderRowTable1['dimension_height'] ?>' form="editImage">
-                                                        <span class="error"><?php echo $DimensionHeightErr ?></span>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <select name="dimension" id="dimension" class="btn dropdown-select" form="editImage">
-                                                            <option value="<?php echo $orderRowTable1['dimension'] ?>">Selected -> <?php echo $orderRowTable1['dimension'] ?></option>
-                                                            <option value="Inches">Inches</option>
-                                                            <option value="cm">cm</option>
-                                                            <option value="mm">mm</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <?php //} ?>
-                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <?php //} ?>
                             </form>
                         </div>
                         <div class="col-md-6">
@@ -215,9 +236,11 @@ require_once "edit-php.php";
                                             <h5>Include the background color?</h5>
                                         </td>
                                         <td>
-                                            <select name="backgroundcolorinclusion" id="backgroundcolorinclusion" class="btn dropdown-select" form="editImage">
-                                            
-                                            <option value="<?php echo $orderRowTable1['have_bg_color'] ?>">Selected -> <?php echo $orderRowTable1['have_bg_color'] ?></option>
+                                            <select name="backgroundcolorinclusion" id="backgroundcolorinclusion"
+                                                class="btn dropdown-select" form="editImage">
+
+                                                <option value="<?php echo $orderRowTable1['have_bg_color'] ?>">Selected
+                                                    -> <?php echo $orderRowTable1['have_bg_color'] ?></option>
                                                 <?php while($includeRows = mysqli_fetch_array($fetchIncludeFire)) { ?>
                                                 <option value="<?php echo $includeRows['yes_or_no'] ?>">
                                                     <?php echo $includeRows['yes_or_no'] ?></option>
@@ -230,8 +253,10 @@ require_once "edit-php.php";
                                             <h5>Stitch</h5>
                                         </td>
                                         <td>
-                                            <select name="stitch" id="stitch" class="btn dropdown-select" form="editImage">
-                                            <option value="<?php echo $orderRowTable1['stitch'] ?>">Selected -> <?php echo $orderRowTable1['stitch'] ?></option>
+                                            <select name="stitch" id="stitch" class="btn dropdown-select"
+                                                form="editImage">
+                                                <option value="<?php echo $orderRowTable1['stitch'] ?>">Selected ->
+                                                    <?php echo $orderRowTable1['stitch'] ?></option>
                                                 <?php while ($stitchRows = mysqli_fetch_array($fetchStitchFire)) { ?>
                                                 <option value="<?php echo $stitchRows['stitch'] ?>">
                                                     <?php echo $stitchRows['stitch'] ?></option>
@@ -245,8 +270,10 @@ require_once "edit-php.php";
                                             <h5>Application</h5>
                                         </td>
                                         <td>
-                                            <select name="application" id="application" class="btn dropdown-select" form="editImage">
-                                            <option value="S<?php echo $orderRowTable1['application'] ?>">Selected -> <?php echo $orderRowTable1['application'] ?></option>
+                                            <select name="application" id="application" class="btn dropdown-select"
+                                                form="editImage">
+                                                <option value="S<?php echo $orderRowTable1['application'] ?>">Selected
+                                                    -> <?php echo $orderRowTable1['application'] ?></option>
                                                 <?php while ($applicationRows = mysqli_fetch_array($fetchApplicationFire)) { ?>
                                                 <option value="<?php echo $applicationRows['application'] ?>">
                                                     <?php echo $applicationRows['application'] ?></option>
@@ -260,8 +287,10 @@ require_once "edit-php.php";
                                             <h5>Fabric</h5>
                                         </td>
                                         <td>
-                                            <select name="fabric" id="fabric" class="btn dropdown-select" form="editImage">
-                                            <option value="S<?php echo $orderRowTable1['fabric'] ?>">Selected -> <?php echo $orderRowTable1['fabric'] ?></option>
+                                            <select name="fabric" id="fabric" class="btn dropdown-select"
+                                                form="editImage">
+                                                <option value="S<?php echo $orderRowTable1['fabric'] ?>">Selected ->
+                                                    <?php echo $orderRowTable1['fabric'] ?></option>
                                                 <?php while ($fabricRows = mysqli_fetch_array($fetchFabricFire)) { ?>
                                                 <option value="<?php echo $fabricRows['fabric'] ?>">
                                                     <?php echo $fabricRows['fabric'] ?></option>
@@ -275,8 +304,10 @@ require_once "edit-php.php";
                                             <h5>Thread</h5>
                                         </td>
                                         <td>
-                                            <select name="thread" id="thread" class="btn dropdown-select" form="editImage">
-                                            <option value="S<?php echo $orderRowTable1['thread'] ?>">Selected -> <?php echo $orderRowTable1['thread'] ?></option>
+                                            <select name="thread" id="thread" class="btn dropdown-select"
+                                                form="editImage">
+                                                <option value="S<?php echo $orderRowTable1['thread'] ?>">Selected ->
+                                                    <?php echo $orderRowTable1['thread'] ?></option>
                                                 <?php while ($threadRows = mysqli_fetch_array($fetchThreadFire)) { ?>
                                                 <option value="<?php echo $threadRows['thread'] ?>">
                                                     <?php echo $threadRows['thread'] ?></option>
@@ -290,8 +321,10 @@ require_once "edit-php.php";
                                             <h5>Applique</h5>
                                         </td>
                                         <td>
-                                            <select name="applique" id="applique" class="btn dropdown-select" form="editImage">
-                                            <option value="S<?php echo $orderRowTable1['applique'] ?>">Selected -> <?php echo $orderRowTable1['applique'] ?></option>
+                                            <select name="applique" id="applique" class="btn dropdown-select"
+                                                form="editImage">
+                                                <option value="S<?php echo $orderRowTable1['applique'] ?>">Selected ->
+                                                    <?php echo $orderRowTable1['applique'] ?></option>
                                                 <?php while ($appliqueRows = mysqli_fetch_array($fetchAppliqueFire)) { ?>
                                                 <option value="<?php echo $appliqueRows['applique'] ?>">
                                                     <?php echo $appliqueRows['applique'] ?></option>
@@ -304,12 +337,12 @@ require_once "edit-php.php";
                                             <h5>Comments</h5>
                                         </td>
                                         <td>
-                                            <textarea name="comment" id="comment" cols="40" rows="5"
-                                                value='' form="editImage"><?php echo $orderRowTable1['comments'] ?></textarea>
+                                            <textarea name="comment" id="comment" cols="40" rows="5" value=''
+                                                form="editImage"><?php echo $orderRowTable1['comments'] ?></textarea>
                                             <span class="error"><?php echo $CommentsErr ?></span>
                                         </td>
                                     </tr>
-                                                <?php } ?>
+                                    <?php } ?>
                                 </table>
                             </div>
                         </div>
@@ -317,7 +350,7 @@ require_once "edit-php.php";
                 </div>
 
                 <!-- Embroidery Text -->
-                
+
                 <?php } elseif($category == "Emboridery Text") { ?>
                 <div class="col-md-9 profile-area-content p-5">
                     <h1 class="profile-text-area my-3"> Edit Order</h1>
@@ -327,15 +360,17 @@ require_once "edit-php.php";
                         </div>
                         <div class="col-md-6">
                             <div class="editOrderButtonArea row">
-                                <button form="editText" type="submit" class="btn order-btn-1 d-block py-2 my-2" style="color: white">Save</a>
-                                <a class="btn order-btn-3 d-block py-2 my-2" style="color: white">Discard And Go Back</a>
+                                <button form="editText" name="embText" type="submit"
+                                    class="btn order-btn-1 d-block py-2 my-2" style="color: white">Save</button>
+                                <a class="btn order-btn-3 d-block py-2 my-2" style="color: white">Discard And Go
+                                    Back</a>
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
-                            <form action="" id="editText">
+                            <form id="editText" method="POST">
                                 <div class="container myaccount-details-area">
                                     <table class="myaccount-details-table">
                                         <?php while($orderRowTable2 = mysqli_fetch_array($searchOrderFire)){ ?>
@@ -345,7 +380,8 @@ require_once "edit-php.php";
                                             </td>
                                             <td>
                                                 <textarea name="text" id="" cols="30" rows="5"
-                                                    placeholder="Enter Text Here" form="editText"><?php echo $orderRowTable2['emboridery_text'] ?></textarea>
+                                                    placeholder="Enter Text Here"
+                                                    form="editText"><?php echo $orderRowTable2['emboridery_text'] ?></textarea>
                                                 <span class="error"><?php echo $TextErr ?></span>
 
                                             </td>
@@ -355,7 +391,9 @@ require_once "edit-php.php";
                                                 <h5>Design Name</h5>
                                             </td>
                                             <td>
-                                                <input type="text" name="designnametext" id="ponumber" value="<?php echo $orderRowTable2['design_name'] ?>" form="editText">
+                                                <input type="text" name="designnametext" id="ponumber"
+                                                    value="<?php echo $orderRowTable2['design_name'] ?>"
+                                                    form="editText">
                                                 <span class="error"><?php echo $DesignNameTextErr ?></span>
                                             </td>
                                         </tr>
@@ -364,7 +402,8 @@ require_once "edit-php.php";
                                                 <h5>PO Number</h5>
                                             </td>
                                             <td>
-                                                <input type="text" name="ponumbertext" id="ponumber" value="<?php echo $orderRowTable2['ponumber'] ?>" form="editText">
+                                                <input type="text" name="ponumbertext" id="ponumber"
+                                                    value="<?php echo $orderRowTable2['ponumber'] ?>" form="editText">
                                                 <span class="error"><?php echo $PoNumberTextErr ?></span>
                                             </td>
                                         </tr>
@@ -376,8 +415,10 @@ require_once "edit-php.php";
                                                 <div class="dropdown myaccount-details-phpcontent">
                                                     <select name="turnaroundtext" id="turnaroundtext"
                                                         class="btn dropdown-select" form="editText">
-                                                        
-                                                        <option value="<?php echo $orderRowTable2['turnarround'] ?>">Selected -> <?php echo $orderRowTable2['turnarround'] ?></option>
+
+                                                        <option value="<?php echo $orderRowTable2['turnarround'] ?>">
+                                                            Selected -> <?php echo $orderRowTable2['turnarround'] ?>
+                                                        </option>
                                                         <option value="Select Plan">Select Plan</option>
                                                         <option value="Budget - 24 Hours">Budget - 24 Hours</option>
                                                         <option value="Standard - 12 Hours">Standard - 12 Hours
@@ -395,17 +436,24 @@ require_once "edit-php.php";
                                             <td>
                                                 <div class="row dimensionBox">
                                                     <div class="col-md-4">
-                                                        <input type="text" placeholder="Width" name="widthtext" id="widthtext" value="<?php echo $orderRowTable2['dimension_width'] ?>" form="editText">
+                                                        <input type="text" placeholder="Width" name="widthtext"
+                                                            id="widthtext"
+                                                            value="<?php echo $orderRowTable2['dimension_width'] ?>"
+                                                            form="editText">
                                                         <span class="error"><?php echo $DimensionWidthTextErr ?></span>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <input type="text" placeholder="Height" name="heighttext" id="heighttext" value="<?php echo $orderRowTable2['dimension_height'] ?>" form="editText">
+                                                        <input type="text" placeholder="Height" name="heighttext"
+                                                            id="heighttext"
+                                                            value="<?php echo $orderRowTable2['dimension_height'] ?>"
+                                                            form="editText">
                                                         <span class="error"><?php echo $DimensionHeightTextErr ?></span>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <select name="dimensiontext" id="dimensiontext"
                                                             class="btn dropdown-select" form="editText">
-                                                            <option><?php echo $orderRowTable2['dimension'] ?>Selected -> <?php echo $orderRowTable2['dimension'] ?></option>
+                                                            <option><?php echo $orderRowTable2['dimension'] ?>Selected
+                                                                -> <?php echo $orderRowTable2['dimension'] ?></option>
                                                             <option value="Inches">Inches</option>
                                                             <option value="cm">cm</option>
                                                             <option value="mm">mm</option>
@@ -428,7 +476,8 @@ require_once "edit-php.php";
                                         <td>
                                             <select name="backgroundcolorinclusiontext" form="editText"
                                                 id="backgroundcolorinclusiontext" class="btn dropdown-select">
-                                                <option value="<?php echo $orderRowTable2['have_bg_color'] ?>">Selected -> <?php echo $orderRowTable2['have_bg_color'] ?></option>
+                                                <option value="<?php echo $orderRowTable2['have_bg_color'] ?>">Selected
+                                                    -> <?php echo $orderRowTable2['have_bg_color'] ?></option>
                                                 <option value="YES">Yes</option>
                                                 <option value="NO">No</option>
                                             </select>
@@ -439,11 +488,14 @@ require_once "edit-php.php";
                                             <h5>Stitch</h5>
                                         </td>
                                         <td>
-                                            <select name="stitchtext" id="stitchtext" form="editText" class="btn dropdown-select">
-                                                <option value="<?php echo $orderRowTable2['stitch'] ?>">Selected-> <?php echo $orderRowTable2['stitch'] ?></option>
+                                            <select name="stitchtext" id="stitchtext" form="editText"
+                                                class="btn dropdown-select">
+                                                <option value="<?php echo $orderRowTable2['stitch'] ?>">Selected->
+                                                    <?php echo $orderRowTable2['stitch'] ?></option>
                                                 <?php while($stitchList = mysqli_fetch_array($fetchStitchFire)){ ?>
-                                                    <option value="<?php echo $stitchList['stitch'] ?>"><?php echo $stitchList['stitch'] ?></option>
-                                                
+                                                <option value="<?php echo $stitchList['stitch'] ?>">
+                                                    <?php echo $stitchList['stitch'] ?></option>
+
                                                 <?php } ?>
                                             </select>
                                             <span class="error"><?php echo $StitchTextErr ?></span>
@@ -456,10 +508,12 @@ require_once "edit-php.php";
                                         <td>
                                             <select name="applicationtext" id="applicationtext" form="editText"
                                                 class="btn dropdown-select">
-                                                <option value="<?php echo $orderRowTable2['application'] ?>">Selected -><?php echo $orderRowTable2['stitch'] ?></option>
+                                                <option value="<?php echo $orderRowTable2['application'] ?>">Selected
+                                                    -><?php echo $orderRowTable2['application'] ?></option>
                                                 <?php while($applicationList = mysqli_fetch_array($fetchApplicationFire)){ ?>
-                                                    <option value="<?php echo $applicationList['application'] ?>"><?php echo $applicationList['application'] ?></option>
-                                                
+                                                <option value="<?php echo $applicationList['application'] ?>">
+                                                    <?php echo $applicationList['application'] ?></option>
+
                                                 <?php } ?>
                                             </select>
                                             <span class="error"><?php echo $ApplicationTextErr ?></span>
@@ -470,10 +524,13 @@ require_once "edit-php.php";
                                             <h5>Fabric</h5>
                                         </td>
                                         <td>
-                                            <select name="fabrictext" id="fabrictext" form="editText" class="btn dropdown-select">
-                                                <option value="<?php echo $orderRowTable2['fabric'] ?>">Selected -> <?php echo $orderRowTable2['fabric'] ?></option>
+                                            <select name="fabrictext" id="fabrictext" form="editText"
+                                                class="btn dropdown-select">
+                                                <option value="<?php echo $orderRowTable2['fabric'] ?>">Selected ->
+                                                    <?php echo $orderRowTable2['fabric'] ?></option>
                                                 <?php while($fabricList = mysqli_fetch_array($fetchFabricFire)){ ?>
-                                                    <option value="<?php echo $fabricList['fabric'] ?>"><?php echo $fabricList['fabric'] ?></option>
+                                                <option value="<?php echo $fabricList['fabric'] ?>">
+                                                    <?php echo $fabricList['fabric'] ?></option>
                                                 <?php } ?>
                                             </select>
                                             <span class="error"><?php echo $FabricTextErr ?></span>
@@ -484,10 +541,13 @@ require_once "edit-php.php";
                                             <h5>Thread</h5>
                                         </td>
                                         <td>
-                                            <select name="threadtext" id="threadtext" form="editText" class="btn dropdown-select">
-                                                <option value="<?php echo $orderRowTable2['thread'] ?>">Selected -> <?php echo $orderRowTable2['thread'] ?></option>
+                                            <select name="threadtext" id="threadtext" form="editText"
+                                                class="btn dropdown-select">
+                                                <option value="<?php echo $orderRowTable2['thread'] ?>">Selected ->
+                                                    <?php echo $orderRowTable2['thread'] ?></option>
                                                 <?php while($threadList = mysqli_fetch_array($fetchThreadFire)){ ?>
-                                                    <option value="<?php echo $threadList['thread'] ?>"><?php echo $threadList['thread'] ?></option>
+                                                <option value="<?php echo $threadList['thread'] ?>">
+                                                    <?php echo $threadList['thread'] ?></option>
                                                 <?php } ?>
                                             </select>
                                             <span class="error"><?php echo $ThreadTextErr ?></span>
@@ -498,8 +558,10 @@ require_once "edit-php.php";
                                             <h5>Applique</h5>
                                         </td>
                                         <td>
-                                            <select name="appliquetext" id="appliquetext" form="editText" class="btn dropdown-select">
-                                                <option value="<?php echo $orderRowTable2['applique'] ?>">Selected -> <?php echo $orderRowTable2['applique'] ?></option>
+                                            <select name="appliquetext" id="appliquetext" form="editText"
+                                                class="btn dropdown-select">
+                                                <option value="<?php echo $orderRowTable2['applique'] ?>">Selected ->
+                                                    <?php echo $orderRowTable2['applique'] ?></option>
                                                 <option value="Yes">Yes</option>
                                                 <option value="No">No</option>
                                             </select>
@@ -515,7 +577,7 @@ require_once "edit-php.php";
                                             <span class="error"><?php echo $CommentsTextErr ?></span>
                                         </td>
                                     </tr>
-                                        <?php } ?>
+                                    <?php } ?>
                                 </table>
                             </div>
                         </div>
@@ -523,7 +585,7 @@ require_once "edit-php.php";
                 </div>
 
                 <!-- Vector Art -->
-                
+
                 <?php } else if ($category == "Emboridery Vector") { ?>
                 <div class="col-md-9 profile-area-content p-5">
                     <h1 class="profile-text-area my-3"> Edit Order</h1>
@@ -533,8 +595,10 @@ require_once "edit-php.php";
                         </div>
                         <div class="col-md-6">
                             <div class="editOrderButtonArea row">
-                                <button type="submit" form="editVector" class="btn order-btn-1 d-block py-2 my-2" style="color: white">Save</button>
-                                <a href="#" class="btn order-btn-3 d-block py-2 my-2" style="color: white">Discard And Go Back</a>
+                                <button type="submit" name="embVector" form="editVector"
+                                    class="btn order-btn-1 d-block py-2 my-2" style="color: white">Save</button>
+                                <a href="#" class="btn order-btn-3 d-block py-2 my-2" style="color: white">Discard And
+                                    Go Back</a>
                             </div>
                         </div>
                     </div>
@@ -550,7 +614,7 @@ require_once "edit-php.php";
                                                 <h5>Your Design</h5>
                                             </td>
                                             <td>
-                                            <h6 class="error">Main Image cannot be edited</h6>
+                                                <h6 class="error">Main Image cannot be edited</h6>
                                                 <span class="error"><?php echo $DesignImageVectorErr?></span>
                                             </td>
                                         </tr>
@@ -568,7 +632,9 @@ require_once "edit-php.php";
                                                 <h5>Design Name</h5>
                                             </td>
                                             <td>
-                                                <input type="text" name="designnamevector" id="designnamevector" value="<?php echo $orderRowTable3['design_name'] ?>" form="editVector">
+                                                <input type="text" name="designnamevector" id="designnamevector"
+                                                    value="<?php echo $orderRowTable3['design_name'] ?>"
+                                                    form="editVector">
                                                 <span class="error"><?php echo $DesignNameVectorErr?></span>
                                             </td>
                                         </tr>
@@ -577,7 +643,8 @@ require_once "edit-php.php";
                                                 <h5>PO Number</h5>
                                             </td>
                                             <td>
-                                                <input type="text" name="ponumbervector" id="ponumbervector" value="<?php echo $orderRowTable3['ponumber'] ?>" form="editVector">
+                                                <input type="text" name="ponumbervector" id="ponumbervector"
+                                                    value="<?php echo $orderRowTable3['ponumber'] ?>" form="editVector">
                                                 <span class="error"><?php echo $PoNumberVectorErr?></span>
                                             </td>
                                         </tr>
@@ -587,13 +654,16 @@ require_once "edit-php.php";
                                             </td>
                                             <td>
                                                 <div class="dropdown myaccount-details-phpcontent">
-                                                    
+
                                                     <select name="turnaroundvector" id="turnaroundvector"
                                                         class="btn dropdown-select" form="editVector">
-                                                        <option value="<?php echo $orderRowTable3['turnarround'] ?>">Selected -> <?php echo $orderRowTable3['turnarround'] ?></option>
+                                                        <option value="<?php echo $orderRowTable3['turnarround'] ?>">
+                                                            Selected -> <?php echo $orderRowTable3['turnarround'] ?>
+                                                        </option>
                                                         <?php while($turnaroundListva = mysqli_fetch_array($fetchTurnaroundFire)){ ?>
-                                                            <option value="<?php echo $turnaroundListva['turnaround'] ?>"><?php echo $turnaroundListva['turnaround'] ?></option>
-                                                       
+                                                        <option value="<?php echo $turnaroundListva['turnaround'] ?>">
+                                                            <?php echo $turnaroundListva['turnaround'] ?></option>
+
                                                         <?php } ?>
                                                     </select>
                                                     <span class="error"><?php echo $TurnAroundVectorErr?></span>
@@ -601,31 +671,40 @@ require_once "edit-php.php";
                                             </td>
                                         </tr>
                                         <tr>
-                                        <td>
-                                            <h5>Dimensions</h5>
-                                        </td>
-                                        <td>
-                                            <div class="row dimensionBox">
-                                                <div class="col-md-4">
-                                                    <input type="text" placeholder="Width" name="widthvector" id="widthvector" value="<?php echo $orderRowTable3['dimension_width'] ?>" form="editVector">
-                                                    <span class="error"><?php echo $DimensionWidthVectorErr?></span>
+                                            <td>
+                                                <h5>Dimensions</h5>
+                                            </td>
+                                            <td>
+                                                <div class="row dimensionBox">
+                                                    <div class="col-md-4">
+                                                        <input type="text" placeholder="Width" name="widthvector"
+                                                            id="widthvector"
+                                                            value="<?php echo $orderRowTable3['dimension_width'] ?>"
+                                                            form="editVector">
+                                                        <span class="error"><?php echo $DimensionWidthVectorErr?></span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input type="text" placeholder="Height" name="heightvector"
+                                                            id="heightvector"
+                                                            value="<?php echo $orderRowTable3['dimension_height'] ?>"
+                                                            form="editVector">
+                                                        <span
+                                                            class="error"><?php echo $DimensionHeightVectorErr?></span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <select name="dimensionvector" id="dimensionvector"
+                                                            class="btn dropdown-select" form="editVector">
+                                                            <option value="<?php echo $orderRowTable3['dimension'] ?>">
+                                                                Selected -><?php echo $orderRowTable3['dimension'] ?>
+                                                            </option>
+                                                            <option value="Inches">Inches</option>
+                                                            <option value="cm">cm</option>
+                                                            <option value="mm">mm</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-4">
-                                                    <input type="text" placeholder="Height" name="heightvector" id="heightvector" value="<?php echo $orderRowTable3['dimension_height'] ?>" form="editVector">
-                                                    <span class="error"><?php echo $DimensionHeightVectorErr?></span>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <select name="dimensionvector" id="dimensionvector"
-                                                        class="btn dropdown-select" form="editVector">
-                                                        <option value="<?php echo $orderRowTable3['dimension'] ?>">Selected -><?php echo $orderRowTable3['dimension'] ?></option>
-                                                        <option value="Inches">Inches</option>
-                                                        <option value="cm">cm</option>
-                                                        <option value="mm">mm</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
                                     </table>
                                 </div>
                             </form>
@@ -639,8 +718,10 @@ require_once "edit-php.php";
                                         </td>
                                         <td>
                                             <select name="backgroundcolorinclusionvector"
-                                                id="backgroundcolorinclusionvector" class="btn dropdown-select" form="editVector">
-                                                <option value="<?php echo $orderRowTable3['have_bg_color'] ?>">Selected -> <?php echo $orderRowTable3['have_bg_color'] ?></option>
+                                                id="backgroundcolorinclusionvector" class="btn dropdown-select"
+                                                form="editVector">
+                                                <option value="<?php echo $orderRowTable3['have_bg_color'] ?>">Selected
+                                                    -> <?php echo $orderRowTable3['have_bg_color'] ?></option>
 
                                                 <option value="Yes">Yes</option>
                                                 <option value="No">No</option>
@@ -652,8 +733,10 @@ require_once "edit-php.php";
                                             <h5>Format</h5>
                                         </td>
                                         <td>
-                                            <select name="formatvector" id="formatvector" class="btn dropdown-select" form="editVector">
-                                                <option value="<?php echo $orderRowTable3['vector_format'] ?>">Selected -><?php echo $orderRowTable3['vector_format'] ?></option>
+                                            <select name="formatvector" id="formatvector" class="btn dropdown-select"
+                                                form="editVector">
+                                                <option value="<?php echo $orderRowTable3['vector_format'] ?>">Selected
+                                                    -><?php echo $orderRowTable3['vector_format'] ?></option>
                                                 <option value="Select One">Select One</option>
                                                 <option value="svg">svg</option>
                                                 <option value=".ai">.ai</option>
@@ -671,9 +754,11 @@ require_once "edit-php.php";
                                         <td>
                                             <select name="applicationvector" id="applicationvector"
                                                 class="btn dropdown-select" form="editVector">
-                                                <option value="<?php echo $orderRowTable3['application'] ?>">Selected -> <?php echo $orderRowTable3['application'] ?></option>
+                                                <option value="<?php echo $orderRowTable3['application'] ?>">Selected ->
+                                                    <?php echo $orderRowTable3['application'] ?></option>
                                                 <?php while($applicationListva = mysqli_fetch_array($fetchApplicationFire)){ ?>
-                                                    <option value="<?php echo $applicationListva['application'] ?>"><?php echo $applicationListva['application'] ?></option>
+                                                <option value="<?php echo $applicationListva['application'] ?>">
+                                                    <?php echo $applicationListva['application'] ?></option>
                                                 <?php } ?>
                                             </select>
                                             <span class="error"><?php echo $ApplicationVectorErr?></span>
@@ -686,7 +771,9 @@ require_once "edit-php.php";
                                         <td>
                                             <select name="printingprocessvector" id="printingprocessvector"
                                                 class="btn dropdown-select" form="editVector">
-                                                <option value="<?php echo $orderRowTable3['printing_process'] ?>">Selected -> <?php echo $orderRowTable3['printing_process'] ?></option>
+                                                <option value="<?php echo $orderRowTable3['printing_process'] ?>">
+                                                    Selected -> <?php echo $orderRowTable3['printing_process'] ?>
+                                                </option>
                                                 <option value="Select One">Select One</option>
                                                 <option value="Spot Colours">Spot Colours</option>
                                                 <option value="CMYK (process color)">CMYK (process color)
@@ -700,8 +787,10 @@ require_once "edit-php.php";
                                             <h5>Color</h5>
                                         </td>
                                         <td>
-                                            <select name="colorvector" id="colorvector" class="btn dropdown-select" form="editVector">
-                                                <option value="<?php echo $orderRowTable3['color'] ?>">Selected -> <?php echo $orderRowTable3['color'] ?></option>
+                                            <select name="colorvector" id="colorvector" class="btn dropdown-select"
+                                                form="editVector">
+                                                <option value="<?php echo $orderRowTable3['color'] ?>">Selected ->
+                                                    <?php echo $orderRowTable3['color'] ?></option>
                                                 <option value="Select One">Select One</option>
                                                 <option value="As per part">As per part</option>
                                                 <option value="1-color logo">1-color logo</option>
@@ -716,11 +805,12 @@ require_once "edit-php.php";
                                         </td>
                                         <td>
                                             <textarea form="form3" name="commentvector" id="commentvector" cols="40"
-                                                rows="5" form="editVector"><?php echo $orderRowTable3['comments'] ?></textarea>
+                                                rows="5"
+                                                form="editVector"><?php echo $orderRowTable3['comments'] ?></textarea>
                                             <span class="error"><?php echo $CommentsVectorErr?></span>
                                         </td>
                                     </tr>
-                                        <?php } ?>
+                                    <?php } ?>
                                 </table>
                             </div>
                         </div>
@@ -806,4 +896,5 @@ require_once "edit-php.php";
         }
     </script>
 </body>
+
 </html>
