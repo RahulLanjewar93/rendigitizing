@@ -190,14 +190,17 @@ if (isset($_SESSION['USER']))
 
         if ($ErrorCounter == 0) {
 
-                $targetSupportingImage = "Uploads/supportingimages/" . basename($_FILES['supportingimage']['name']);
+                $target = "Uploads/SupportingImages/";
+                $targetSupportingImage = "Uploads/SupportingImages/" . basename($_FILES['supportingimage']['name']);
                 $supportingImage = $_FILES['supportingimage']['name'];
                 $supportingImageTemp = $_FILES['supportingimage']['tmp_name'];
                 $supportingImagetyType = $_FILES['supportingimage']['type'];
-                if (move_uploaded_file($_FILES['supportingimage']['name'], $targetSupportingImage) && strtolower($supportingImagetyType) == "image/jpg" || strtolower($supportingImagetyType) == "image/jpeg" || strtolower($supportingImagetyType) == "image/png") {
-                    //$Supportingmsg = "Image Uploaded Successfully";
+                if (move_uploaded_file($_FILES['supportingimage']['tmp_name'],$target . $_FILES['supportingimage']['name']) && strtolower($supportingImagetyType) == "image/jpg" || strtolower($supportingImagetyType) == "image/jpeg" || strtolower($supportingImagetyType) == "image/png") {
+                    $Supportingmsg = "Image Uploaded Successfully";
+                    echo $Supportingmsg;
                 } else {
-                    //$Supportingmsg = "Invalid Image";
+                    $Supportingmsg = "Invalid Image";
+                    echo $Supportingmsg;
                 }
 
                 //Price calculation
