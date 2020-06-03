@@ -2,16 +2,6 @@
 require_once "edit-php.php";
 echo $EmborideryTextSuccessMsg;
 echo $EmborideryTextFailedMsg;
-$targetSupportingImage = "Uploads/Vector/SupportingImages/" . basename($_FILES['supportingimage']['name']);
-                    $supportingImage = $_FILES['supportingimage']['name'];
-                    $supportingImageTemp = $_FILES['supportingimage']['tmp_name'];
-                    $supportingImagetyType = $_FILES['supportingimage']['type'];
-                   echo $targetSupportingImage;
-                    if (move_uploaded_file($_FILES['supportingimage']['name'], $targetSupportingImage) && strtolower($supportingImagetyType) == "image/jpg" || strtolower($supportingImagetyType) == "image/jpeg" || strtolower($supportingImagetyType) == "image/png") {
-                        echo "Done";
-                    } else {
-                        echo "Not DOne";
-                    }
 ?>
 <html>
 
@@ -128,104 +118,106 @@ $targetSupportingImage = "Uploads/Vector/SupportingImages/" . basename($_FILES['
 
                     <div class="row">
                         <div class="col-md-6">
-                            <form id="editImage" method="POST" enctype="multipart/form-data>
+                            <form id="editImage" method="POST" enctype="multipart/form-data">
                                 <div class=" container myaccount-details-area" id="editImage">
-                                <h1>Prefetch</h1>
-                                <?php while($orderRowTable1 = mysqli_fetch_array($searchOrderFire)) {
-                                    echo $orderRowTable1['design_name'];
+                                    <?php while($orderRowTable1 = mysqli_fetch_array($searchOrderFire)) {
                                         ?>
-                                <table class="myaccount-details-table">
-                                    <tr>
-                                        <td>
-                                            <h5>Your Design</h5>
-                                        </td>
-                                        <td>
-                                            <h6 class="error">Main Image cannot be edited</h6>
-                                            <span class="error"><?php echo $DesignImageErr ?></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <h5>Supporting Design</h5>
-                                        </td>
-                                        <td>
-                                            <input type="file" name="supportingimage" class="input-file">
-                                            <span class="error"><?php echo $SupportingImageErr ?></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <h5>Design Name</h5>
-                                        </td>
-                                        <td>
-                                            <input type="text" name="designname" id=""
-                                                value='<?php echo $orderRowTable1['design_name'] ?>' form="editImage">
-                                            <span class="error"><?php echo $DesignNameErr ?></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <h5>PO Number</h5>
-                                        </td>
-                                        <td>
-                                            <input type="text" name="ponumber" id=""
-                                                value='<?php echo $orderRowTable1['ponumber'] ?>' form="editImage">
-                                            <span class="error"><?php echo $PoNumberErr ?></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <h5>Turnaround</h5>
-                                        </td>
-                                        <td>
-                                            <div class="dropdown myaccount-details-phpcontent">
-                                                <select name="turnaround" id="turnaround" class="btn dropdown-select"
+                                    <table class="myaccount-details-table">
+                                        <tr>
+                                            <td>
+                                                <h5>Your Design</h5>
+                                            </td>
+                                            <td>
+                                                <h6 class="error">Main Image cannot be edited</h6>
+                                                <span class="error"><?php echo $DesignImageErr ?></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h5>Supporting Design</h5>
+                                            </td>
+                                            <td>
+                                                <input type="file" name="supportingimage" class="input-file">
+                                                <span class="error"><?php echo $SupportingImageErr ?></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h5>Design Name</h5>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="designname" id=""
+                                                    value='<?php echo $orderRowTable1['design_name'] ?>'
                                                     form="editImage">
-                                                    <option value="<?php echo $orderRowTable1['turnarround'] ?>">
-                                                        Selected -><?php echo $orderRowTable1['turnarround'] ?></option>
-                                                    <?php while ($turnaroundRows = mysqli_fetch_array($fetchTurnaroundFire)) { ?>
-                                                    <option value="<?php echo $turnaroundRows['turnaround'] ?>">
-                                                        <?php echo $turnaroundRows['turnaround'] ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                                <span class="error"><?php echo $TurnAroundErr ?></span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <h5>Dimensions</h5>
-                                        </td>
-                                        <td>
-                                            <div class="row dimensionBox">
-                                                <div class="col-md-4">
-                                                    <input type="text" placeholder="Width" name="width" id="width"
-                                                        value='<?php echo $orderRowTable1['dimension_width'] ?>'
-                                                        form="editImage">
-                                                    <span class="error"><?php echo $DimensionWidthErr ?></span>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <input type="text" placeholder="Height" name="height" id="height"
-                                                        value='<?php echo $orderRowTable1['dimension_height'] ?>'
-                                                        form="editImage">
-                                                    <span class="error"><?php echo $DimensionHeightErr ?></span>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <select name="dimension" id="dimension" class="btn dropdown-select"
-                                                        form="editImage">
-                                                        <option value="<?php echo $orderRowTable1['dimension'] ?>">
-                                                            Selected -> <?php echo $orderRowTable1['dimension'] ?>
+                                                <span class="error"><?php echo $DesignNameErr ?></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h5>PO Number</h5>
+                                            </td>
+                                            <td>
+                                                <input type="text" name="ponumber" id=""
+                                                    value='<?php echo $orderRowTable1['ponumber'] ?>' form="editImage">
+                                                <span class="error"><?php echo $PoNumberErr ?></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h5>Turnaround</h5>
+                                            </td>
+                                            <td>
+                                                <div class="dropdown myaccount-details-phpcontent">
+                                                    <select name="turnaround" id="turnaround"
+                                                        class="btn dropdown-select" form="editImage">
+                                                        <option value="<?php echo $orderRowTable1['turnarround'] ?>">
+                                                            Selected -><?php echo $orderRowTable1['turnarround'] ?>
                                                         </option>
-                                                        <option value="Inches">Inches</option>
-                                                        <option value="cm">cm</option>
-                                                        <option value="mm">mm</option>
+                                                        <?php while ($turnaroundRows = mysqli_fetch_array($fetchTurnaroundFire)) { ?>
+                                                        <option value="<?php echo $turnaroundRows['turnaround'] ?>">
+                                                            <?php echo $turnaroundRows['turnaround'] ?></option>
+                                                        <?php } ?>
                                                     </select>
+                                                    <span class="error"><?php echo $TurnAroundErr ?></span>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <?php //} ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h5>Dimensions</h5>
+                                            </td>
+                                            <td>
+                                                <div class="row dimensionBox">
+                                                    <div class="col-md-4">
+                                                        <input type="text" placeholder="Width" name="width" id="width"
+                                                            value='<?php echo $orderRowTable1['dimension_width'] ?>'
+                                                            form="editImage">
+                                                        <span class="error"><?php echo $DimensionWidthErr ?></span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input type="text" placeholder="Height" name="height"
+                                                            id="height"
+                                                            value='<?php echo $orderRowTable1['dimension_height'] ?>'
+                                                            form="editImage">
+                                                        <span class="error"><?php echo $DimensionHeightErr ?></span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <select name="dimension" id="dimension"
+                                                            class="btn dropdown-select" form="editImage">
+                                                            <option value="<?php echo $orderRowTable1['dimension'] ?>">
+                                                                Selected -> <?php echo $orderRowTable1['dimension'] ?>
+                                                            </option>
+                                                            <option value="Inches">Inches</option>
+                                                            <option value="cm">cm</option>
+                                                            <option value="mm">mm</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <?php //} ?>
+                                </div>
                             </form>
                         </div>
                         <div class="col-md-6">
@@ -370,7 +362,7 @@ $targetSupportingImage = "Uploads/Vector/SupportingImages/" . basename($_FILES['
 
                     <div class="row">
                         <div class="col-md-6">
-                            <form id="editText" method="POST">
+                            <form id="editText" method="POST" enctype="multipart/form-data">
                                 <div class="container myaccount-details-area">
                                     <table class="myaccount-details-table">
                                         <?php while($orderRowTable2 = mysqli_fetch_array($searchOrderFire)){ ?>
@@ -605,7 +597,7 @@ $targetSupportingImage = "Uploads/Vector/SupportingImages/" . basename($_FILES['
 
                     <div class="row">
                         <div class="col-md-6">
-                            <form id="editVector">
+                            <form id="editVector" method="POST" enctype="multipart/form-data">
                                 <div class="container myaccount-details-area" id="emImage">
                                     <table class="myaccount-details-table">
                                         <?php while($orderRowTable3 = mysqli_fetch_array($searchOrderFire)){ ?>

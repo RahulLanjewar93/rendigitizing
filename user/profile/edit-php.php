@@ -190,30 +190,15 @@ if (isset($_SESSION['USER']))
 
         if ($ErrorCounter == 0) {
 
-    
-            
-
-
-
-                //Supporting Image
-                // $targetSupportingImage = "Uploads/supportingimages/" . basename($_FILES['supportingimage']['name']);
-                // $supportingImage = $_FILES['supportingimage']['name'];
-                // $supportingImageTemp = $_FILES['supportingimage']['tmp_name'];
-                // $supportingImagetyType = $_FILES['supportingimage']['type'];
-                
-                // if (move_uploaded_file($_FILES['supportingimage']['name'], $targetSupportingImage) && strtolower($supportingImagetyType) == "image/jpg" || strtolower($supportingImagetyType) == "image/jpeg" || strtolower($supportingImagetyType) == "image/png") 
-                // {
-                //     //$Supportingmsg = "Image Uploaded Successfully";
-                // } else 
-                // {
-                //     $Supportingmsg = "Invalid Image";
-                //     echo $supportingImage;
-                //     echo $Supportingmsg;
-                // }
-
-                //echo $Mainmsg;
-                //echo $Supportingmsg;
-
+                $targetSupportingImage = "Uploads/supportingimages/" . basename($_FILES['supportingimage']['name']);
+                $supportingImage = $_FILES['supportingimage']['name'];
+                $supportingImageTemp = $_FILES['supportingimage']['tmp_name'];
+                $supportingImagetyType = $_FILES['supportingimage']['type'];
+                if (move_uploaded_file($_FILES['supportingimage']['name'], $targetSupportingImage) && strtolower($supportingImagetyType) == "image/jpg" || strtolower($supportingImagetyType) == "image/jpeg" || strtolower($supportingImagetyType) == "image/png") {
+                    //$Supportingmsg = "Image Uploaded Successfully";
+                } else {
+                    //$Supportingmsg = "Invalid Image";
+                }
 
                 //Price calculation
                 
@@ -254,48 +239,6 @@ if (isset($_SESSION['USER']))
                 comments = '$Comments', price = $FinalPrice,
                 order_flag = 'UPDATED', updated_at = '$datetime'
                 WHERE order_id = $orderId AND user = '$userEmail'";
-
-                    
-
-
-
-// File upload path
-
-// $targetDir = "Uploads/SupportingImages/";
-// $fileName =$_FILES["supportingimage"]["name"];
-// echo "Name ->".$fileName;
-// $tmpFile = $_FILES["supportingimage"]["tmp_name"];
-// $targetFilePath = $targetDir . $fileName;
-// $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-// if(!empty($fileName)){
-//     echo "File ->".$fileName;
-//     // Allow certain file formats
-//     $allowTypes = array('jpg','png','jpeg','gif','pdf');
-//     if(in_array($fileType, $allowTypes)){
-//         echo $targetFilePath;
-//         // Upload file to server
-//         if(move_uploaded_file($tmpFile, $targetFilePath)){
-//             // Insert image file name into database
-//             $insert = $db->query("INSERT into images (file_name, uploaded_on) VALUES ('".$fileName."', NOW())");
-//             if($insert){
-//                 $statusMsg = "The file ".$fileName. " has been uploaded successfully.";
-//                 echo $statusMsg;
-//             }else{
-//                 $statusMsg = "File upload failed, please try again.";
-//                 echo $statusMsg;
-//             } 
-//         }else{
-//             $statusMsg = "Sorry, there was an error uploading your file.";
-//             echo $statusMsg;
-//         }
-//     }else{
-//         $statusMsg = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
-//         echo $statusMsg;
-//     }
-// }else{
-//     $statusMsg = 'Please select a file to upload.';
-//     echo $statusMsg;
-// }
 
 
                 $InsertImageEmborideryFire = mysqli_query($conn, $InsertImageEmboridery);
@@ -683,8 +626,8 @@ if (isset($_SESSION['USER']))
         }
     }
 }
-    else {
-        header("location:http://localhost/RenDigitizingUpdated/user/authentication/login.php");
-
+else 
+{
+    header("location:http://localhost/RenDigitizingUpdated/user/authentication/login.php");
 }
 ?>
